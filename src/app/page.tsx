@@ -765,15 +765,17 @@ export default function DashboardPortfolio() {
             </span>
             <span className="h-px flex-1 bg-[#e5e7eb] dark:bg-[#1e293b] min-w-[24px]" />
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
             {TECH_LOGOS.map((t) => (
               <a
                 key={t.label}
                 href={t.href}
-                className="group inline-flex items-center gap-1.5 text-[11.5px] px-3 py-1.5 rounded-md bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-sm transition-all"
+                className="group flex items-center gap-2 text-[11.5px] px-3 py-2 rounded-md bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-sm transition-all min-w-0"
               >
-                <t.Icon className="text-[15px] shrink-0" style={{ color: t.color }} />
-                <span className="text-[#111827] dark:text-[#e2e8f0]">{t.label}</span>
+                <span className="w-4 h-4 inline-flex items-center justify-center shrink-0" style={{ color: t.color }}>
+                  <t.Icon className="w-full h-full" />
+                </span>
+                <span className="text-[#111827] dark:text-[#e2e8f0] truncate">{t.label}</span>
               </a>
             ))}
           </div>
