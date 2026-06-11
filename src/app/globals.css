@@ -152,6 +152,17 @@ html {
   to { transform: translateY(0); opacity: 1; }
 }
 
+@media print {
+  section, .resume-section, article, .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+}
+
 @keyframes fadeScale {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }

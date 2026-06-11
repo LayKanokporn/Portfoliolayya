@@ -1158,21 +1158,31 @@ export default function PortfolioPage() {
               Send a message
             </h3>
             <div className="grid sm:grid-cols-2 gap-3">
-              <input
-                name="name"
-                required
-                placeholder="Your name"
-                className="border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors"
-              />
-              <input
-                name="email"
-                type="email"
-                required
-                placeholder="Your email"
-                className="border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors"
-              />
+              <div>
+                <label htmlFor="contact-name" className="sr-only">Your name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  required
+                  placeholder="Your name"
+                  className="w-full border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-email" className="sr-only">Your email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Your email"
+                  className="w-full border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors"
+                />
+              </div>
             </div>
+            <label htmlFor="contact-message" className="sr-only">Your message</label>
             <textarea
+              id="contact-message"
               name="message"
               required
               placeholder="Your message"
@@ -1191,7 +1201,7 @@ export default function PortfolioPage() {
 
           {/* Direct contact methods */}
           <aside className="space-y-3">
-            <ContactRow icon={<FiMail />} label="Email" value="Laybabaka2@gmail.com" href="mailto:Laybabaka2@gmail.com" />
+            <ContactRow icon={<FiMail />} label="Email" value="laybabaka@gmail.com" href="mailto:laybabaka@gmail.com" />
             <ContactRow icon={<FiLinkedin />} label="LinkedIn" value="linkedin.com/in/laykanokporn" href="https://www.linkedin.com/in/laykanokporn" />
             <ContactRow icon={<FiGithub />} label="GitHub" value="github.com/LayKanokporn" href="https://github.com/LayKanokporn" />
             <ContactRow icon={<FiMapPin />} label="Location" value="Bangkok, Thailand" />
@@ -1221,7 +1231,7 @@ export default function PortfolioPage() {
               Resume
             </a>
             <a
-              href="mailto:Laybabaka2@gmail.com"
+              href="mailto:laybabaka@gmail.com"
               className="text-[12px] bg-transparent border border-white/40 text-white px-4 py-2 rounded-md hover:bg-white/10 transition-colors"
             >
               Get in touch
@@ -1239,7 +1249,7 @@ export default function PortfolioPage() {
           <div className="flex items-center gap-4 text-[12px]">
             <a href="https://www.linkedin.com/in/laykanokporn" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a56db]">LinkedIn</a>
             <a href="https://github.com/LayKanokporn" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a56db]">GitHub</a>
-            <a href="mailto:Laybabaka2@gmail.com" className="text-[#6b7280] hover:text-[#1a56db]">Email</a>
+            <a href="mailto:laybabaka@gmail.com" className="text-[#6b7280] hover:text-[#1a56db]">Email</a>
             <Link href="/" className="text-[#6b7280] hover:text-[#1a56db]">Home</Link>
             <Link href="/resume" className="text-[#6b7280] hover:text-[#1a56db]">Resume page</Link>
             <Link href="/v1" className="text-[#6b7280] hover:text-[#1a56db]">Creative version</Link>

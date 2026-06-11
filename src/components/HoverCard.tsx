@@ -119,7 +119,7 @@ export function HoverCard({
             transition={{ duration: 0.18 }}
             className="lg:hidden overflow-hidden"
           >
-            <div className="mt-1 mb-1 rounded-md border border-[#e5e7eb] bg-[#f8faff] p-3 ml-6">
+            <div className="mt-1 mb-1 rounded-md border border-[#e5e7eb] dark:border-[#1e293b] bg-[#f8faff] dark:bg-[#0f172a] p-3 ml-6">
               {content}
             </div>
           </motion.div>

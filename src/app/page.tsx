@@ -43,7 +43,7 @@ import {
   SiUipath,
   SiPython,
   SiLine,
-  SiMicrosoftazure,
+
   SiGooglecloud,
 } from "react-icons/si";
 import { MdSmartToy } from "react-icons/md";
@@ -60,7 +60,7 @@ const TECH_LOGOS = [
   { label: "SAP S/4HANA", color: "#0080a0", href: "#projects", Icon: SiSap },
   { label: "UiPath", color: "#fa4616", href: "#experience", Icon: SiUipath },
   { label: "Blue Prism", color: "#00aae4", href: "#experience", Icon: null, letter: "BP" },
-  { label: "Power Automate", color: "#0066ff", href: "#projects", Icon: SiMicrosoftazure },
+  { label: "Power Automate", color: "#0066ff", href: "#projects", Icon: null, letter: "PA" },
   { label: "SAP Build", color: "#0080a0", href: "/portfolio#experience", Icon: SiSap },
   { label: "AI Builder OCR", color: "#742774", href: "#projects", Icon: MdSmartToy },
   { label: "Python", color: "#3776ab", href: "#experience", Icon: SiPython },
@@ -513,7 +513,7 @@ export default function DashboardPortfolio() {
               <Logo variant="compact" theme="light" />
               <button
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center w-9 h-9 rounded-md hover:bg-[#f8faff]"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-md text-[#111827] dark:text-[#e2e8f0] hover:bg-[#f8faff] dark:hover:bg-[#1e293b]"
                 aria-label="Close menu"
               >
                 <FiX />
@@ -674,8 +674,8 @@ export default function DashboardPortfolio() {
           {/* Right column: graphic + photo chip */}
           <div className="w-full max-w-md justify-self-start lg:justify-self-end space-y-3">
             <HeroGraphic className="w-full h-auto" />
-            <div className="flex items-center gap-3 px-3 py-2 rounded-md border border-[#e5e7eb] bg-white">
-              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#e5e7eb] bg-[#f3f4f6] shrink-0">
+            <div className="flex items-center gap-3 px-3 py-2 rounded-md border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a]">
+              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#e5e7eb] dark:border-[#334155] bg-[#e0e7ff] dark:bg-[#1e3a5f] shrink-0 flex items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/profile.jpg"
@@ -683,6 +683,13 @@ export default function DashboardPortfolio() {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
+                    const parent = e.currentTarget.parentElement;
+                    if (parent) {
+                      const initials = document.createElement("span");
+                      initials.textContent = "KL";
+                      initials.className = "text-[12px] font-medium text-[#1a56db] dark:text-[#60a5fa]";
+                      parent.appendChild(initials);
+                    }
                   }}
                 />
               </div>
@@ -730,7 +737,7 @@ export default function DashboardPortfolio() {
       </section>
 
       {/* TECH STRIP — visual brand chips, all clickable */}
-      <section className="relative border-b border-[#e5e7eb] bg-[#f8faff] overflow-hidden">
+      <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-[#f8faff] dark:bg-[#060c18] overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-7 py-5 sm:py-6">
           <div className="flex items-center gap-3 mb-3 flex-wrap">
             <span className="text-[10px] uppercase tracking-wider text-[#6b7280] dark:text-[#64748b]">
@@ -807,7 +814,7 @@ export default function DashboardPortfolio() {
           </SidebarGroup>
 
           <SidebarGroup label="Connect">
-            <SideRow icon={<FiMail />} label="Email" href="mailto:Laybabaka2@gmail.com" />
+            <SideRow icon={<FiMail />} label="Email" href="mailto:laybabaka@gmail.com" />
             <SideRow
               icon={<FiLinkedin />}
               label="LinkedIn"
@@ -1138,7 +1145,7 @@ export default function DashboardPortfolio() {
               Resume
             </a>
             <a
-              href="mailto:Laybabaka2@gmail.com"
+              href="mailto:laybabaka@gmail.com"
               className="text-[12px] bg-transparent border border-white/40 text-white px-4 py-2 rounded-md hover:bg-white/10 transition-colors"
             >
               Get in touch
@@ -1170,7 +1177,7 @@ export default function DashboardPortfolio() {
             >
               GitHub
             </a>
-            <a href="mailto:Laybabaka2@gmail.com" className="text-[#6b7280] hover:text-[#1a56db]">
+            <a href="mailto:laybabaka@gmail.com" className="text-[#6b7280] hover:text-[#1a56db]">
               Email
             </a>
             <Link href="/portfolio" className="text-[#6b7280] hover:text-[#1a56db]">
