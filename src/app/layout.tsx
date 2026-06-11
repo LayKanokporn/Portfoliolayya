@@ -1,19 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/components/Providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-serif",
   subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Kanokporn Hudsree — ERP Developer & Automation Engineer",
+  title: "Lay · Automation Engineer",
   description:
     "ERP Developer & Automation Engineer at AIS. Enterprise SAP automation (S/4HANA, Build Process Automation, BTP), RPA (UiPath, Blue Prism, Power Automate), Document AI, and self-built LINE Bot production system. First-Class Honors graduate in Computer & Robotics Engineering.",
   keywords: [
@@ -66,8 +72,8 @@ export const metadata: Metadata = {
     images: ["/profile.jpg"]
   },
   icons: {
-    icon: [{ url: "/logo.jpg", type: "image/jpg" }],
-    shortcut: ["/logo.jpg"],
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: ["/favicon.svg"],
     apple: [{ url: "/logo.jpg" }]
   }
 };
@@ -80,9 +86,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
