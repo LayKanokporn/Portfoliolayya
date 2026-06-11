@@ -837,7 +837,17 @@ export default function DashboardPortfolio() {
               </div>
               <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8]">4 lanes · 9 components · finance-owned error path</div>
             </div>
-            <ArchitectureDiagram className="w-full h-auto" />
+            {/* Toggle: real Power Automate editor screenshot vs logical SVG view */}
+            <div className="relative w-full">
+              <ArchitectureDiagram className="w-full h-auto" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/architecture-payment-advice.jpg"
+                alt="Power Automate Cloud Flow editor showing Payment Advice automation"
+                className="absolute inset-0 w-full h-full object-contain bg-white dark:bg-[#0f172a] rounded-md"
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+              />
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-[10.5px]">
               <div>
                 <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Hypothesis</div>
@@ -971,9 +981,17 @@ export default function DashboardPortfolio() {
               >
                 <div className={`h-1 ${p.accent}`} />
 
-                {/* Visual: SVG art, with real image fallback if provided */}
-                <div className="relative h-40 w-full bg-[#f8faff] border-b border-[#e5e7eb] overflow-hidden">
+                {/* Visual: real screenshot if available, else SVG art fallback */}
+                <div className="relative h-40 w-full bg-[#f8faff] dark:bg-[#0a0f1e] border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
                   <ProjectArt theme={p.art} ariaLabel={p.name} />
+                  {p.image && (
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                  )}
                 </div>
 
                 <div className="p-4">

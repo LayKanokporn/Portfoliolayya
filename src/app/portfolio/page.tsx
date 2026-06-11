@@ -992,9 +992,17 @@ export default function PortfolioPage() {
               key={p.name}
               className={`rounded-lg border border-[#e5e7eb] border-l-4 ${p.accent} bg-white overflow-hidden`}
             >
-              {/* Visual */}
-              <div className="relative w-full h-44 bg-[#f8faff] border-b border-[#e5e7eb] overflow-hidden">
+              {/* Visual — real screenshot if available, else SVG art fallback */}
+              <div className="relative w-full h-44 bg-[#f8faff] dark:bg-[#0a0f1e] border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
                 <ProjectArt theme={p.art} ariaLabel={p.name} />
+                {p.image && (
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                )}
               </div>
 
               <div className="p-5">
