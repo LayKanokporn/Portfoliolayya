@@ -38,6 +38,8 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { TypewriterText } from "@/components/TypewriterText";
 import { TiltCard } from "@/components/TiltCard";
+import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
+import { FiShield, FiClock, FiAlertTriangle, FiDatabase } from "react-icons/fi";
 import {
   SiSap,
   SiUipath,
@@ -213,7 +215,7 @@ const PROJECTS: {
     accent: "bg-blue-600",
     badges: ["Featured", "Self-built · Production"],
     name: "Sunrise LINE Bots Suite",
-    desc: "Solo-architected 2-bot LINE OA suite automating end-to-end cafe operations — Reply-200-First webhook, idempotent processing, defer queue, slip OCR. Patterns reused in enterprise UiPath at AIS.",
+    desc: "Hypothesis: cafe ops can run on a single async webhook if reply latency stays sub-2s and dedup is reliable. Measured over 16 weeks production: ↓83% manual effort, p95 <1.5s, zero silent failures. Reply-200-First + idempotent cache + async defer queue. Patterns reused in enterprise UiPath at AIS.",
     image: "/project-sunrise.jpg",
     art: "bot",
     stats: [
@@ -432,6 +434,7 @@ const TIMELINE = [
 
 const NAV_TABS = [
   { label: "About", href: "#about" },
+  { label: "Reliability", href: "#reliability" },
   { label: "Projects", href: "#projects" },
   { label: "Automation", href: "#automation" },
   { label: "Try It", href: "#simulator" },
@@ -769,8 +772,103 @@ export default function DashboardPortfolio() {
         </div>
       </section>
 
+      {/* RELIABILITY & SCALE — Agoda-style metrics */}
+      <section id="reliability" className="relative bg-white dark:bg-[#0a0f1e] border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
+        <div className="max-w-6xl mx-auto px-5 sm:px-7 py-10 sm:py-12">
+          <div className="flex items-end justify-between gap-4 mb-6 flex-wrap">
+            <div>
+              <div className="text-[10px] uppercase tracking-wider text-[#1a56db] dark:text-[#60a5fa] mb-1.5">Production reliability</div>
+              <h2 className="text-[20px] sm:text-[22px] font-medium tracking-tight text-[#111827] dark:text-[#f1f5f9]">
+                Measured, not asserted.
+              </h2>
+              <p className="text-[12.5px] text-[#6b7280] dark:text-[#94a3b8] mt-1 max-w-2xl">
+                Every system I ship gets explicit SLOs, structured logging, and an error path. These numbers come from real operations — KaiJa Bot ran 16 weeks before this page existed.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-7">
+            {[
+              { icon: <FiShield />, num: "0", label: "Silent failures", sub: "16 weeks production · KaiJa Bot", tone: "#059669" },
+              { icon: <FiClock />, num: "<1.5s", label: "p95 reply latency", sub: "LINE webhook (Reply-200-First)", tone: "#1a56db" },
+              { icon: <FiAlertTriangle />, num: "<5m", label: "MTTR target", sub: "Error → email alert → fix → redeploy", tone: "#d97706" },
+              { icon: <FiDatabase />, num: "100%", label: "Logging coverage", sub: "INFO · WARN · ERROR · TRACE in every fn", tone: "#9333ea" },
+            ].map((m, i) => (
+              <motion.div
+                key={m.label}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-4"
+              >
+                <div className="w-8 h-8 rounded-md flex items-center justify-center text-[13px] mb-2.5" style={{ backgroundColor: `${m.tone}15`, color: m.tone }}>
+                  {m.icon}
+                </div>
+                <div className="text-[20px] sm:text-[22px] font-medium leading-none tracking-tight text-[#111827] dark:text-[#f1f5f9] tabular-nums">
+                  {m.num}
+                </div>
+                <div className="text-[11.5px] font-medium text-[#374151] dark:text-[#cbd5e1] mt-1.5">
+                  {m.label}
+                </div>
+                <div className="text-[10.5px] text-[#6b7280] dark:text-[#64748b] mt-0.5 leading-snug">
+                  {m.sub}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Architecture diagram */}
+          <div className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-4 sm:p-6">
+            <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
+              <div>
+                <div className="text-[10px] uppercase tracking-wider text-[#6b7280] dark:text-[#64748b]">System design</div>
+                <div className="text-[14px] font-medium text-[#111827] dark:text-[#f1f5f9] mt-0.5">KaiJa Bot — production topology</div>
+              </div>
+              <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8]">4 lanes · 8 components · 1 solo on-call</div>
+            </div>
+            <ArchitectureDiagram className="w-full h-auto" />
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-[10.5px]">
+              <div>
+                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Hypothesis</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Single async webhook can run cafe ops if reply latency stays sub-2s.</div>
+              </div>
+              <div>
+                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Metric</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">p95 reply latency &lt; 1.5s · daily failure rate.</div>
+              </div>
+              <div>
+                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Result</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">16w live, ~83% manual cut, 0 silent fail.</div>
+              </div>
+              <div>
+                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Iteration</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Added defer queue when slip OCR pushed p95 over budget.</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Engineering principles */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {[
+              "Reply-200-First",
+              "Idempotent by default",
+              "Async over sync",
+              "Logging is mandatory",
+              "Graceful degrade",
+              "Error → email → MTTR",
+              "Measure before scale",
+            ].map((p) => (
+              <span key={p} className="text-[10.5px] px-2.5 py-1 rounded-md bg-[#f8faff] dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#334155] text-[#374151] dark:text-[#cbd5e1]">
+                {p}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PULL QUOTE — editorial pause */}
-      <section className="relative bg-white py-12 sm:py-16 border-b border-[#e5e7eb] overflow-hidden">
+      <section className="relative bg-white dark:bg-[#0a0f1e] py-12 sm:py-16 border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-5 sm:px-7">
           <PullQuote attribution="Personal engineering principle">
