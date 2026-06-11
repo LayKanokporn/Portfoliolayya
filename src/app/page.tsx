@@ -725,12 +725,12 @@ export default function DashboardPortfolio() {
           {/* Right column: graphic + photo chip */}
           <div className="w-full max-w-md justify-self-start lg:justify-self-end space-y-3">
             <HeroGraphic className="w-full h-auto" />
-            <div className="flex items-center gap-3 px-3 py-2 rounded-md border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a]">
-              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#e5e7eb] dark:border-[#334155] bg-[#e0e7ff] dark:bg-[#1e3a5f] shrink-0 flex items-center justify-center">
+            <div className="flex items-center gap-3.5 px-3.5 py-3 rounded-md border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a]">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border border-[#e5e7eb] dark:border-[#334155] bg-[#e0e7ff] dark:bg-[#1e3a5f] shrink-0 flex items-center justify-center ring-2 ring-[#1a56db]/10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/profile.jpg"
-                  alt="Kanokporn Hudsree"
+                  alt="Kanokporn Hudsree (Lay)"
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
@@ -738,16 +738,19 @@ export default function DashboardPortfolio() {
                     if (parent) {
                       const initials = document.createElement("span");
                       initials.textContent = "KL";
-                      initials.className = "text-[12px] font-medium text-[#1a56db] dark:text-[#60a5fa]";
+                      initials.className = "text-[16px] font-medium text-[#1a56db] dark:text-[#60a5fa]";
                       parent.appendChild(initials);
                     }
                   }}
                 />
               </div>
               <div className="min-w-0">
-                <div className="text-[12px] font-medium text-[#111827] dark:text-[#f1f5f9] truncate">Kanokporn (Lay)</div>
-                <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8] truncate">
+                <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9] truncate">Kanokporn Hudsree (Lay)</div>
+                <div className="text-[11px] text-[#6b7280] dark:text-[#94a3b8] truncate">
                   ERP Developer @ AIS · Founder @ Sunrise
+                </div>
+                <div className="text-[10.5px] text-[#1a56db] dark:text-[#60a5fa] mt-0.5">
+                  Open to Automation Specialist roles
                 </div>
               </div>
             </div>
