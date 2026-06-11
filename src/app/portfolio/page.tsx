@@ -707,6 +707,35 @@ export default function PortfolioPage() {
               <blockquote className="border-l-2 border-[#1a56db] pl-4 text-[13px] italic text-[#374151] leading-relaxed">
                 {POSITIONING.quote}
               </blockquote>
+
+              {/* Presented at — proof banner with real event photo */}
+              <a
+                href="#projects"
+                className="mt-5 block group relative rounded-md overflow-hidden border border-[#e5e7eb] hover:border-[#1a56db]/40 transition-all"
+              >
+                <div className="relative h-32 sm:h-40 bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/event-you-ai-forward.jpg"
+                    alt="Lay presenting AI Code Assistant for QA at YOU&AI Forward Together — AIS × PTT Digital joint AI showcase"
+                    className="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+                  <div className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 text-[9px] uppercase tracking-wider px-2 py-1 rounded bg-black/40 backdrop-blur-sm text-white border border-white/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Live presentation
+                  </div>
+                  <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                    <div className="text-[11.5px] sm:text-[13px] font-medium leading-tight">
+                      Presented at YOU&amp;AI Forward Together
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] opacity-85 mt-0.5">
+                      AIS × PTT Digital · AI showcase · AI Code Assistant for QA (+75% productivity)
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
 
             {/* Capabilities row */}
