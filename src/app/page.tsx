@@ -38,6 +38,15 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { TypewriterText } from "@/components/TypewriterText";
 import { TiltCard } from "@/components/TiltCard";
+import {
+  SiSap,
+  SiUipath,
+  SiPython,
+  SiLine,
+  SiMicrosoftazure,
+  SiGooglecloud,
+} from "react-icons/si";
+import { MdSmartToy } from "react-icons/md";
 
 // ── DATA ──────────────────────────────────────────────────────────────
 const METRICS = [
@@ -48,14 +57,15 @@ const METRICS = [
 ];
 
 const TECH_LOGOS = [
-  { label: "SAP S/4HANA", color: "#0080a0", href: "#projects" },
-  { label: "UiPath", color: "#fa4616", href: "#experience" },
-  { label: "Blue Prism", color: "#00aae4", href: "#experience" },
-  { label: "Power Automate", color: "#0066ff", href: "#projects" },
-  { label: "SAP Build", color: "#0080a0", href: "/portfolio#experience" },
-  { label: "AI Builder OCR", color: "#742774", href: "#projects" },
-  { label: "Python", color: "#3776ab", href: "#experience" },
-  { label: "LINE Messaging API", color: "#06c755", href: "#projects" },
+  { label: "SAP S/4HANA", color: "#0080a0", href: "#projects", Icon: SiSap },
+  { label: "UiPath", color: "#fa4616", href: "#experience", Icon: SiUipath },
+  { label: "Blue Prism", color: "#00aae4", href: "#experience", Icon: null, letter: "BP" },
+  { label: "Power Automate", color: "#0066ff", href: "#projects", Icon: SiMicrosoftazure },
+  { label: "SAP Build", color: "#0080a0", href: "/portfolio#experience", Icon: SiSap },
+  { label: "AI Builder OCR", color: "#742774", href: "#projects", Icon: MdSmartToy },
+  { label: "Python", color: "#3776ab", href: "#experience", Icon: SiPython },
+  { label: "LINE Bot", color: "#06c755", href: "#projects", Icon: SiLine },
+  { label: "Google Cloud", color: "#4285f4", href: "#projects", Icon: SiGooglecloud },
 ];
 
 const HERO_CHIPS = [
@@ -471,7 +481,7 @@ export default function DashboardPortfolio() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-block text-[12px] px-3.5 py-1.5 rounded-md border border-[#e5e7eb] text-[#111827] hover:bg-[#f8faff] transition-colors"
+            className="hidden sm:inline-block text-[12px] px-3.5 py-1.5 rounded-md border border-[#e5e7eb] dark:border-[#334155] text-[#111827] dark:text-[#e2e8f0] hover:bg-[#f8faff] dark:hover:bg-[#1e293b] transition-colors"
           >
             Resume
           </a>
@@ -486,7 +496,7 @@ export default function DashboardPortfolio() {
           </MagneticButton>
           <button
             onClick={() => setMobileOpen(true)}
-            className="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-[#e5e7eb] text-[#111827] hover:bg-[#f8faff]"
+            className="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-[#e5e7eb] dark:border-[#334155] text-[#111827] dark:text-[#e2e8f0] hover:bg-[#f8faff] dark:hover:bg-[#1e293b]"
             aria-label="Open menu"
           >
             <FiMenu />
@@ -499,7 +509,7 @@ export default function DashboardPortfolio() {
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-[#111827]/40" onClick={() => setMobileOpen(false)} />
           <div className="absolute top-0 right-0 h-full w-[280px] max-w-[85%] bg-white dark:bg-[#0f172a] border-l border-[#e5e7eb] dark:border-[#1e293b] shadow-xl flex flex-col">
-            <div className="flex items-center justify-between px-4 h-[52px] border-b border-[#e5e7eb]">
+            <div className="flex items-center justify-between px-4 h-[52px] border-b border-[#e5e7eb] dark:border-[#1e293b]">
               <Logo variant="compact" theme="light" />
               <button
                 onClick={() => setMobileOpen(false)}
@@ -515,7 +525,7 @@ export default function DashboardPortfolio() {
                   key={t.label}
                   href={t.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-5 py-2.5 text-[13px] text-[#374151] hover:bg-[#f8faff] hover:text-[#1a56db]"
+                  className="block px-5 py-2.5 text-[13px] text-[#374151] dark:text-[#cbd5e1] hover:bg-[#f8faff] dark:hover:bg-[#1e293b] hover:text-[#1a56db]"
                 >
                   {t.label}
                 </a>
@@ -523,7 +533,7 @@ export default function DashboardPortfolio() {
               <Link
                 href="/portfolio"
                 onClick={() => setMobileOpen(false)}
-                className="block px-5 py-2.5 text-[13px] text-[#1a56db] hover:bg-[#f8faff]"
+                className="block px-5 py-2.5 text-[13px] text-[#1a56db] dark:text-[#60a5fa] hover:bg-[#f8faff] dark:hover:bg-[#1e293b]"
               >
                 Full portfolio →
               </Link>
@@ -533,7 +543,7 @@ export default function DashboardPortfolio() {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center text-[12px] px-3 py-2 rounded-md border border-[#e5e7eb] text-[#111827] hover:bg-[#f8faff]"
+                className="block text-center text-[12px] px-3 py-2 rounded-md border border-[#e5e7eb] dark:border-[#334155] text-[#111827] dark:text-[#e2e8f0] hover:bg-[#f8faff] dark:hover:bg-[#1e293b]"
               >
                 Download Resume
               </a>
@@ -569,15 +579,15 @@ export default function DashboardPortfolio() {
           className="relative max-w-6xl mx-auto px-4 sm:px-7 py-8 sm:py-10 grid lg:grid-cols-[1fr_380px] gap-6 items-start"
         >
           <div>
-            <div className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-[#6b7280] bg-white border border-[#e5e7eb] px-2.5 py-1 rounded mb-4">
+            <div className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-[#6b7280] dark:text-[#94a3b8] bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#334155] px-2.5 py-1 rounded mb-4">
               <FiMapPin className="text-sm" />
               Bangkok, Thailand · Available globally
             </div>
-            <h1 className="text-[28px] sm:text-[32px] tracking-tight leading-tight mb-1.5 text-[#111827]">
+            <h1 className="text-[28px] sm:text-[32px] tracking-tight leading-tight mb-1.5 text-[#111827] dark:text-[#f1f5f9]">
               Kanokporn Hudsree{" "}
-              <span className="text-[#6b7280] font-normal text-[20px] sm:text-[22px]">(Lay)</span>
+              <span className="text-[#6b7280] dark:text-[#94a3b8] font-normal text-[20px] sm:text-[22px]">(Lay)</span>
             </h1>
-            <p className="text-[15px] sm:text-[16px] text-[#1a56db] font-medium mb-4 h-6">
+            <p className="text-[15px] sm:text-[16px] text-[#1a56db] dark:text-[#60a5fa] font-medium mb-4 min-h-[24px]">
               <TypewriterText
                 strings={[
                   "ERP Developer · Automation Engineer",
@@ -591,7 +601,7 @@ export default function DashboardPortfolio() {
                 pauseMs={2000}
               />
             </p>
-            <p className="text-[13px] sm:text-[14px] text-[#374151] max-w-2xl leading-relaxed mb-5">
+            <p className="text-[13px] sm:text-[14px] text-[#374151] dark:text-[#cbd5e1] max-w-2xl leading-relaxed mb-5">
               I build automation systems that eliminate manual work — from SAP S/4HANA financial
               workflows (BG Alert, Payment Advice with AI Builder OCR, THOR/SOFR) to a self-built
               LINE Bot suite cutting daily bookkeeping by ~83% over 16 weeks of production.
@@ -677,8 +687,8 @@ export default function DashboardPortfolio() {
                 />
               </div>
               <div className="min-w-0">
-                <div className="text-[12px] font-medium text-[#111827] truncate">Kanokporn (Lay)</div>
-                <div className="text-[10.5px] text-[#6b7280] truncate">
+                <div className="text-[12px] font-medium text-[#111827] dark:text-[#f1f5f9] truncate">Kanokporn (Lay)</div>
+                <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8] truncate">
                   ERP Developer @ AIS · Founder @ Sunrise
                 </div>
               </div>
@@ -688,7 +698,7 @@ export default function DashboardPortfolio() {
       </section>
 
       {/* METRIC TILES — bigger, clickable */}
-      <section className="relative border-b border-[#e5e7eb] bg-white overflow-hidden">
+      <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0a0f1e] overflow-hidden">
         <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-7 py-7 sm:py-9 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {METRICS.map((m, i) => (
@@ -707,10 +717,10 @@ export default function DashboardPortfolio() {
                 </div>
                 <FiArrowRight className="text-[#9ca3af] group-hover:text-[#1a56db] group-hover:translate-x-0.5 transition-all" />
               </div>
-              <div className="text-[22px] sm:text-[26px] font-medium leading-none tracking-tight text-[#111827] tabular-nums">
+              <div className="text-[22px] sm:text-[26px] font-medium leading-none tracking-tight text-[#111827] dark:text-[#f1f5f9] tabular-nums">
                 <AnimatedCounter value={m.num} />
               </div>
-              <div className="text-[11px] sm:text-[12px] text-[#6b7280] mt-2 leading-relaxed">
+              <div className="text-[11px] sm:text-[12px] text-[#6b7280] dark:text-[#94a3b8] mt-2 leading-relaxed">
                 {m.desc}
               </div>
             </motion.a>
@@ -723,24 +733,29 @@ export default function DashboardPortfolio() {
       <section className="relative border-b border-[#e5e7eb] bg-[#f8faff] overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-7 py-5 sm:py-6">
           <div className="flex items-center gap-3 mb-3 flex-wrap">
-            <span className="text-[10px] uppercase tracking-wider text-[#6b7280]">
+            <span className="text-[10px] uppercase tracking-wider text-[#6b7280] dark:text-[#64748b]">
               Stack in production
             </span>
-            <span className="h-px flex-1 bg-[#e5e7eb] min-w-[24px]" />
+            <span className="h-px flex-1 bg-[#e5e7eb] dark:bg-[#1e293b] min-w-[24px]" />
           </div>
           <div className="flex flex-wrap gap-2">
             {TECH_LOGOS.map((t) => (
               <a
                 key={t.label}
                 href={t.href}
-                className="group inline-flex items-center gap-2 text-[11.5px] px-3 py-1.5 rounded-md bg-white border border-[#e5e7eb] hover:border-[#1a56db]/40 hover:shadow-sm transition-all"
+                className="group inline-flex items-center gap-1.5 text-[11.5px] px-3 py-1.5 rounded-md bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-sm transition-all"
               >
-                <span
-                  className="w-1.5 h-1.5 rounded-full shrink-0"
-                  style={{ backgroundColor: t.color }}
-                />
-                <span className="text-[#111827]">{t.label}</span>
-                <FiArrowRight className="opacity-0 group-hover:opacity-100 text-[#1a56db] -ml-0.5 transition-opacity" />
+                {t.Icon ? (
+                  <t.Icon className="text-[14px] shrink-0" style={{ color: t.color }} />
+                ) : (
+                  <span
+                    className="text-[8px] font-bold px-1 rounded shrink-0 text-white leading-[14px]"
+                    style={{ backgroundColor: t.color }}
+                  >
+                    {t.letter}
+                  </span>
+                )}
+                <span className="text-[#111827] dark:text-[#e2e8f0]">{t.label}</span>
               </a>
             ))}
           </div>
@@ -807,17 +822,17 @@ export default function DashboardPortfolio() {
         </aside>
 
         {/* CONTENT */}
-        <div className="p-5 sm:p-7 bg-[#f8faff]">
+        <div className="p-5 sm:p-7 bg-[#f8faff] dark:bg-[#060c18]">
           {/* ABOUT — proof-based */}
-          <div className="rounded-lg border border-[#e5e7eb] bg-white p-5 mb-8">
+          <div className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-5 mb-8">
             <SecTitle title="About" />
-            <p className="text-[13px] text-[#374151] leading-relaxed mb-2">
+            <p className="text-[13px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2">
               ERP Developer &amp; Automation Engineer building production-grade SAP, RPA, and
               AI-powered automation at AIS. Currently shipping 5 SAP S/4HANA automations
               (financial &amp; procurement) and operating a self-built LINE Bot production system
               that cut daily bookkeeping by ~83% over 16 weeks with zero silent failures.
             </p>
-            <p className="text-[13px] text-[#6b7280] leading-relaxed">
+            <p className="text-[13px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed">
               Computer &amp; Robotics Engineering · First-Class Honors (GPA 3.53) · Bangkok
               University · 2+ years industry experience.
             </p>
@@ -837,7 +852,7 @@ export default function DashboardPortfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="rounded-lg border border-[#e5e7eb] bg-white overflow-hidden hover:border-[#1a56db]/40 hover:shadow-md transition-all"
+                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] overflow-hidden hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-md transition-all"
               >
                 <div className={`h-1 ${p.accent}`} />
 
@@ -861,19 +876,19 @@ export default function DashboardPortfolio() {
                       </span>
                     ))}
                   </div>
-                  <h3 className="text-[14px] font-medium mb-2 leading-snug text-[#111827]">
+                  <h3 className="text-[14px] font-medium mb-2 leading-snug text-[#111827] dark:text-[#f1f5f9]">
                     {p.name}
                   </h3>
 
-                  <p className="text-[12px] text-[#6b7280] leading-relaxed mb-3">{p.desc}</p>
-                  <div className="flex gap-4 border-t border-[#e5e7eb] pt-2.5 items-end justify-between">
+                  <p className="text-[12px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed mb-3">{p.desc}</p>
+                  <div className="flex gap-4 border-t border-[#e5e7eb] dark:border-[#1e293b] pt-2.5 items-end justify-between">
                     <div className="flex gap-4">
                       {p.stats.map((s) => (
                         <div key={s.l}>
                           <div className="text-[13px] font-medium text-[#1a56db] leading-none">
                             {s.v}
                           </div>
-                          <div className="text-[10px] text-[#6b7280] mt-1">{s.l}</div>
+                          <div className="text-[10px] text-[#6b7280] dark:text-[#64748b] mt-1">{s.l}</div>
                         </div>
                       ))}
                     </div>
@@ -910,39 +925,39 @@ export default function DashboardPortfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="group block rounded-lg border border-[#e5e7eb] bg-white p-4 hover:border-[#1a56db]/40 hover:shadow-md transition-all"
+                className="group block rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-4 hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-md transition-all"
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
-                    <div className="text-[13px] font-medium text-[#111827] mb-0.5 inline-flex items-center gap-1.5">
+                    <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9] mb-0.5 inline-flex items-center gap-1.5">
                       {a.title}
                       <FiArrowRight className="opacity-0 group-hover:opacity-100 text-[#1a56db] transition-opacity" />
                     </div>
-                    <div className="text-[10px] text-[#6b7280]">{a.tag}</div>
+                    <div className="text-[10px] text-[#6b7280] dark:text-[#64748b]">{a.tag}</div>
                   </div>
                   <FiBriefcase className="text-[#1a56db] shrink-0 mt-0.5" />
                 </div>
                 <div className="space-y-1.5 text-[12px] mb-3">
                   <div>
-                    <span className="text-[10px] uppercase tracking-wide text-[#6b7280] mr-2">
+                    <span className="text-[10px] uppercase tracking-wide text-[#6b7280] dark:text-[#64748b] mr-2">
                       Challenge
                     </span>
-                    <span className="text-[#374151]">{a.challenge}</span>
+                    <span className="text-[#374151] dark:text-[#cbd5e1]">{a.challenge}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase tracking-wide text-[#6b7280] mr-2">
+                    <span className="text-[10px] uppercase tracking-wide text-[#6b7280] dark:text-[#64748b] mr-2">
                       Solution
                     </span>
-                    <span className="text-[#374151]">{a.solution}</span>
+                    <span className="text-[#374151] dark:text-[#cbd5e1]">{a.solution}</span>
                   </div>
                 </div>
-                <div className="text-[10px] uppercase tracking-wide text-[#6b7280] mb-1.5">
+                <div className="text-[10px] uppercase tracking-wide text-[#6b7280] dark:text-[#64748b] mb-1.5">
                   Process flow
                 </div>
                 <div className="flex flex-wrap items-center gap-1 mb-3">
                   {a.flow.map((step, idx) => (
                     <React.Fragment key={step}>
-                      <span className="text-[10px] px-2 py-1 bg-[#f8faff] border border-[#e5e7eb] rounded text-[#374151]">
+                      <span className="text-[10px] px-2 py-1 bg-[#f8faff] dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#334155] rounded text-[#374151] dark:text-[#cbd5e1]">
                         {step}
                       </span>
                       {idx < a.flow.length - 1 && (
@@ -951,13 +966,13 @@ export default function DashboardPortfolio() {
                     </React.Fragment>
                   ))}
                 </div>
-                <div className="flex gap-4 border-t border-[#e5e7eb] pt-2.5">
+                <div className="flex gap-4 border-t border-[#e5e7eb] dark:border-[#1e293b] pt-2.5">
                   {a.results.map((r) => (
                     <div key={r.l}>
-                      <div className="text-[13px] font-medium text-[#1a56db] leading-none">
+                      <div className="text-[13px] font-medium text-[#1a56db] dark:text-[#60a5fa] leading-none">
                         {r.v}
                       </div>
-                      <div className="text-[10px] text-[#6b7280] mt-1">{r.l}</div>
+                      <div className="text-[10px] text-[#6b7280] dark:text-[#64748b] mt-1">{r.l}</div>
                     </div>
                   ))}
                 </div>
@@ -1056,10 +1071,10 @@ export default function DashboardPortfolio() {
 
           {/* SKILLS */}
           <SecTitle title="Technical skills" />
-          <div className="rounded-lg border border-[#e5e7eb] bg-white p-5 mb-2">
+          <div className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-5 mb-2">
             {SKILL_GROUPS.map((g) => (
               <div key={g.name} className="mb-4 last:mb-0">
-                <div className="text-[10px] font-medium uppercase tracking-wider text-[#6b7280] mb-2">
+                <div className="text-[10px] font-medium uppercase tracking-wider text-[#6b7280] dark:text-[#64748b] mb-2">
                   {g.name}
                 </div>
                 <div className="flex flex-wrap gap-1.5">
@@ -1068,8 +1083,8 @@ export default function DashboardPortfolio() {
                       key={tag.t}
                       className={`text-[11px] px-2.5 py-1 rounded border ${
                         tag.hi
-                          ? "bg-[#e0e7ff] text-[#1a56db] border-[#c7d2fe]"
-                          : "bg-[#f8faff] text-[#374151] border-[#e5e7eb]"
+                          ? "bg-[#e0e7ff] dark:bg-[#1e3a5f] text-[#1a56db] dark:text-[#60a5fa] border-[#c7d2fe] dark:border-[#1e40af]"
+                          : "bg-[#f8faff] dark:bg-[#1e293b] text-[#374151] dark:text-[#94a3b8] border-[#e5e7eb] dark:border-[#334155]"
                       }`}
                     >
                       {tag.t}
@@ -1081,18 +1096,18 @@ export default function DashboardPortfolio() {
           </div>
 
           {/* Languages — honest */}
-          <div className="rounded-lg border border-[#e5e7eb] bg-white p-5 mt-3">
-            <div className="text-[10px] font-medium uppercase tracking-wider text-[#6b7280] mb-2">
+          <div className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-5 mt-3">
+            <div className="text-[10px] font-medium uppercase tracking-wider text-[#6b7280] dark:text-[#64748b] mb-2">
               Languages
             </div>
             <div className="flex flex-wrap gap-4 text-[12px]">
               <div>
-                <span className="text-[#111827]">Thai</span>{" "}
-                <span className="text-[#6b7280]">— Native</span>
+                <span className="text-[#111827] dark:text-[#f1f5f9]">Thai</span>{" "}
+                <span className="text-[#6b7280] dark:text-[#94a3b8]">— Native</span>
               </div>
               <div>
-                <span className="text-[#111827]">English</span>{" "}
-                <span className="text-[#6b7280]">— Intermediate (Working Proficiency)</span>
+                <span className="text-[#111827] dark:text-[#f1f5f9]">English</span>{" "}
+                <span className="text-[#6b7280] dark:text-[#94a3b8]">— Intermediate (Working Proficiency)</span>
               </div>
             </div>
           </div>
@@ -1133,9 +1148,9 @@ export default function DashboardPortfolio() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-[#e5e7eb] bg-white">
+      <footer className="border-t border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0a0f1e]">
         <div className="max-w-6xl mx-auto px-5 sm:px-7 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="text-[11px] text-[#6b7280]">
+          <span className="text-[11px] text-[#6b7280] dark:text-[#64748b]">
             © {new Date().getFullYear()} Kanokporn Hudsree · Bangkok, Thailand
           </span>
           <div className="flex items-center gap-4 text-[12px]">
