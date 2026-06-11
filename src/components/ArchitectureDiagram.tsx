@@ -5,109 +5,118 @@ import { motion } from "framer-motion";
 export function ArchitectureDiagram({ className = "" }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 720 320"
+      viewBox="0 0 720 340"
       className={className}
       role="img"
-      aria-label="KaiJa Bot architecture: LINE webhook to GAS to Sheets with retry, defer queue, and idempotent cache"
+      aria-label="Payment Advice with OCR architecture: Outlook inbox to Power Automate to AI Builder OCR to SAP validation to per-beneficiary distribution with Excel audit log and error alerting"
     >
       <defs>
-        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <marker id="ad-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M0,0 L10,5 L0,10 z" fill="#1a56db" />
         </marker>
-        <marker id="arr-err" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <marker id="ad-arr-err" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M0,0 L10,5 L0,10 z" fill="#ef4444" />
         </marker>
-        <pattern id="ad-dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+        <pattern id="ad-grid" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
           <circle cx="11" cy="11" r="0.6" fill="currentColor" />
         </pattern>
       </defs>
 
-      <rect x="2" y="2" width="716" height="316" rx="12" className="fill-[#f8faff] dark:fill-[#0f172a]" stroke="none" />
-      <rect x="2" y="2" width="716" height="316" rx="12" fill="none" className="stroke-[#e5e7eb] dark:stroke-[#1e293b]" />
-      <rect x="2" y="2" width="716" height="316" rx="12" fill="url(#ad-dots)" className="text-[#cbd5e1] dark:text-[#1e293b]" opacity="0.5" />
+      {/* Panel */}
+      <rect x="2" y="2" width="716" height="336" rx="12" className="fill-[#f8faff] dark:fill-[#0f172a]" stroke="none" />
+      <rect x="2" y="2" width="716" height="336" rx="12" fill="none" className="stroke-[#e5e7eb] dark:stroke-[#1e293b]" />
+      <rect x="2" y="2" width="716" height="336" rx="12" fill="url(#ad-grid)" className="text-[#cbd5e1] dark:text-[#1e293b]" opacity="0.5" />
 
       {/* Lane labels */}
-      <text x="24" y="28" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#64748b]" letterSpacing="1.5">EDGE</text>
-      <text x="220" y="28" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#64748b]" letterSpacing="1.5">COMPUTE</text>
-      <text x="448" y="28" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#64748b]" letterSpacing="1.5">STATE</text>
-      <text x="630" y="28" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#64748b]" letterSpacing="1.5">OBSERVE</text>
+      <text x="24" y="28" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#64748b]" letterSpacing="1.5">INGEST</text>
+      <text x="190" y="28" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#64748b]" letterSpacing="1.5">EXTRACT</text>
+      <text x="370" y="28" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#64748b]" letterSpacing="1.5">VALIDATE</text>
+      <text x="540" y="28" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#64748b]" letterSpacing="1.5">DISTRIBUTE</text>
 
-      {/* LINE User */}
+      {/* AP Team / Inbox */}
       <motion.g initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-        <rect x="24" y="60" width="120" height="48" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#06c755" strokeWidth="1.5" />
-        <text x="84" y="82" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">LINE User</text>
-        <text x="84" y="96" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Message / Slip / Cmd</text>
+        <rect x="20" y="60" width="140" height="56" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#0066ff" strokeWidth="1.8" />
+        <text x="90" y="82" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Vendor Email</text>
+        <text x="90" y="96" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#0066ff] dark:fill-[#60a5fa]">Outlook inbox</text>
+        <text x="90" y="108" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Payment advice attachment</text>
       </motion.g>
 
-      {/* LINE Platform */}
-      <motion.g initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-        <rect x="24" y="148" width="120" height="48" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#06c755" strokeWidth="1.5" />
-        <text x="84" y="170" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">LINE Messaging API</text>
-        <text x="84" y="184" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Webhook · 30s deadline</text>
+      {/* Power Automate trigger */}
+      <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.1 }}>
+        <rect x="20" y="140" width="140" height="56" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#0066ff" strokeWidth="1.8" />
+        <text x="90" y="162" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Power Automate</text>
+        <text x="90" y="176" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#0066ff] dark:fill-[#60a5fa]">Cloud Flow trigger</text>
+        <text x="90" y="188" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">When email arrives</text>
       </motion.g>
 
-      {/* Webhook Receiver */}
+      {/* AI Builder OCR */}
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
-        <rect x="220" y="60" width="180" height="56" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#1a56db" strokeWidth="2" />
-        <text x="310" y="80" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Webhook Receiver</text>
-        <text x="310" y="94" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#1a56db] dark:fill-[#60a5fa]">Reply 200 First</text>
-        <text x="310" y="106" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Google Apps Script doPost</text>
+        <rect x="195" y="80" width="160" height="80" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#9333ea" strokeWidth="2" />
+        <text x="275" y="100" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">AI Builder OCR</text>
+        <text x="275" y="115" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#9333ea] dark:fill-[#a78bfa]">Document model</text>
+        <line x1="207" y1="124" x2="343" y2="124" className="stroke-[#e5e7eb] dark:stroke-[#1e293b]" />
+        <text x="275" y="138" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Extract: vendor, invoice #,</text>
+        <text x="275" y="150" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">amount, payment date, ref</text>
       </motion.g>
 
-      {/* Idempotent Cache */}
+      {/* Confidence Gate */}
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.4 }}>
-        <rect x="220" y="132" width="180" height="44" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#1a56db" strokeWidth="1.5" strokeDasharray="3 2" />
-        <text x="310" y="151" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Idempotency Check</text>
-        <text x="310" y="165" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Dedup by messageId (TTL 24h)</text>
+        <rect x="195" y="180" width="160" height="48" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#9333ea" strokeWidth="1.5" strokeDasharray="3 2" />
+        <text x="275" y="200" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Confidence Gate</text>
+        <text x="275" y="214" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">≥ 85% → continue · &lt; → review</text>
       </motion.g>
 
-      {/* Defer Queue */}
+      {/* SAP Validation */}
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.5 }}>
-        <rect x="220" y="192" width="180" height="56" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#9333ea" strokeWidth="2" />
-        <text x="310" y="212" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Defer Queue + OCR</text>
-        <text x="310" y="226" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#9333ea] dark:fill-[#a78bfa]">Async slip processing</text>
-        <text x="310" y="238" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Time-trigger · Push fallback</text>
+        <rect x="375" y="80" width="150" height="80" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#0080a0" strokeWidth="2" />
+        <text x="450" y="100" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">SAP S/4HANA</text>
+        <text x="450" y="115" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#0080a0] dark:fill-[#5eead4]">Master data validation</text>
+        <line x1="387" y1="124" x2="513" y2="124" className="stroke-[#e5e7eb] dark:stroke-[#1e293b]" />
+        <text x="450" y="138" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Vendor match · Invoice ref</text>
+        <text x="450" y="150" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Amount tolerance check</text>
       </motion.g>
 
-      {/* Sheets State DB */}
+      {/* Beneficiary Lookup */}
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.6 }}>
-        <rect x="448" y="60" width="160" height="120" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#0d9488" strokeWidth="2" />
-        <text x="528" y="80" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Google Sheets DB</text>
-        <line x1="460" y1="92" x2="596" y2="92" className="stroke-[#e5e7eb] dark:stroke-[#1e293b]" />
-        <text x="528" y="108" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Transactions</text>
-        <text x="528" y="124" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Stock / SKU</text>
-        <text x="528" y="140" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">User State</text>
-        <text x="528" y="156" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Defer Queue Log</text>
-        <text x="528" y="172" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Dedup Cache</text>
+        <rect x="375" y="180" width="150" height="48" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#0080a0" strokeWidth="1.5" strokeDasharray="3 2" />
+        <text x="450" y="200" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Beneficiary Lookup</text>
+        <text x="450" y="214" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Per-vendor email + cc list</text>
       </motion.g>
 
-      {/* Push fallback box */}
+      {/* Outlook send */}
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.7 }}>
-        <rect x="448" y="196" width="160" height="56" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#06c755" strokeWidth="1.5" strokeDasharray="3 2" />
-        <text x="528" y="216" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Push API Fallback</text>
-        <text x="528" y="230" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">When reply token expires</text>
-        <text x="528" y="242" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#06c755] dark:fill-[#34d399]">graceful degrade</text>
+        <rect x="545" y="80" width="150" height="80" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#0066ff" strokeWidth="2" />
+        <text x="620" y="100" textAnchor="middle" fontSize="11" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Outlook Send</text>
+        <text x="620" y="115" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#0066ff] dark:fill-[#60a5fa]">Per beneficiary</text>
+        <line x1="557" y1="124" x2="683" y2="124" className="stroke-[#e5e7eb] dark:stroke-[#1e293b]" />
+        <text x="620" y="138" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Generated advice PDF</text>
+        <text x="620" y="150" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">Targeted distribution</text>
       </motion.g>
 
-      {/* Observability */}
+      {/* Excel Audit Log */}
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.8 }}>
-        <rect x="624" y="60" width="80" height="100" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#f59e0b" strokeWidth="2" />
-        <text x="664" y="80" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Log Sheet</text>
-        <line x1="636" y1="90" x2="692" y2="90" className="stroke-[#e5e7eb] dark:stroke-[#1e293b]" />
-        <text x="664" y="105" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">INFO</text>
-        <text x="664" y="120" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#f59e0b] dark:fill-[#fbbf24]">WARN</text>
-        <text x="664" y="135" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#ef4444]">ERROR</text>
-        <text x="664" y="150" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#374151] dark:fill-[#cbd5e1]">TRACE</text>
-      </motion.g>
-      <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.9 }}>
-        <rect x="624" y="172" width="80" height="76" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#ef4444" strokeWidth="1.5" />
-        <text x="664" y="192" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Email Alert</text>
-        <text x="664" y="208" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#ef4444]">on ERROR</text>
-        <text x="664" y="222" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">MTTR &lt; 5m</text>
-        <text x="664" y="238" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">on-call: solo</text>
+        <rect x="545" y="180" width="150" height="48" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#059669" strokeWidth="2" />
+        <text x="620" y="200" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Excel Audit Log</text>
+        <text x="620" y="214" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#059669] dark:fill-[#34d399]">SOX-grade traceability</text>
       </motion.g>
 
-      {/* Edges */}
+      {/* Error path — Finance review queue */}
+      <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.9 }}>
+        <rect x="195" y="248" width="330" height="56" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="3 2" />
+        <text x="360" y="268" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Finance Review Queue</text>
+        <text x="360" y="282" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#ef4444]">Low confidence · SAP mismatch · validation fail</text>
+        <text x="360" y="295" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Email alert → manual review → loop back to OCR retrain</text>
+      </motion.g>
+
+      {/* Email Alert */}
+      <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 1.0 }}>
+        <rect x="545" y="248" width="150" height="56" rx="8" className="fill-white dark:fill-[#0a0f1e]" stroke="#ef4444" strokeWidth="1.5" />
+        <text x="620" y="268" textAnchor="middle" fontSize="10.5" fontFamily="ui-sans-serif" fontWeight="500" className="fill-[#111827] dark:fill-[#f1f5f9]">Email Alert</text>
+        <text x="620" y="282" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#ef4444]">On any failure</text>
+        <text x="620" y="295" textAnchor="middle" fontSize="8.5" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">Finance team owner</text>
+      </motion.g>
+
+      {/* Happy path edges */}
       <motion.g
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
@@ -116,32 +125,35 @@ export function ArchitectureDiagram({ className = "" }: { className?: string }) 
         strokeWidth="1.5"
         fill="none"
       >
-        <motion.line x1="84" y1="108" x2="84" y2="146" markerEnd="url(#arr)" />
-        <motion.line x1="144" y1="172" x2="218" y2="88" markerEnd="url(#arr)" />
-        <motion.line x1="310" y1="116" x2="310" y2="130" markerEnd="url(#arr)" />
-        <motion.line x1="310" y1="176" x2="310" y2="190" markerEnd="url(#arr)" />
-        <motion.path d="M400 160 Q 425 160 446 120" markerEnd="url(#arr)" />
-        <motion.path d="M400 220 Q 425 220 446 152" markerEnd="url(#arr)" />
-        <motion.line x1="608" y1="120" x2="622" y2="100" markerEnd="url(#arr)" />
-        <motion.path d="M400 95 Q 480 30 660 60" markerEnd="url(#arr)" />
+        <motion.line x1="90" y1="116" x2="90" y2="138" markerEnd="url(#ad-arr)" />
+        <motion.path d="M160 168 Q 175 168 192 120" markerEnd="url(#ad-arr)" />
+        <motion.line x1="275" y1="160" x2="275" y2="178" markerEnd="url(#ad-arr)" />
+        <motion.path d="M355 204 Q 365 204 373 196" markerEnd="url(#ad-arr)" />
+        <motion.line x1="355" y1="120" x2="373" y2="120" markerEnd="url(#ad-arr)" />
+        <motion.line x1="450" y1="160" x2="450" y2="178" markerEnd="url(#ad-arr)" />
+        <motion.path d="M525 204 Q 535 204 543 196" markerEnd="url(#ad-arr)" />
+        <motion.line x1="525" y1="120" x2="543" y2="120" markerEnd="url(#ad-arr)" />
+        <motion.line x1="620" y1="160" x2="620" y2="178" markerEnd="url(#ad-arr)" />
       </motion.g>
 
-      {/* Error path */}
+      {/* Error path edges (dashed red) */}
       <motion.g
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 1.2 }}
         stroke="#ef4444"
-        strokeWidth="1.2"
+        strokeWidth="1.3"
         strokeDasharray="4 3"
         fill="none"
       >
-        <motion.path d="M664 160 L 664 170" markerEnd="url(#arr-err)" />
+        <motion.path d="M275 228 L 275 246" markerEnd="url(#ad-arr-err)" />
+        <motion.path d="M450 228 L 450 246" markerEnd="url(#ad-arr-err)" />
+        <motion.line x1="525" y1="276" x2="543" y2="276" markerEnd="url(#ad-arr-err)" />
       </motion.g>
 
       {/* Footnote */}
-      <text x="360" y="296" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">
-        Reply-200-First · Idempotent · Async OCR · Logged · Auto-alerted on error
+      <text x="360" y="324" textAnchor="middle" fontSize="9" fontFamily="ui-sans-serif" className="fill-[#6b7280] dark:fill-[#94a3b8]">
+        AI Builder OCR · SAP validation · per-beneficiary distribution · SOX-grade audit · error → finance review
       </text>
     </svg>
   );

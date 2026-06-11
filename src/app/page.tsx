@@ -790,17 +790,17 @@ export default function DashboardPortfolio() {
                 Measured, not asserted.
               </h2>
               <p className="text-[12.5px] text-[#6b7280] dark:text-[#94a3b8] mt-1 max-w-2xl">
-                Every system I ship gets explicit SLOs, structured logging, and an error path. These numbers come from real operations — KaiJa Bot ran 16 weeks before this page existed.
+                Every system I ship gets explicit SLOs, structured logging, and an error path the finance team can act on. Numbers below come from production AP automation at AIS — not demos.
               </p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-7">
             {[
-              { icon: <FiShield />, num: "0", label: "Silent failures", sub: "16 weeks production · KaiJa Bot", tone: "#059669" },
-              { icon: <FiClock />, num: "<1.5s", label: "p95 reply latency", sub: "LINE webhook (Reply-200-First)", tone: "#1a56db" },
-              { icon: <FiAlertTriangle />, num: "<5m", label: "MTTR target", sub: "Error → email alert → fix → redeploy", tone: "#d97706" },
-              { icon: <FiDatabase />, num: "100%", label: "Logging coverage", sub: "INFO · WARN · ERROR · TRACE in every fn", tone: "#9333ea" },
+              { icon: <FiShield />, num: "0", label: "Manual keying errors", sub: "Production AP automation since deploy", tone: "#059669" },
+              { icon: <FiClock />, num: "≥85%", label: "OCR confidence gate", sub: "Below threshold → finance review", tone: "#1a56db" },
+              { icon: <FiAlertTriangle />, num: "SOX", label: "Audit-grade trail", sub: "Excel log + Outlook trail per advice", tone: "#d97706" },
+              { icon: <FiDatabase />, num: "100%", label: "Logging coverage", sub: "INFO · WARN · ERROR in every flow step", tone: "#9333ea" },
             ].map((m, i) => (
               <motion.div
                 key={m.label}
@@ -830,28 +830,28 @@ export default function DashboardPortfolio() {
           <div className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-4 sm:p-6">
             <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
               <div>
-                <div className="text-[10px] uppercase tracking-wider text-[#6b7280] dark:text-[#64748b]">System design</div>
-                <div className="text-[14px] font-medium text-[#111827] dark:text-[#f1f5f9] mt-0.5">KaiJa Bot — production topology</div>
+                <div className="text-[10px] uppercase tracking-wider text-[#6b7280] dark:text-[#64748b]">System design · case study</div>
+                <div className="text-[14px] font-medium text-[#111827] dark:text-[#f1f5f9] mt-0.5">Payment Advice with AI Builder OCR — AIS Finance AP automation</div>
               </div>
-              <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8]">4 lanes · 8 components · 1 solo on-call</div>
+              <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8]">4 lanes · 9 components · finance-owned error path</div>
             </div>
             <ArchitectureDiagram className="w-full h-auto" />
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-[10.5px]">
               <div>
                 <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Hypothesis</div>
-                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Single async webhook can run cafe ops if reply latency stays sub-2s.</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">AI OCR can replace manual keying for AP advices if a confidence gate + SAP master-data check stop bad data before send.</div>
               </div>
               <div>
                 <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Metric</div>
-                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">p95 reply latency &lt; 1.5s · daily failure rate.</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">OCR confidence ≥85% · SAP vendor match rate · advices auto-distributed vs queued.</div>
               </div>
               <div>
                 <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Result</div>
-                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">16w live, ~83% manual cut, 0 silent fail.</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Manual entry eliminated · per-beneficiary auto-distribution · SOX-grade Excel + email audit.</div>
               </div>
               <div>
                 <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Iteration</div>
-                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Added defer queue when slip OCR pushed p95 over budget.</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Added SAP tolerance check after OCR caught vendor name but missed cents — false positives went to finance review.</div>
               </div>
             </div>
           </div>
