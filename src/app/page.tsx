@@ -256,6 +256,20 @@ const PROJECTS: {
     links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
   },
   {
+    accent: "bg-purple-600",
+    badges: ["PTT Digital", "AI · Code Quality"],
+    name: "AI Code Assistant for QA (PTT Digital)",
+    desc: "Hypothesis: an AI code review assistant can offload routine QA checks (lint, vulnerability scan, convention review) from senior reviewers and cut review cycle time. Measured at PTT Digital: +75% QA productivity, 5-20% release-cycle cost reduction. Presented live at YOU&AI Forward Together (AIS × PTT joint event).",
+    image: "/project-ai-code-qa.jpg",
+    art: "pipeline",
+    stats: [
+      { v: "+75%", l: "QA productivity" },
+      { v: "5-20%", l: "Cost / release" },
+      { v: "Live", l: "PTT × AIS event" },
+    ],
+    links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
+  },
+  {
     accent: "bg-emerald-500",
     badges: ["SAP OB83", "Financial ERP"],
     name: "Market Rate Maintenance (THOR & SOFR)",
@@ -313,6 +327,18 @@ const AUTOMATIONS: {
     results: [
       { v: "↓83%", l: "Manual effort" },
       { v: "0 failures", l: "16+ weeks production" },
+    ],
+    href: "/portfolio#projects",
+  },
+  {
+    title: "AI Code Assistant for QA",
+    tag: "AI · LLM · PTT Digital",
+    challenge: "Senior reviewers spent hours per release on routine QA checks (lint, vulnerability scan, convention review).",
+    solution: "AI code assistant that pre-screens PRs against QA rule-set and flags anomalies before human review. Presented at AIS × PTT joint AI event.",
+    flow: ["PR Diff Extract", "AI Rule Check", "Vulnerability Scan", "Review Summary"],
+    results: [
+      { v: "+75%", l: "QA productivity" },
+      { v: "5-20%", l: "Cost / release" },
     ],
     href: "/portfolio#projects",
   },
@@ -421,7 +447,12 @@ const TIMELINE = [
     role: "Software Engineer",
     company: "PTT Digital Solutions",
     color: "#0080a0",
-    highlights: ["YOLOv5 traffic detection 92.5%", "API integration & data pipeline"],
+    highlights: [
+      "AI Code Assistant for QA · +75% productivity · 5-20% cost/release",
+      "Presented at YOU&AI Forward Together (AIS × PTT)",
+      "YOLOv5 traffic detection 92.5%",
+      "API integration & data pipeline",
+    ],
   },
   {
     period: "Aug – Dec 2024",
