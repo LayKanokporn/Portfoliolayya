@@ -45,10 +45,10 @@ import {
   SiUipath,
   SiPython,
   SiLine,
-
   SiGooglecloud,
 } from "react-icons/si";
 import { MdSmartToy } from "react-icons/md";
+import { BluePrismLogo, PowerAutomateLogo, PowerAppsLogo } from "@/components/BrandLogos";
 
 // ── DATA ──────────────────────────────────────────────────────────────
 const METRICS = [
@@ -60,23 +60,24 @@ const METRICS = [
 
 const TECH_LOGOS = [
   { label: "SAP S/4HANA", color: "#0080a0", href: "#projects", Icon: SiSap },
-  { label: "UiPath", color: "#fa4616", href: "#experience", Icon: SiUipath },
-  { label: "Blue Prism", color: "#00aae4", href: "#experience", Icon: null, letter: "BP" },
-  { label: "Power Automate", color: "#0066ff", href: "#projects", Icon: null, letter: "PA" },
   { label: "SAP Build", color: "#0080a0", href: "/portfolio#experience", Icon: SiSap },
+  { label: "UiPath", color: "#fa4616", href: "#experience", Icon: SiUipath },
+  { label: "Blue Prism", color: "#00aae4", href: "#experience", Icon: BluePrismLogo },
+  { label: "Power Automate", color: "#0066ff", href: "#projects", Icon: PowerAutomateLogo },
+  { label: "Power Apps", color: "#742774", href: "#projects", Icon: PowerAppsLogo },
   { label: "AI Builder OCR", color: "#742774", href: "#projects", Icon: MdSmartToy },
   { label: "Python", color: "#3776ab", href: "#experience", Icon: SiPython },
-  { label: "LINE Bot", color: "#06c755", href: "#projects", Icon: SiLine },
   { label: "Google Cloud", color: "#4285f4", href: "#projects", Icon: SiGooglecloud },
+  { label: "LINE Bot", color: "#06c755", href: "#projects", Icon: SiLine },
 ];
 
 const HERO_CHIPS = [
-  { label: "Open to work", hot: true },
+  { label: "Open to Automation Specialist roles", hot: true },
   { label: "SAP S/4HANA" },
-  { label: "UiPath" },
-  { label: "Power Automate" },
-  { label: "SAP Build" },
+  { label: "UiPath · Blue Prism" },
+  { label: "Power Automate · Power Apps" },
   { label: "Python" },
+  { label: "API · OData" },
 ];
 
 type Detail = {
@@ -89,13 +90,14 @@ type Detail = {
 const FOCUS_DETAILS: Record<string, Detail> = {
   "Automation Specialist": {
     title: "Automation Specialist",
-    desc: "ERP Developer + Automation Engineer focused on production-grade automation across SAP, RPA, API, and AI — not just one layer.",
+    desc: "I engineer automation systems with explicit SLOs and structured logging — across SAP, RPA, API, and AI. Reliability over features, measurement over assertion, ownership over hand-off.",
     bullets: [
+      "5 enterprise SAP S/4HANA automations live at AIS (BG Alert · Payment Advice · OB83 · GR · Mass SO)",
+      "16 weeks solo production · 0 silent failures · p95 reply < 1.5s",
+      "Logging mandatory in every function · email-alerted error path · MTTR < 5m",
       "First-Class Honors (GPA 3.53) — Computer & Robotics Engineering",
-      "Currently delivering 5 enterprise SAP automations at AIS",
-      "Self-built LINE Bot production system — 16+ weeks, ↓83% manual effort",
     ],
-    link: { label: "Full about →", href: "/portfolio#about" },
+    link: { label: "Reliability metrics →", href: "#reliability" },
   },
   "SAP · RPA · AI": {
     title: "Cross-stack engineer",
@@ -346,9 +348,22 @@ const SKILL_GROUPS = [
       { t: "UiPath", hi: true },
       { t: "Blue Prism", hi: true },
       { t: "Power Automate", hi: true },
+      { t: "Power Apps", hi: true },
       { t: "CronJob" },
       { t: "Python Scheduling" },
       { t: "Process Optimization" },
+    ],
+  },
+  {
+    name: "Reliability & Observability",
+    tags: [
+      { t: "Structured logging", hi: true },
+      { t: "Error path / DLQ" },
+      { t: "Idempotency" },
+      { t: "Retry + backoff" },
+      { t: "MTTR ownership" },
+      { t: "SLO thinking" },
+      { t: "Solo on-call" },
     ],
   },
   {
@@ -593,21 +608,23 @@ export default function DashboardPortfolio() {
             <p className="text-[15px] sm:text-[16px] text-[#1a56db] dark:text-[#60a5fa] font-medium mb-4 min-h-[24px]">
               <TypewriterText
                 strings={[
-                  "ERP Developer · Automation Engineer",
-                  "SAP S/4HANA Specialist",
-                  "RPA Developer · UiPath · Blue Prism",
-                  "Digital Transformation Engineer",
-                  "LINE Bot Architect · Solo Builder",
+                  "Automation Specialist · SAP · RPA · API",
+                  "Reliable, observable, measured.",
+                  "16 weeks production · 0 silent failures",
+                  "p95 < 1.5s · MTTR < 5m · 100% logged",
+                  "Cross-stack: SAP, UiPath, Blue Prism, Power Platform",
                 ]}
                 typingSpeed={50}
                 deletingSpeed={25}
-                pauseMs={2000}
+                pauseMs={2200}
               />
             </p>
             <p className="text-[13px] sm:text-[14px] text-[#374151] dark:text-[#cbd5e1] max-w-2xl leading-relaxed mb-5">
-              I build automation systems that eliminate manual work — from SAP S/4HANA financial
-              workflows (BG Alert, Payment Advice with AI Builder OCR, THOR/SOFR) to a self-built
-              LINE Bot suite cutting daily bookkeeping by ~83% over 16 weeks of production.
+              I engineer automation systems that eliminate manual toil — measured, observable, and
+              boring to operate. Production SAP S/4HANA finance workflows (BG Alert, Payment Advice
+              with AI Builder OCR, OB83 / THOR / SOFR) at AIS, plus a self-built LINE Bot suite that
+              ran 16 weeks with zero silent failures and p95 reply &lt; 1.5s. Comfortable owning the
+              system end-to-end: design, ship, monitor, on-call.
             </p>
             <div className="flex flex-wrap gap-1.5 mb-5">
               {HERO_CHIPS.map((c) => (
@@ -755,16 +772,7 @@ export default function DashboardPortfolio() {
                 href={t.href}
                 className="group inline-flex items-center gap-1.5 text-[11.5px] px-3 py-1.5 rounded-md bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-sm transition-all"
               >
-                {t.Icon ? (
-                  <t.Icon className="text-[14px] shrink-0" style={{ color: t.color }} />
-                ) : (
-                  <span
-                    className="text-[8px] font-bold px-1 rounded shrink-0 text-white leading-[14px]"
-                    style={{ backgroundColor: t.color }}
-                  >
-                    {t.letter}
-                  </span>
-                )}
+                <t.Icon className="text-[15px] shrink-0" style={{ color: t.color }} />
                 <span className="text-[#111827] dark:text-[#e2e8f0]">{t.label}</span>
               </a>
             ))}
