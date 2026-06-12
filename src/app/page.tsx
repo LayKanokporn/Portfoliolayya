@@ -1001,13 +1001,13 @@ export default function DashboardPortfolio() {
               href="#projects"
               className="mt-5 block group relative rounded-md overflow-hidden border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 transition-all bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]"
             >
-              <div className="grid sm:grid-cols-[3fr_5fr]">
-                <div className="relative aspect-[3/4] sm:aspect-auto sm:min-h-[280px]">
+              <div className="grid sm:grid-cols-[2fr_3fr]">
+                <div className="relative aspect-[3/4] sm:aspect-auto sm:min-h-[420px] bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/event-you-ai-forward.jpg"
                     alt="Lay presenting AI Code Assistant for QA at PTT Digital YOU&AI Forward Together AI showcase"
-                    className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
                     onError={(e) => { e.currentTarget.style.display = "none"; }}
                   />
                   <div className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 text-[9px] uppercase tracking-wider px-2 py-1 rounded bg-black/40 backdrop-blur-sm text-white border border-white/20">
