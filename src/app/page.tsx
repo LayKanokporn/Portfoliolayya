@@ -259,13 +259,13 @@ const PROJECTS: {
     accent: "bg-purple-600",
     badges: ["PTT Digital", "AI · Code Quality"],
     name: "AI Code Assistant for QA (PTT Digital)",
-    desc: "Hypothesis: an AI code review assistant can offload routine QA checks (lint, vulnerability scan, convention review) from senior reviewers and cut review cycle time. Measured at PTT Digital: +75% QA productivity, 5-20% release-cycle cost reduction. Presented live at YOU&AI Forward Together (AIS × PTT joint event).",
+    desc: "Hypothesis: an AI code review assistant can offload routine QA checks (lint, vulnerability scan, convention review) from senior reviewers and cut review cycle time. Measured at PTT Digital: +75% QA productivity, 5-20% release-cycle cost reduction. Presented live at PTT Digital YOU&AI Forward Together AI showcase.",
     image: "/project-ai-code-qa.jpg",
     art: "pipeline",
     stats: [
       { v: "+75%", l: "QA productivity" },
       { v: "5-20%", l: "Cost / release" },
-      { v: "Live", l: "PTT × AIS event" },
+      { v: "Live", l: "PTT AI showcase" },
     ],
     links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
   },
@@ -334,7 +334,7 @@ const AUTOMATIONS: {
     title: "AI Code Assistant for QA",
     tag: "AI · LLM · PTT Digital",
     challenge: "Senior reviewers spent hours per release on routine QA checks (lint, vulnerability scan, convention review).",
-    solution: "AI code assistant that pre-screens PRs against QA rule-set and flags anomalies before human review. Presented at AIS × PTT joint AI event.",
+    solution: "AI code assistant that pre-screens PRs against QA rule-set and flags anomalies before human review. Presented at PTT Digital YOU&AI Forward Together AI showcase.",
     flow: ["PR Diff Extract", "AI Rule Check", "Vulnerability Scan", "Review Summary"],
     results: [
       { v: "+75%", l: "QA productivity" },
@@ -449,7 +449,7 @@ const TIMELINE = [
     color: "#0080a0",
     highlights: [
       "AI Code Assistant for QA · +75% productivity · 5-20% cost/release",
-      "Presented at YOU&AI Forward Together (AIS × PTT)",
+      "Presented at PTT Digital YOU&AI Forward Together",
       "YOLOv5 traffic detection 92.5%",
       "API integration & data pipeline",
     ],
@@ -1005,7 +1005,7 @@ export default function DashboardPortfolio() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/event-you-ai-forward.jpg"
-                  alt="Lay presenting AI Code Assistant for QA at YOU&AI Forward Together — AIS × PTT Digital joint AI showcase"
+                  alt="Lay presenting AI Code Assistant for QA at PTT Digital YOU&AI Forward Together AI showcase"
                   className="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
                   onError={(e) => { e.currentTarget.style.display = "none"; }}
                 />
@@ -1019,7 +1019,7 @@ export default function DashboardPortfolio() {
                     Presented at YOU&amp;AI Forward Together
                   </div>
                   <div className="text-[10px] sm:text-[11px] opacity-85 mt-0.5">
-                    AIS × PTT Digital · AI showcase · AI Code Assistant for QA (+75% productivity)
+                    PTT Digital · YOU&AI Forward Together · AI Code Assistant for QA (+75% productivity)
                   </div>
                 </div>
               </div>

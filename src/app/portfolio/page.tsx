@@ -367,7 +367,7 @@ const PROJECTS: {
     category: "AI · LLM · Code Quality Automation",
     image: "/project-ai-code-qa.jpg",
     art: "pipeline",
-    desc: "AI-powered code review assistant that pre-screens pull requests against QA rule-set — lint, security/vulnerability scan, naming convention, and architecture pattern checks — before they reach senior reviewers. Presented live at YOU&AI Forward Together, the AIS × PTT joint AI showcase.",
+    desc: "AI-powered code review assistant that pre-screens pull requests against QA rule-set — lint, security/vulnerability scan, naming convention, and architecture pattern checks — before they reach senior reviewers. Presented live at PTT Digital YOU&AI Forward Together AI showcase.",
     impact: {
       before: "Senior reviewers spent hours per release running routine QA checks manually, slowing the release cycle and creating a review bottleneck.",
       after: "AI pre-screens every PR in seconds and surfaces only anomalies for human review — measured +75% QA productivity and 5-20% cost reduction per release cycle.",
@@ -378,10 +378,10 @@ const PROJECTS: {
       "Security/vulnerability scanner integration",
       "Structured review summary auto-attached to PR",
       "Telemetry for productivity and cost-per-release metrics",
-      "Presented at YOU&AI Forward Together — AIS × PTT joint event",
+      "Presented at PTT Digital YOU&AI Forward Together AI showcase",
     ],
     tech: ["Python", "LLM Integration", "AST Parsing", "CI/CD Pipeline", "REST API"],
-    stats: [{ v: "+75%", l: "QA productivity" }, { v: "5-20%", l: "Cost / release" }, { v: "Live demo", l: "PTT × AIS event" }],
+    stats: [{ v: "+75%", l: "QA productivity" }, { v: "5-20%", l: "Cost / release" }, { v: "Live demo", l: "PTT AI showcase" }],
     links: [{ kind: "github", href: "https://github.com/LayKanokporn", label: "GitHub" }],
   },
   {
@@ -717,7 +717,7 @@ export default function PortfolioPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/event-you-ai-forward.jpg"
-                    alt="Lay presenting AI Code Assistant for QA at YOU&AI Forward Together — AIS × PTT Digital joint AI showcase"
+                    alt="Lay presenting AI Code Assistant for QA at PTT Digital YOU&AI Forward Together AI showcase"
                     className="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
                     onError={(e) => { e.currentTarget.style.display = "none"; }}
                   />
@@ -731,7 +731,7 @@ export default function PortfolioPage() {
                       Presented at YOU&amp;AI Forward Together
                     </div>
                     <div className="text-[10px] sm:text-[11px] opacity-85 mt-0.5">
-                      AIS × PTT Digital · AI showcase · AI Code Assistant for QA (+75% productivity)
+                      PTT Digital · YOU&AI Forward Together · AI Code Assistant for QA (+75% productivity)
                     </div>
                   </div>
                 </div>
