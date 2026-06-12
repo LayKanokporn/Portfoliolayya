@@ -996,26 +996,28 @@ export default function DashboardPortfolio() {
               University · 2+ years industry experience.
             </p>
 
-            {/* Presented at — proof banner with real event photo */}
+            {/* Presented at — proof banner with real event photo (full portrait) */}
             <a
               href="#projects"
-              className="mt-5 block group relative rounded-md overflow-hidden border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 transition-all"
+              className="mt-5 block group relative rounded-md overflow-hidden border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 transition-all bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]"
             >
-              <div className="relative h-32 sm:h-40 bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/event-you-ai-forward.jpg"
-                  alt="Lay presenting AI Code Assistant for QA at PTT Digital YOU&AI Forward Together AI showcase"
-                  className="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
-                  onError={(e) => { e.currentTarget.style.display = "none"; }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
-                <div className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 text-[9px] uppercase tracking-wider px-2 py-1 rounded bg-black/40 backdrop-blur-sm text-white border border-white/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  Live presentation
+              <div className="grid sm:grid-cols-[3fr_5fr]">
+                <div className="relative aspect-[3/4] sm:aspect-auto sm:min-h-[280px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/event-you-ai-forward.jpg"
+                    alt="Lay presenting AI Code Assistant for QA at PTT Digital YOU&AI Forward Together AI showcase"
+                    className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                  <div className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 text-[9px] uppercase tracking-wider px-2 py-1 rounded bg-black/40 backdrop-blur-sm text-white border border-white/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Live presentation
+                  </div>
                 </div>
-                <div className="absolute bottom-2.5 left-3 right-3 text-white">
-                  <div className="text-[11.5px] sm:text-[13px] font-medium leading-tight">
+                <div className="p-4 sm:p-5 text-white flex flex-col justify-center gap-2">
+                  <div className="text-[10px] uppercase tracking-wider opacity-70">PTT Digital · AI showcase</div>
+                  <div className="text-[14px] sm:text-[16px] font-medium leading-snug">
                     Presented at YOU&amp;AI Forward Together
                   </div>
                   <div className="text-[10px] sm:text-[11px] opacity-85 mt-0.5">
@@ -1040,18 +1042,24 @@ export default function DashboardPortfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] overflow-hidden hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-md transition-all"
+                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] overflow-hidden hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-md transition-all group relative"
               >
+                {/* Whole-card click target — goes to portfolio detail */}
+                <Link
+                  href="/portfolio#projects"
+                  aria-label={`View ${p.name} details`}
+                  className="absolute inset-0 z-10"
+                />
                 <div className={`h-1 ${p.accent}`} />
 
                 {/* Visual: real screenshot if available, else SVG art fallback */}
-                <div className="relative h-40 w-full bg-[#f8faff] dark:bg-[#0a0f1e] border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
+                <div className={`relative w-full bg-[#f8faff] dark:bg-[#0a0f1e] border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden ${p.art === "pipeline" ? "h-56" : "h-40"}`}>
                   <ProjectArt theme={p.art} ariaLabel={p.name} />
                   {p.image && (
                     <img
                       src={p.image}
                       alt={p.name}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className={`absolute inset-0 w-full h-full ${p.art === "pipeline" ? "object-contain bg-[#0c2463]" : "object-cover"}`}
                       onError={(e) => { e.currentTarget.style.display = "none"; }}
                     />
                   )}
@@ -1088,22 +1096,22 @@ export default function DashboardPortfolio() {
                         </div>
                       ))}
                     </div>
-                    {p.links && p.links.length > 0 && (
-                      <div className="flex items-center gap-2 shrink-0">
-                        {p.links.map((lk) => (
-                          <a
-                            key={lk.kind}
-                            href={lk.href}
-                            target={lk.kind === "github" ? "_blank" : undefined}
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-[10px] text-[#1a56db] hover:underline"
-                          >
-                            {lk.kind === "github" ? <FiGithub /> : <FiExternalLink />}
-                            {lk.label}
-                          </a>
-                        ))}
-                      </div>
-                    )}
+                    <div className="flex items-center gap-3 shrink-0 relative z-20">
+                      {p.links?.filter(lk => lk.kind === "github").map((lk) => (
+                        <a
+                          key={lk.kind}
+                          href={lk.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] text-[#1a56db] hover:underline"
+                        >
+                          <FiGithub /> {lk.label}
+                        </a>
+                      ))}
+                      <span className="inline-flex items-center gap-1 text-[10px] font-medium text-[#1a56db] group-hover:translate-x-0.5 transition-transform">
+                        View details <FiArrowRight />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
