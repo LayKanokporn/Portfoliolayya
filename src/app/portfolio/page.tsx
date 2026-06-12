@@ -361,6 +361,30 @@ const PROJECTS: {
     links: [{ kind: "github", href: "https://github.com/LayKanokporn", label: "GitHub" }],
   },
   {
+    accent: "border-l-purple-600",
+    name: "AI Code Assistant for Quality Assurance — PTT Digital",
+    role: "Software Engineer · PTT Digital · Jan – Aug 2025",
+    category: "AI · LLM · Code Quality Automation",
+    image: "/project-ai-code-qa.jpg",
+    art: "pipeline",
+    desc: "AI-powered code review assistant that pre-screens pull requests against QA rule-set — lint, security/vulnerability scan, naming convention, and architecture pattern checks — before they reach senior reviewers. Presented live at PTT Digital YOU&AI Forward Together AI showcase.",
+    impact: {
+      before: "Senior reviewers spent hours per release running routine QA checks manually, slowing the release cycle and creating a review bottleneck.",
+      after: "AI pre-screens every PR in seconds and surfaces only anomalies for human review — measured +75% QA productivity and 5-20% cost reduction per release cycle.",
+    },
+    features: [
+      "PR diff extraction + AST-aware parsing",
+      "Rule-engine for lint, naming, architecture patterns",
+      "Security/vulnerability scanner integration",
+      "Structured review summary auto-attached to PR",
+      "Telemetry for productivity and cost-per-release metrics",
+      "Presented at PTT Digital YOU&AI Forward Together AI showcase",
+    ],
+    tech: ["Python", "LLM Integration", "AST Parsing", "CI/CD Pipeline", "REST API"],
+    stats: [{ v: "+75%", l: "QA productivity" }, { v: "5-20%", l: "Cost / release" }, { v: "Live demo", l: "PTT AI showcase" }],
+    links: [{ kind: "github", href: "https://github.com/LayKanokporn", label: "GitHub" }],
+  },
+  {
     accent: "border-l-emerald-500",
     name: "Market Rate Maintenance (THOR & SOFR) — SAP S/4HANA OB83",
     role: "ERP Developer · AIS · Sep 2025 – Present",
@@ -683,6 +707,35 @@ export default function PortfolioPage() {
               <blockquote className="border-l-2 border-[#1a56db] pl-4 text-[13px] italic text-[#374151] leading-relaxed">
                 {POSITIONING.quote}
               </blockquote>
+
+              {/* Presented at — proof banner with real event photo */}
+              <a
+                href="#projects"
+                className="mt-5 block group relative rounded-md overflow-hidden border border-[#e5e7eb] hover:border-[#1a56db]/40 transition-all"
+              >
+                <div className="relative min-h-[280px] sm:min-h-[420px] bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/event-you-ai-forward.jpg"
+                    alt="Lay presenting AI Code Assistant for QA at PTT Digital YOU&AI Forward Together AI showcase"
+                    className="absolute inset-0 w-full h-full object-contain opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+                  <div className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 text-[9px] uppercase tracking-wider px-2 py-1 rounded bg-black/40 backdrop-blur-sm text-white border border-white/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Live presentation
+                  </div>
+                  <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                    <div className="text-[11.5px] sm:text-[13px] font-medium leading-tight">
+                      Presented at YOU&amp;AI Forward Together
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] opacity-85 mt-0.5">
+                      PTT Digital · YOU&AI Forward Together · AI Code Assistant for QA (+75% productivity)
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
 
             {/* Capabilities row */}
@@ -931,15 +984,19 @@ export default function PortfolioPage() {
                   </h4>
                   <div className="grid sm:grid-cols-2 gap-2">
                     {e.projects.map((p) => (
-                      <div
+                      <a
                         key={p.name}
-                        className="p-2.5 rounded-md border border-[#e5e7eb] bg-[#f8faff]"
+                        href="#projects"
+                        className="group block p-2.5 rounded-md border border-[#e5e7eb] bg-[#f8faff] hover:border-[#1a56db]/40 hover:bg-[#e0e7ff] transition-colors"
                       >
-                        <div className="text-[12px] font-medium text-[#111827] mb-0.5">
-                          {p.name}
+                        <div className="flex items-start justify-between gap-1 mb-0.5">
+                          <div className="text-[12px] font-medium text-[#111827] group-hover:text-[#1a56db] transition-colors leading-snug">
+                            {p.name}
+                          </div>
+                          <FiArrowRight className="text-[#9ca3af] group-hover:text-[#1a56db] group-hover:translate-x-0.5 transition-all shrink-0 mt-0.5 text-[11px]" />
                         </div>
                         <div className="text-[11px] text-[#6b7280] leading-relaxed">{p.detail}</div>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -992,9 +1049,17 @@ export default function PortfolioPage() {
               key={p.name}
               className={`rounded-lg border border-[#e5e7eb] border-l-4 ${p.accent} bg-white overflow-hidden`}
             >
-              {/* Visual */}
-              <div className="relative w-full h-44 bg-[#f8faff] border-b border-[#e5e7eb] overflow-hidden">
+              {/* Visual — real screenshot if available, else SVG art fallback */}
+              <div className="relative w-full h-44 bg-[#f8faff] dark:bg-[#0a0f1e] border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
                 <ProjectArt theme={p.art} ariaLabel={p.name} />
+                {p.image && (
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                )}
               </div>
 
               <div className="p-5">
@@ -1158,21 +1223,31 @@ export default function PortfolioPage() {
               Send a message
             </h3>
             <div className="grid sm:grid-cols-2 gap-3">
-              <input
-                name="name"
-                required
-                placeholder="Your name"
-                className="border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors"
-              />
-              <input
-                name="email"
-                type="email"
-                required
-                placeholder="Your email"
-                className="border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors"
-              />
+              <div>
+                <label htmlFor="contact-name" className="sr-only">Your name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  required
+                  placeholder="Your name"
+                  className="w-full border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-email" className="sr-only">Your email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Your email"
+                  className="w-full border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors"
+                />
+              </div>
             </div>
+            <label htmlFor="contact-message" className="sr-only">Your message</label>
             <textarea
+              id="contact-message"
               name="message"
               required
               placeholder="Your message"
@@ -1191,7 +1266,7 @@ export default function PortfolioPage() {
 
           {/* Direct contact methods */}
           <aside className="space-y-3">
-            <ContactRow icon={<FiMail />} label="Email" value="Laybabaka2@gmail.com" href="mailto:Laybabaka2@gmail.com" />
+            <ContactRow icon={<FiMail />} label="Email" value="laybabaka@gmail.com" href="mailto:laybabaka@gmail.com" />
             <ContactRow icon={<FiLinkedin />} label="LinkedIn" value="linkedin.com/in/laykanokporn" href="https://www.linkedin.com/in/laykanokporn" />
             <ContactRow icon={<FiGithub />} label="GitHub" value="github.com/LayKanokporn" href="https://github.com/LayKanokporn" />
             <ContactRow icon={<FiMapPin />} label="Location" value="Bangkok, Thailand" />
@@ -1221,7 +1296,7 @@ export default function PortfolioPage() {
               Resume
             </a>
             <a
-              href="mailto:Laybabaka2@gmail.com"
+              href="mailto:laybabaka@gmail.com"
               className="text-[12px] bg-transparent border border-white/40 text-white px-4 py-2 rounded-md hover:bg-white/10 transition-colors"
             >
               Get in touch
@@ -1239,7 +1314,7 @@ export default function PortfolioPage() {
           <div className="flex items-center gap-4 text-[12px]">
             <a href="https://www.linkedin.com/in/laykanokporn" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a56db]">LinkedIn</a>
             <a href="https://github.com/LayKanokporn" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a56db]">GitHub</a>
-            <a href="mailto:Laybabaka2@gmail.com" className="text-[#6b7280] hover:text-[#1a56db]">Email</a>
+            <a href="mailto:laybabaka@gmail.com" className="text-[#6b7280] hover:text-[#1a56db]">Email</a>
             <Link href="/" className="text-[#6b7280] hover:text-[#1a56db]">Home</Link>
             <Link href="/resume" className="text-[#6b7280] hover:text-[#1a56db]">Resume page</Link>
             <Link href="/v1" className="text-[#6b7280] hover:text-[#1a56db]">Creative version</Link>

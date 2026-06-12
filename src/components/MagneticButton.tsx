@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 /**
@@ -27,6 +27,10 @@ export function MagneticButton({
   ...rest
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    setIsTouch(window.matchMedia("(hover: none)").matches);
+  }, []);
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
   // Spring smooths the motion so it never feels jittery
@@ -38,7 +42,7 @@ export function MagneticButton({
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const node = ref.current;
-    if (!node) return;
+    if (!node || isTouch) return;
     const rect = node.getBoundingClientRect();
     const dx = e.clientX - (rect.left + rect.width / 2);
     const dy = e.clientY - (rect.top + rect.height / 2);

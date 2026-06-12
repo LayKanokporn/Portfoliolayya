@@ -224,9 +224,9 @@ export default function AutomationSimulator() {
       </div>
 
       {/* Body */}
-      <div className="grid lg:grid-cols-2 gap-0">
+      <div className="grid md:grid-cols-2 gap-0">
         {/* Left: inputs */}
-        <div className="p-5 border-b lg:border-b-0 lg:border-r border-[#e5e7eb]">
+        <div className="p-5 border-b md:border-b-0 md:border-r border-[#e5e7eb] dark:border-[#1e293b]">
           <div className="flex items-center justify-between mb-2">
             <h4 className="text-[11px] uppercase tracking-wider text-[#6b7280]">Inputs</h4>
             <button
@@ -248,7 +248,7 @@ export default function AutomationSimulator() {
                   }
                   placeholder={field.sample}
                   disabled={running}
-                  className="w-full border border-[#e5e7eb] bg-[#f8faff] rounded-md px-3 py-2 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors disabled:opacity-60"
+                  className="w-full border border-[#e5e7eb] dark:border-[#334155] bg-[#f8faff] dark:bg-[#0f172a] dark:text-[#e2e8f0] rounded-md px-3 py-2.5 text-[12px] focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db] transition-colors disabled:opacity-60"
                 />
               </label>
             ))}
@@ -273,7 +273,7 @@ export default function AutomationSimulator() {
             <button
               onClick={reset}
               disabled={running}
-              className="inline-flex items-center justify-center gap-1 text-[12px] bg-white border border-[#e5e7eb] hover:bg-[#f8faff] text-[#111827] px-3 py-2 rounded-md disabled:opacity-60"
+              className="inline-flex items-center justify-center gap-1 text-[12px] bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#334155] hover:bg-[#f8faff] dark:hover:bg-[#1e293b] text-[#111827] dark:text-[#e2e8f0] px-3 py-2.5 rounded-md disabled:opacity-60"
               aria-label="Reset"
             >
               <FiRefreshCw />
@@ -320,8 +320,8 @@ export default function AutomationSimulator() {
             Output JSON
           </h4>
           <pre
-            className={`rounded-md border bg-[#0f172a] text-[#e2e8f0] text-[11px] leading-relaxed p-3 overflow-x-auto max-h-72 ${
-              output ? "border-[#1a56db]/30" : "border-[#e5e7eb] opacity-50"
+            className={`rounded-md border bg-[#0f172a] text-[#e2e8f0] text-[11px] leading-relaxed p-3 overflow-x-auto max-h-48 md:max-h-72 ${
+              output ? "border-[#1a56db]/30" : "border-[#334155] opacity-50"
             }`}
           >
 {output ? JSON.stringify(output, null, 2) : "// run the automation to see structured output"}

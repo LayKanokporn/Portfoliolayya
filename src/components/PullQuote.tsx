@@ -26,15 +26,15 @@ export function PullQuote({
       {/* Giant serif open-quote — purely decorative */}
       <span
         aria-hidden
-        className="serif-accent absolute -top-2 -left-2 sm:-top-6 sm:-left-4 text-[80px] sm:text-[120px] leading-none text-[#1a56db]/15 select-none pointer-events-none"
+        className="serif-accent absolute -top-2 -left-2 sm:-top-6 sm:-left-4 text-[80px] sm:text-[120px] leading-none text-[#1a56db]/15 dark:text-[#3b82f6]/20 select-none pointer-events-none"
       >
         “
       </span>
-      <blockquote className="relative text-[16px] sm:text-[20px] leading-relaxed text-[#111827] font-normal">
+      <blockquote className="relative text-[16px] sm:text-[20px] leading-relaxed text-[#111827] dark:text-[#f1f5f9] font-normal">
         {children}
       </blockquote>
       {attribution && (
-        <figcaption className="mt-4 text-[11px] uppercase tracking-wider text-[#6b7280] flex items-center gap-2">
+        <figcaption className="mt-4 text-[11px] uppercase tracking-wider text-[#6b7280] dark:text-[#94a3b8] flex items-center gap-2">
           <span className="h-px w-8 bg-[#1a56db]" />
           {attribution}
         </figcaption>

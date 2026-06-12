@@ -189,8 +189,8 @@ export default function ResumePage() {
             </div>
             <div className="flex items-center gap-1.5">
               <FiMail className="text-[#1a56db]" />
-              <a href="mailto:Laybabaka2@gmail.com" className="text-[#1a56db]">
-                Laybabaka2@gmail.com
+              <a href="mailto:laybabaka@gmail.com" className="text-[#1a56db]">
+                laybabaka@gmail.com
               </a>
             </div>
             <div className="flex items-center gap-1.5">

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -38,15 +38,17 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { TypewriterText } from "@/components/TypewriterText";
 import { TiltCard } from "@/components/TiltCard";
+import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
+import { FiShield, FiClock, FiAlertTriangle, FiDatabase } from "react-icons/fi";
 import {
   SiSap,
   SiUipath,
   SiPython,
   SiLine,
-  SiMicrosoftazure,
   SiGooglecloud,
 } from "react-icons/si";
 import { MdSmartToy } from "react-icons/md";
+import { BluePrismLogo, PowerAutomateLogo, PowerAppsLogo } from "@/components/BrandLogos";
 
 // ── DATA ──────────────────────────────────────────────────────────────
 const METRICS = [
@@ -58,23 +60,24 @@ const METRICS = [
 
 const TECH_LOGOS = [
   { label: "SAP S/4HANA", color: "#0080a0", href: "#projects", Icon: SiSap },
-  { label: "UiPath", color: "#fa4616", href: "#experience", Icon: SiUipath },
-  { label: "Blue Prism", color: "#00aae4", href: "#experience", Icon: null, letter: "BP" },
-  { label: "Power Automate", color: "#0066ff", href: "#projects", Icon: SiMicrosoftazure },
   { label: "SAP Build", color: "#0080a0", href: "/portfolio#experience", Icon: SiSap },
+  { label: "UiPath", color: "#fa4616", href: "#experience", Icon: SiUipath },
+  { label: "Blue Prism", color: "#00aae4", href: "#experience", Icon: BluePrismLogo },
+  { label: "Power Automate", color: "#0066ff", href: "#projects", Icon: PowerAutomateLogo },
+  { label: "Power Apps", color: "#742774", href: "#projects", Icon: PowerAppsLogo },
   { label: "AI Builder OCR", color: "#742774", href: "#projects", Icon: MdSmartToy },
   { label: "Python", color: "#3776ab", href: "#experience", Icon: SiPython },
-  { label: "LINE Bot", color: "#06c755", href: "#projects", Icon: SiLine },
   { label: "Google Cloud", color: "#4285f4", href: "#projects", Icon: SiGooglecloud },
+  { label: "LINE Bot", color: "#06c755", href: "#projects", Icon: SiLine },
 ];
 
 const HERO_CHIPS = [
-  { label: "Open to work", hot: true },
+  { label: "Open to Automation Specialist roles", hot: true },
   { label: "SAP S/4HANA" },
-  { label: "UiPath" },
-  { label: "Power Automate" },
-  { label: "SAP Build" },
+  { label: "UiPath · Blue Prism" },
+  { label: "Power Automate · Power Apps" },
   { label: "Python" },
+  { label: "API · OData" },
 ];
 
 type Detail = {
@@ -87,13 +90,14 @@ type Detail = {
 const FOCUS_DETAILS: Record<string, Detail> = {
   "Automation Specialist": {
     title: "Automation Specialist",
-    desc: "ERP Developer + Automation Engineer focused on production-grade automation across SAP, RPA, API, and AI — not just one layer.",
+    desc: "I engineer automation systems with explicit SLOs and structured logging — across SAP, RPA, API, and AI. Reliability over features, measurement over assertion, ownership over hand-off.",
     bullets: [
+      "5 enterprise SAP S/4HANA automations live at AIS (BG Alert · Payment Advice · OB83 · GR · Mass SO)",
+      "16 weeks solo production · 0 silent failures · p95 reply < 1.5s",
+      "Logging mandatory in every function · email-alerted error path · MTTR < 5m",
       "First-Class Honors (GPA 3.53) — Computer & Robotics Engineering",
-      "Currently delivering 5 enterprise SAP automations at AIS",
-      "Self-built LINE Bot production system — 16+ weeks, ↓83% manual effort",
     ],
-    link: { label: "Full about →", href: "/portfolio#about" },
+    link: { label: "Reliability metrics →", href: "#reliability" },
   },
   "SAP · RPA · AI": {
     title: "Cross-stack engineer",
@@ -213,7 +217,7 @@ const PROJECTS: {
     accent: "bg-blue-600",
     badges: ["Featured", "Self-built · Production"],
     name: "Sunrise LINE Bots Suite",
-    desc: "Solo-architected 2-bot LINE OA suite automating end-to-end cafe operations — Reply-200-First webhook, idempotent processing, defer queue, slip OCR. Patterns reused in enterprise UiPath at AIS.",
+    desc: "Hypothesis: cafe ops can run on a single async webhook if reply latency stays sub-2s and dedup is reliable. Measured over 16 weeks production: ↓83% manual effort, p95 <1.5s, zero silent failures. Reply-200-First + idempotent cache + async defer queue. Patterns reused in enterprise UiPath at AIS.",
     image: "/project-sunrise.jpg",
     art: "bot",
     stats: [
@@ -248,6 +252,20 @@ const PROJECTS: {
       { v: "AI Builder", l: "OCR engine" },
       { v: "Reduced", l: "Manual entry" },
       { v: "Auto", l: "Distributed" },
+    ],
+    links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
+  },
+  {
+    accent: "bg-purple-600",
+    badges: ["PTT Digital", "AI · Code Quality"],
+    name: "AI Code Assistant for QA (PTT Digital)",
+    desc: "Hypothesis: an AI code review assistant can offload routine QA checks (lint, vulnerability scan, convention review) from senior reviewers and cut review cycle time. Measured at PTT Digital: +75% QA productivity, 5-20% release-cycle cost reduction. Presented live at PTT Digital YOU&AI Forward Together AI showcase.",
+    image: "/project-ai-code-qa.jpg",
+    art: "pipeline",
+    stats: [
+      { v: "+75%", l: "QA productivity" },
+      { v: "5-20%", l: "Cost / release" },
+      { v: "Live", l: "PTT AI showcase" },
     ],
     links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
   },
@@ -313,6 +331,18 @@ const AUTOMATIONS: {
     href: "/portfolio#projects",
   },
   {
+    title: "AI Code Assistant for QA",
+    tag: "AI · LLM · PTT Digital",
+    challenge: "Senior reviewers spent hours per release on routine QA checks (lint, vulnerability scan, convention review).",
+    solution: "AI code assistant that pre-screens PRs against QA rule-set and flags anomalies before human review. Presented at PTT Digital YOU&AI Forward Together AI showcase.",
+    flow: ["PR Diff Extract", "AI Rule Check", "Vulnerability Scan", "Review Summary"],
+    results: [
+      { v: "+75%", l: "QA productivity" },
+      { v: "5-20%", l: "Cost / release" },
+    ],
+    href: "/portfolio#projects",
+  },
+  {
     title: "Multi-Source Inventory Sync",
     tag: "Blue Prism · Python · REST API",
     challenge: "Manual stock updates and oversell incidents across E-Commerce channels.",
@@ -344,9 +374,22 @@ const SKILL_GROUPS = [
       { t: "UiPath", hi: true },
       { t: "Blue Prism", hi: true },
       { t: "Power Automate", hi: true },
+      { t: "Power Apps", hi: true },
       { t: "CronJob" },
       { t: "Python Scheduling" },
       { t: "Process Optimization" },
+    ],
+  },
+  {
+    name: "Reliability & Observability",
+    tags: [
+      { t: "Structured logging", hi: true },
+      { t: "Error path / DLQ" },
+      { t: "Idempotency" },
+      { t: "Retry + backoff" },
+      { t: "MTTR ownership" },
+      { t: "SLO thinking" },
+      { t: "Solo on-call" },
     ],
   },
   {
@@ -404,7 +447,12 @@ const TIMELINE = [
     role: "Software Engineer",
     company: "PTT Digital Solutions",
     color: "#0080a0",
-    highlights: ["YOLOv5 traffic detection 92.5%", "API integration & data pipeline"],
+    highlights: [
+      "AI Code Assistant for QA · +75% productivity · 5-20% cost/release",
+      "Presented at PTT Digital YOU&AI Forward Together",
+      "YOLOv5 traffic detection 92.5%",
+      "API integration & data pipeline",
+    ],
   },
   {
     period: "Aug – Dec 2024",
@@ -432,6 +480,7 @@ const TIMELINE = [
 
 const NAV_TABS = [
   { label: "About", href: "#about" },
+  { label: "Reliability", href: "#reliability" },
   { label: "Projects", href: "#projects" },
   { label: "Automation", href: "#automation" },
   { label: "Try It", href: "#simulator" },
@@ -441,6 +490,14 @@ const NAV_TABS = [
 // ── COMPONENT ─────────────────────────────────────────────────────────
 export default function DashboardPortfolio() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [photoOpen, setPhotoOpen] = useState(false);
+
+  useEffect(() => {
+    if (!photoOpen) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setPhotoOpen(false); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [photoOpen]);
   const sectionIds = React.useMemo(
     () => NAV_TABS.map((t) => t.href.replace("#", "")),
     []
@@ -466,8 +523,8 @@ export default function DashboardPortfolio() {
                   href={t.href}
                   className={`px-3 h-[52px] flex items-center text-[12px] border-b-2 transition-colors ${
                     isActive
-                      ? "text-[#1a56db] border-[#1a56db]"
-                      : "text-[#6b7280] border-transparent hover:text-[#111827] hover:border-[#1a56db]/60"
+                      ? "text-[#1a56db] dark:text-[#60a5fa] border-[#1a56db] dark:border-[#60a5fa]"
+                      : "text-[#6b7280] dark:text-[#94a3b8] border-transparent hover:text-[#111827] dark:hover:text-[#f1f5f9] hover:border-[#1a56db]/60"
                   }`}
                 >
                   {t.label}
@@ -513,7 +570,7 @@ export default function DashboardPortfolio() {
               <Logo variant="compact" theme="light" />
               <button
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center w-9 h-9 rounded-md hover:bg-[#f8faff]"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-md text-[#111827] dark:text-[#e2e8f0] hover:bg-[#f8faff] dark:hover:bg-[#1e293b]"
                 aria-label="Close menu"
               >
                 <FiX />
@@ -590,21 +647,23 @@ export default function DashboardPortfolio() {
             <p className="text-[15px] sm:text-[16px] text-[#1a56db] dark:text-[#60a5fa] font-medium mb-4 min-h-[24px]">
               <TypewriterText
                 strings={[
-                  "ERP Developer · Automation Engineer",
-                  "SAP S/4HANA Specialist",
-                  "RPA Developer · UiPath · Blue Prism",
-                  "Digital Transformation Engineer",
-                  "LINE Bot Architect · Solo Builder",
+                  "Automation Specialist · SAP · RPA · API",
+                  "Reliable, observable, measured.",
+                  "16 weeks production · 0 silent failures",
+                  "p95 < 1.5s · MTTR < 5m · 100% logged",
+                  "Cross-stack: SAP, UiPath, Blue Prism, Power Platform",
                 ]}
                 typingSpeed={50}
                 deletingSpeed={25}
-                pauseMs={2000}
+                pauseMs={2200}
               />
             </p>
             <p className="text-[13px] sm:text-[14px] text-[#374151] dark:text-[#cbd5e1] max-w-2xl leading-relaxed mb-5">
-              I build automation systems that eliminate manual work — from SAP S/4HANA financial
-              workflows (BG Alert, Payment Advice with AI Builder OCR, THOR/SOFR) to a self-built
-              LINE Bot suite cutting daily bookkeeping by ~83% over 16 weeks of production.
+              I engineer automation systems that eliminate manual toil — measured, observable, and
+              boring to operate. Production SAP S/4HANA finance workflows (BG Alert, Payment Advice
+              with AI Builder OCR, OB83 / THOR / SOFR) at AIS, plus a self-built LINE Bot suite that
+              ran 16 weeks with zero silent failures and p95 reply &lt; 1.5s. Comfortable owning the
+              system end-to-end: design, ship, monitor, on-call.
             </p>
             <div className="flex flex-wrap gap-1.5 mb-5">
               {HERO_CHIPS.map((c) => (
@@ -674,22 +733,36 @@ export default function DashboardPortfolio() {
           {/* Right column: graphic + photo chip */}
           <div className="w-full max-w-md justify-self-start lg:justify-self-end space-y-3">
             <HeroGraphic className="w-full h-auto" />
-            <div className="flex items-center gap-3 px-3 py-2 rounded-md border border-[#e5e7eb] bg-white">
-              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#e5e7eb] bg-[#f3f4f6] shrink-0">
+            <div className="flex items-center gap-3.5 px-3.5 py-3 rounded-md border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a]">
+              <button
+                onClick={() => setPhotoOpen(true)}
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border border-[#e5e7eb] dark:border-[#334155] bg-[#e0e7ff] dark:bg-[#1e3a5f] shrink-0 flex items-center justify-center ring-2 ring-[#1a56db]/10 hover:ring-[#1a56db]/40 transition-all cursor-zoom-in"
+                aria-label="View full profile photo"
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/profile.jpg"
-                  alt="Kanokporn Hudsree"
+                  alt="Kanokporn Hudsree (Lay)"
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
+                    const parent = e.currentTarget.parentElement;
+                    if (parent) {
+                      const initials = document.createElement("span");
+                      initials.textContent = "KL";
+                      initials.className = "text-[16px] font-medium text-[#1a56db] dark:text-[#60a5fa]";
+                      parent.appendChild(initials);
+                    }
                   }}
                 />
-              </div>
+              </button>
               <div className="min-w-0">
-                <div className="text-[12px] font-medium text-[#111827] dark:text-[#f1f5f9] truncate">Kanokporn (Lay)</div>
-                <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8] truncate">
+                <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9] truncate">Kanokporn Hudsree (Lay)</div>
+                <div className="text-[11px] text-[#6b7280] dark:text-[#94a3b8] truncate">
                   ERP Developer @ AIS · Founder @ Sunrise
+                </div>
+                <div className="text-[10.5px] text-[#1a56db] dark:text-[#60a5fa] mt-0.5">
+                  Open to Automation Specialist roles
                 </div>
               </div>
             </div>
@@ -730,7 +803,7 @@ export default function DashboardPortfolio() {
       </section>
 
       {/* TECH STRIP — visual brand chips, all clickable */}
-      <section className="relative border-b border-[#e5e7eb] bg-[#f8faff] overflow-hidden">
+      <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-[#f8faff] dark:bg-[#060c18] overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-7 py-5 sm:py-6">
           <div className="flex items-center gap-3 mb-3 flex-wrap">
             <span className="text-[10px] uppercase tracking-wider text-[#6b7280] dark:text-[#64748b]">
@@ -738,32 +811,130 @@ export default function DashboardPortfolio() {
             </span>
             <span className="h-px flex-1 bg-[#e5e7eb] dark:bg-[#1e293b] min-w-[24px]" />
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
             {TECH_LOGOS.map((t) => (
               <a
                 key={t.label}
                 href={t.href}
-                className="group inline-flex items-center gap-1.5 text-[11.5px] px-3 py-1.5 rounded-md bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-sm transition-all"
+                className="group flex items-center gap-2 text-[11.5px] px-3 py-2 rounded-md bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-sm transition-all min-w-0"
               >
-                {t.Icon ? (
-                  <t.Icon className="text-[14px] shrink-0" style={{ color: t.color }} />
-                ) : (
-                  <span
-                    className="text-[8px] font-bold px-1 rounded shrink-0 text-white leading-[14px]"
-                    style={{ backgroundColor: t.color }}
-                  >
-                    {t.letter}
-                  </span>
-                )}
-                <span className="text-[#111827] dark:text-[#e2e8f0]">{t.label}</span>
+                <span className="w-4 h-4 inline-flex items-center justify-center shrink-0" style={{ color: t.color }}>
+                  <t.Icon className="w-full h-full" />
+                </span>
+                <span className="text-[#111827] dark:text-[#e2e8f0] truncate">{t.label}</span>
               </a>
             ))}
           </div>
         </div>
       </section>
 
+      {/* RELIABILITY & SCALE — Agoda-style metrics */}
+      <section id="reliability" className="relative bg-white dark:bg-[#0a0f1e] border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
+        <div className="max-w-6xl mx-auto px-5 sm:px-7 py-10 sm:py-12">
+          <div className="flex items-end justify-between gap-4 mb-6 flex-wrap">
+            <div>
+              <div className="text-[10px] uppercase tracking-wider text-[#1a56db] dark:text-[#60a5fa] mb-1.5">Production reliability</div>
+              <h2 className="text-[20px] sm:text-[22px] font-medium tracking-tight text-[#111827] dark:text-[#f1f5f9]">
+                Measured, not asserted.
+              </h2>
+              <p className="text-[12.5px] text-[#6b7280] dark:text-[#94a3b8] mt-1 max-w-2xl">
+                Every system I ship gets explicit SLOs, structured logging, and an error path the finance team can act on. Numbers below come from production AP automation at AIS — not demos.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-7">
+            {[
+              { icon: <FiShield />, num: "0", label: "Manual keying errors", sub: "Production AP automation since deploy", tone: "#059669" },
+              { icon: <FiClock />, num: "≥85%", label: "OCR confidence gate", sub: "Below threshold → finance review", tone: "#1a56db" },
+              { icon: <FiAlertTriangle />, num: "SOX", label: "Audit-grade trail", sub: "Excel log + Outlook trail per advice", tone: "#d97706" },
+              { icon: <FiDatabase />, num: "100%", label: "Logging coverage", sub: "INFO · WARN · ERROR in every flow step", tone: "#9333ea" },
+            ].map((m, i) => (
+              <motion.div
+                key={m.label}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-4"
+              >
+                <div className="w-8 h-8 rounded-md flex items-center justify-center text-[13px] mb-2.5" style={{ backgroundColor: `${m.tone}15`, color: m.tone }}>
+                  {m.icon}
+                </div>
+                <div className="text-[20px] sm:text-[22px] font-medium leading-none tracking-tight text-[#111827] dark:text-[#f1f5f9] tabular-nums">
+                  {m.num}
+                </div>
+                <div className="text-[11.5px] font-medium text-[#374151] dark:text-[#cbd5e1] mt-1.5">
+                  {m.label}
+                </div>
+                <div className="text-[10.5px] text-[#6b7280] dark:text-[#64748b] mt-0.5 leading-snug">
+                  {m.sub}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Architecture diagram */}
+          <div className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-4 sm:p-6">
+            <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
+              <div>
+                <div className="text-[10px] uppercase tracking-wider text-[#6b7280] dark:text-[#64748b]">System design · case study</div>
+                <div className="text-[14px] font-medium text-[#111827] dark:text-[#f1f5f9] mt-0.5">Payment Advice with AI Builder OCR — AIS Finance AP automation</div>
+              </div>
+              <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8]">4 lanes · 9 components · finance-owned error path</div>
+            </div>
+            {/* Toggle: real Power Automate editor screenshot vs logical SVG view */}
+            <div className="relative w-full">
+              <ArchitectureDiagram className="w-full h-auto" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/architecture-payment-advice.jpg"
+                alt="Power Automate Cloud Flow editor showing Payment Advice automation"
+                className="absolute inset-0 w-full h-full object-contain bg-white dark:bg-[#0f172a] rounded-md"
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+              />
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-[10.5px]">
+              <div>
+                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Hypothesis</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">AI OCR can replace manual keying for AP advices if a confidence gate + SAP master-data check stop bad data before send.</div>
+              </div>
+              <div>
+                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Metric</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">OCR confidence ≥85% · SAP vendor match rate · advices auto-distributed vs queued.</div>
+              </div>
+              <div>
+                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Result</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Manual entry eliminated · per-beneficiary auto-distribution · SOX-grade Excel + email audit.</div>
+              </div>
+              <div>
+                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Iteration</div>
+                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Added SAP tolerance check after OCR caught vendor name but missed cents — false positives went to finance review.</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Engineering principles */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {[
+              "Reply-200-First",
+              "Idempotent by default",
+              "Async over sync",
+              "Logging is mandatory",
+              "Graceful degrade",
+              "Error → email → MTTR",
+              "Measure before scale",
+            ].map((p) => (
+              <span key={p} className="text-[10.5px] px-2.5 py-1 rounded-md bg-[#f8faff] dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#334155] text-[#374151] dark:text-[#cbd5e1]">
+                {p}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PULL QUOTE — editorial pause */}
-      <section className="relative bg-white py-12 sm:py-16 border-b border-[#e5e7eb] overflow-hidden">
+      <section className="relative bg-white dark:bg-[#0a0f1e] py-12 sm:py-16 border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-5 sm:px-7">
           <PullQuote attribution="Personal engineering principle">
@@ -807,7 +978,7 @@ export default function DashboardPortfolio() {
           </SidebarGroup>
 
           <SidebarGroup label="Connect">
-            <SideRow icon={<FiMail />} label="Email" href="mailto:Laybabaka2@gmail.com" />
+            <SideRow icon={<FiMail />} label="Email" href="mailto:laybabaka@gmail.com" />
             <SideRow
               icon={<FiLinkedin />}
               label="LinkedIn"
@@ -836,6 +1007,37 @@ export default function DashboardPortfolio() {
               Computer &amp; Robotics Engineering · First-Class Honors (GPA 3.53) · Bangkok
               University · 2+ years industry experience.
             </p>
+
+            {/* Presented at — proof banner with real event photo (full portrait) */}
+            <a
+              href="#projects"
+              className="mt-5 block group relative rounded-md overflow-hidden border border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 transition-all bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]"
+            >
+              <div className="grid sm:grid-cols-[2fr_3fr]">
+                <div className="relative aspect-[3/4] sm:aspect-auto sm:min-h-[420px] bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/event-you-ai-forward.jpg"
+                    alt="Lay presenting AI Code Assistant for QA at PTT Digital YOU&AI Forward Together AI showcase"
+                    className="absolute inset-0 w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                  <div className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 text-[9px] uppercase tracking-wider px-2 py-1 rounded bg-black/40 backdrop-blur-sm text-white border border-white/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Live presentation
+                  </div>
+                </div>
+                <div className="p-4 sm:p-5 text-white flex flex-col justify-center gap-2">
+                  <div className="text-[10px] uppercase tracking-wider opacity-70">PTT Digital · AI showcase</div>
+                  <div className="text-[14px] sm:text-[16px] font-medium leading-snug">
+                    Presented at YOU&amp;AI Forward Together
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] opacity-85 mt-0.5">
+                    PTT Digital · YOU&AI Forward Together · AI Code Assistant for QA (+75% productivity)
+                  </div>
+                </div>
+              </div>
+            </a>
           </div>
 
           {/* PROJECTS */}
@@ -852,13 +1054,27 @@ export default function DashboardPortfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] overflow-hidden hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-md transition-all"
+                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] overflow-hidden hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-md transition-all group relative"
               >
+                {/* Whole-card click target — goes to portfolio detail */}
+                <Link
+                  href="/portfolio#projects"
+                  aria-label={`View ${p.name} details`}
+                  className="absolute inset-0 z-10"
+                />
                 <div className={`h-1 ${p.accent}`} />
 
-                {/* Visual: SVG art, with real image fallback if provided */}
-                <div className="relative h-40 w-full bg-[#f8faff] border-b border-[#e5e7eb] overflow-hidden">
+                {/* Visual: real screenshot if available, else SVG art fallback */}
+                <div className={`relative w-full bg-[#f8faff] dark:bg-[#0a0f1e] border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden ${p.art === "pipeline" ? "h-56" : "h-40"}`}>
                   <ProjectArt theme={p.art} ariaLabel={p.name} />
+                  {p.image && (
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className={`absolute inset-0 w-full h-full ${p.art === "pipeline" ? "object-contain bg-[#0c2463]" : "object-cover"}`}
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                  )}
                 </div>
 
                 <div className="p-4">
@@ -892,22 +1108,22 @@ export default function DashboardPortfolio() {
                         </div>
                       ))}
                     </div>
-                    {p.links && p.links.length > 0 && (
-                      <div className="flex items-center gap-2 shrink-0">
-                        {p.links.map((lk) => (
-                          <a
-                            key={lk.kind}
-                            href={lk.href}
-                            target={lk.kind === "github" ? "_blank" : undefined}
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-[10px] text-[#1a56db] hover:underline"
-                          >
-                            {lk.kind === "github" ? <FiGithub /> : <FiExternalLink />}
-                            {lk.label}
-                          </a>
-                        ))}
-                      </div>
-                    )}
+                    <div className="flex items-center gap-3 shrink-0 relative z-20">
+                      {p.links?.filter(lk => lk.kind === "github").map((lk) => (
+                        <a
+                          key={lk.kind}
+                          href={lk.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] text-[#1a56db] hover:underline"
+                        >
+                          <FiGithub /> {lk.label}
+                        </a>
+                      ))}
+                      <span className="inline-flex items-center gap-1 text-[10px] font-medium text-[#1a56db] group-hover:translate-x-0.5 transition-transform">
+                        View details <FiArrowRight />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -1138,7 +1354,7 @@ export default function DashboardPortfolio() {
               Resume
             </a>
             <a
-              href="mailto:Laybabaka2@gmail.com"
+              href="mailto:laybabaka@gmail.com"
               className="text-[12px] bg-transparent border border-white/40 text-white px-4 py-2 rounded-md hover:bg-white/10 transition-colors"
             >
               Get in touch
@@ -1170,7 +1386,7 @@ export default function DashboardPortfolio() {
             >
               GitHub
             </a>
-            <a href="mailto:Laybabaka2@gmail.com" className="text-[#6b7280] hover:text-[#1a56db]">
+            <a href="mailto:laybabaka@gmail.com" className="text-[#6b7280] hover:text-[#1a56db]">
               Email
             </a>
             <Link href="/portfolio" className="text-[#6b7280] hover:text-[#1a56db]">
@@ -1185,6 +1401,33 @@ export default function DashboardPortfolio() {
           </div>
         </div>
       </footer>
+
+      {/* Profile photo lightbox */}
+      {photoOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4"
+          onClick={() => setPhotoOpen(false)}
+        >
+          <div
+            className="relative max-w-sm w-full rounded-xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/profile.jpg"
+              alt="Kanokporn Hudsree (Lay) — professional photo"
+              className="w-full h-auto block"
+            />
+            <button
+              onClick={() => setPhotoOpen(false)}
+              className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
+              aria-label="Close"
+            >
+              <FiX size={16} />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1205,11 +1448,11 @@ function SidePopover({
       width={300}
       content={
         <div>
-          <div className="text-[12px] font-medium text-[#111827] mb-1.5">{detail.title}</div>
-          <p className="text-[11.5px] text-[#374151] leading-relaxed mb-2.5">{detail.desc}</p>
+          <div className="text-[12px] font-medium text-[#111827] dark:text-[#f1f5f9] mb-1.5">{detail.title}</div>
+          <p className="text-[11.5px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2.5">{detail.desc}</p>
           <ul className="space-y-1 mb-3">
             {detail.bullets.map((b) => (
-              <li key={b} className="flex items-start gap-1.5 text-[11.5px] text-[#374151]">
+              <li key={b} className="flex items-start gap-1.5 text-[11.5px] text-[#374151] dark:text-[#cbd5e1]">
                 <span className="text-[#1a56db] mt-0.5 leading-none">·</span>
                 <span className="leading-snug">{b}</span>
               </li>
