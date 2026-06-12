@@ -523,8 +523,8 @@ export default function DashboardPortfolio() {
                   href={t.href}
                   className={`px-3 h-[52px] flex items-center text-[12px] border-b-2 transition-colors ${
                     isActive
-                      ? "text-[#1a56db] border-[#1a56db]"
-                      : "text-[#6b7280] border-transparent hover:text-[#111827] hover:border-[#1a56db]/60"
+                      ? "text-[#1a56db] dark:text-[#60a5fa] border-[#1a56db] dark:border-[#60a5fa]"
+                      : "text-[#6b7280] dark:text-[#94a3b8] border-transparent hover:text-[#111827] dark:hover:text-[#f1f5f9] hover:border-[#1a56db]/60"
                   }`}
                 >
                   {t.label}
@@ -1448,11 +1448,11 @@ function SidePopover({
       width={300}
       content={
         <div>
-          <div className="text-[12px] font-medium text-[#111827] mb-1.5">{detail.title}</div>
-          <p className="text-[11.5px] text-[#374151] leading-relaxed mb-2.5">{detail.desc}</p>
+          <div className="text-[12px] font-medium text-[#111827] dark:text-[#f1f5f9] mb-1.5">{detail.title}</div>
+          <p className="text-[11.5px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2.5">{detail.desc}</p>
           <ul className="space-y-1 mb-3">
             {detail.bullets.map((b) => (
-              <li key={b} className="flex items-start gap-1.5 text-[11.5px] text-[#374151]">
+              <li key={b} className="flex items-start gap-1.5 text-[11.5px] text-[#374151] dark:text-[#cbd5e1]">
                 <span className="text-[#1a56db] mt-0.5 leading-none">·</span>
                 <span className="leading-snug">{b}</span>
               </li>
