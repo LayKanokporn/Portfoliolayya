@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -490,6 +490,14 @@ const NAV_TABS = [
 // ── COMPONENT ─────────────────────────────────────────────────────────
 export default function DashboardPortfolio() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [photoOpen, setPhotoOpen] = useState(false);
+
+  useEffect(() => {
+    if (!photoOpen) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setPhotoOpen(false); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [photoOpen]);
   const sectionIds = React.useMemo(
     () => NAV_TABS.map((t) => t.href.replace("#", "")),
     []
@@ -726,7 +734,11 @@ export default function DashboardPortfolio() {
           <div className="w-full max-w-md justify-self-start lg:justify-self-end space-y-3">
             <HeroGraphic className="w-full h-auto" />
             <div className="flex items-center gap-3.5 px-3.5 py-3 rounded-md border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a]">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border border-[#e5e7eb] dark:border-[#334155] bg-[#e0e7ff] dark:bg-[#1e3a5f] shrink-0 flex items-center justify-center ring-2 ring-[#1a56db]/10">
+              <button
+                onClick={() => setPhotoOpen(true)}
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border border-[#e5e7eb] dark:border-[#334155] bg-[#e0e7ff] dark:bg-[#1e3a5f] shrink-0 flex items-center justify-center ring-2 ring-[#1a56db]/10 hover:ring-[#1a56db]/40 transition-all cursor-zoom-in"
+                aria-label="View full profile photo"
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/profile.jpg"
@@ -743,7 +755,7 @@ export default function DashboardPortfolio() {
                     }
                   }}
                 />
-              </div>
+              </button>
               <div className="min-w-0">
                 <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9] truncate">Kanokporn Hudsree (Lay)</div>
                 <div className="text-[11px] text-[#6b7280] dark:text-[#94a3b8] truncate">
@@ -1389,6 +1401,33 @@ export default function DashboardPortfolio() {
           </div>
         </div>
       </footer>
+
+      {/* Profile photo lightbox */}
+      {photoOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4"
+          onClick={() => setPhotoOpen(false)}
+        >
+          <div
+            className="relative max-w-sm w-full rounded-xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/profile.jpg"
+              alt="Kanokporn Hudsree (Lay) — professional photo"
+              className="w-full h-auto block"
+            />
+            <button
+              onClick={() => setPhotoOpen(false)}
+              className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
+              aria-label="Close"
+            >
+              <FiX size={16} />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

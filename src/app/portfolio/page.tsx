@@ -713,12 +713,12 @@ export default function PortfolioPage() {
                 href="#projects"
                 className="mt-5 block group relative rounded-md overflow-hidden border border-[#e5e7eb] hover:border-[#1a56db]/40 transition-all"
               >
-                <div className="relative h-32 sm:h-40 bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]">
+                <div className="relative min-h-[280px] sm:min-h-[420px] bg-gradient-to-br from-[#0c2463] to-[#1a5fb4]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/event-you-ai-forward.jpg"
                     alt="Lay presenting AI Code Assistant for QA at PTT Digital YOU&AI Forward Together AI showcase"
-                    className="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
+                    className="absolute inset-0 w-full h-full object-contain opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
                     onError={(e) => { e.currentTarget.style.display = "none"; }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
@@ -984,15 +984,19 @@ export default function PortfolioPage() {
                   </h4>
                   <div className="grid sm:grid-cols-2 gap-2">
                     {e.projects.map((p) => (
-                      <div
+                      <a
                         key={p.name}
-                        className="p-2.5 rounded-md border border-[#e5e7eb] bg-[#f8faff]"
+                        href="#projects"
+                        className="group block p-2.5 rounded-md border border-[#e5e7eb] bg-[#f8faff] hover:border-[#1a56db]/40 hover:bg-[#e0e7ff] transition-colors"
                       >
-                        <div className="text-[12px] font-medium text-[#111827] mb-0.5">
-                          {p.name}
+                        <div className="flex items-start justify-between gap-1 mb-0.5">
+                          <div className="text-[12px] font-medium text-[#111827] group-hover:text-[#1a56db] transition-colors leading-snug">
+                            {p.name}
+                          </div>
+                          <FiArrowRight className="text-[#9ca3af] group-hover:text-[#1a56db] group-hover:translate-x-0.5 transition-all shrink-0 mt-0.5 text-[11px]" />
                         </div>
                         <div className="text-[11px] text-[#6b7280] leading-relaxed">{p.detail}</div>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
