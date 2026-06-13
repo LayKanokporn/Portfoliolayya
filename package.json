@@ -9,14 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/body-parser": "^1.19.5",
-    "@types/express": "^5.0.2",
-    "antd": "^5.25.2",
-    "body-parser": "^2.2.0",
-    "express": "^5.1.0",
     "framer-motion": "^12.17.0",
-    "next": "15.3.8",
-    "nodemailer": "^7.0.3",
+    "next": "^15.5.19",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
@@ -26,11 +20,10 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.2",
+    "eslint-config-next": "^15.5.19",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
