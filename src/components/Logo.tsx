@@ -27,9 +27,6 @@ export function Logo({
       ? { L: "#ffffff", text: "#ffffff", sub: "rgba(255,255,255,0.7)", dot: "#fbbf24" }
       : null;
 
-  // auto: Tailwind dark: variants; light/dark: also use auto classes
-  const useAuto = theme !== "blue";
-
   if (variant === "compact") {
     if (fixedColors) {
       return (
