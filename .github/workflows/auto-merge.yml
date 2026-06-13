@@ -1,0 +1,31 @@
+name: Auto Merge Lay to Main
+
+on:
+  push:
+    branches:
+      - Lay
+      
+jobs:
+  merge-to-main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Configure Git Identity
+        run: |
+          git config user.name "chaiwat-come"
+          git config user.email "chaiwat_noon007@hotmail.com"
+
+      - name: Fetch Lay branch
+        run: git fetch origin Lay
+
+      - name: Merge Lay into main
+        run: |
+          git merge origin/Lay --no-ff -m "Merge Lay into main"
+          git push origin main
