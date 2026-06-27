@@ -3,12 +3,10 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  FiMapPin,
   FiAward,
   FiLayers,
   FiServer,
   FiTrendingDown,
-  FiDownload,
   FiArrowRight,
   FiMail,
   FiLinkedin,
@@ -28,7 +26,7 @@ import AutomationSimulator from "@/components/AutomationSimulator";
 import { HoverCard } from "@/components/HoverCard";
 import { MagneticButton } from "@/components/MagneticButton";
 import { ProjectArt, type ArtTheme } from "@/components/ProjectArt";
-import { HeroGraphic } from "@/components/HeroGraphic";
+import { HeroSpotlight } from "@/components/HeroSpotlight";
 import { PullQuote } from "@/components/PullQuote";
 import { SectionDivider } from "@/components/SectionDivider";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
@@ -36,7 +34,6 @@ import { FloatingHireButton } from "@/components/FloatingHireButton";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
-import { TypewriterText } from "@/components/TypewriterText";
 import { TiltCard } from "@/components/TiltCard";
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
 import { FiShield, FiClock, FiAlertTriangle, FiDatabase } from "react-icons/fi";
@@ -69,15 +66,6 @@ const TECH_LOGOS = [
   { label: "Python", color: "#3776ab", href: "#experience", Icon: SiPython },
   { label: "Google Cloud", color: "#4285f4", href: "#projects", Icon: SiGooglecloud },
   { label: "LINE Bot", color: "#06c755", href: "#projects", Icon: SiLine },
-];
-
-const HERO_CHIPS = [
-  { label: "Open to Automation Specialist roles", hot: true },
-  { label: "SAP S/4HANA" },
-  { label: "UiPath · Blue Prism" },
-  { label: "Power Automate · Power Apps" },
-  { label: "Python" },
-  { label: "API · OData" },
 ];
 
 type Detail = {
@@ -617,158 +605,8 @@ export default function DashboardPortfolio() {
         </div>
       )}
 
-      {/* HERO */}
-      <section id="about" className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-[#f8faff] dark:bg-[#0a0f1e] overflow-hidden">
-        {/* Decorative grid background */}
-        <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none" />
-        {/* Gradient orbs — depth without distraction */}
-        <div className="absolute -right-32 -top-32 w-[500px] h-[500px] rounded-full pointer-events-none orb-breathe"
-          style={{ background: "radial-gradient(circle at center, rgba(26,86,219,0.10) 0%, transparent 70%)" }} />
-        <div className="absolute -left-24 bottom-0 w-[360px] h-[360px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle at center, rgba(99,102,241,0.07) 0%, transparent 70%)" }} />
-        <div className="absolute left-1/2 top-1/3 w-[280px] h-[280px] -translate-x-1/2 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle at center, rgba(6,199,85,0.05) 0%, transparent 70%)" }} />
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="relative max-w-6xl mx-auto px-4 sm:px-7 py-8 sm:py-10 grid lg:grid-cols-[1fr_380px] gap-6 items-start"
-        >
-          <div>
-            <div className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-[#6b7280] dark:text-[#94a3b8] bg-white dark:bg-[#0f172a] border border-[#e5e7eb] dark:border-[#334155] px-2.5 py-1 rounded mb-4">
-              <FiMapPin className="text-sm" />
-              Bangkok, Thailand · Available globally
-            </div>
-            <h1 className="text-[28px] sm:text-[32px] tracking-tight leading-tight mb-1.5 text-[#111827] dark:text-[#f1f5f9]">
-              Kanokporn Hudsree{" "}
-              <span className="text-[#6b7280] dark:text-[#94a3b8] font-normal text-[20px] sm:text-[22px]">(Lay)</span>
-            </h1>
-            <p className="text-[15px] sm:text-[16px] text-[#1a56db] dark:text-[#60a5fa] font-medium mb-4 min-h-[24px]">
-              <TypewriterText
-                strings={[
-                  "Automation Specialist · SAP · RPA · API",
-                  "Reliable, observable, measured.",
-                  "16 weeks production · 0 silent failures",
-                  "p95 < 1.5s · MTTR < 5m · 100% logged",
-                  "Cross-stack: SAP, UiPath, Blue Prism, Power Platform",
-                ]}
-                typingSpeed={50}
-                deletingSpeed={25}
-                pauseMs={2200}
-              />
-            </p>
-            <p className="text-[13px] sm:text-[14px] text-[#374151] dark:text-[#cbd5e1] max-w-2xl leading-relaxed mb-5">
-              I engineer automation systems that eliminate manual toil — measured, observable, and
-              boring to operate. Production SAP S/4HANA finance workflows (BG Alert, Payment Advice
-              with AI Builder OCR, OB83 / THOR / SOFR) at AIS, plus a self-built LINE Bot suite that
-              ran 16 weeks with zero silent failures and p95 reply &lt; 1.5s. Comfortable owning the
-              system end-to-end: design, ship, monitor, on-call.
-            </p>
-            <div className="flex flex-wrap gap-1.5 mb-5">
-              {HERO_CHIPS.map((c) => (
-                <span
-                  key={c.label}
-                  className={`inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded border ${
-                    c.hot
-                      ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400"
-                      : "bg-white dark:bg-[#1e293b] border-[#e5e7eb] dark:border-[#334155] text-[#374151] dark:text-[#cbd5e1]"
-                  }`}
-                >
-                  {c.hot && (
-                    <span className="relative flex h-2 w-2 shrink-0">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                    </span>
-                  )}
-                  {c.label}
-                </span>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-2 mb-4">
-              <MagneticButton
-                as="a"
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                strength={0.3}
-                className="inline-flex items-center text-[12px] font-medium bg-[#1a56db] hover:bg-[#1e40af] text-white px-4 py-2 rounded-md transition-colors"
-              >
-                <FiDownload /> Download Resume
-              </MagneticButton>
-              <a
-                href="#projects"
-                className="inline-flex items-center gap-2 text-[12px] bg-white dark:bg-[#1e293b] border border-[#e5e7eb] dark:border-[#334155] text-[#111827] dark:text-[#f1f5f9] px-4 py-2 rounded-md hover:bg-[#f8faff] dark:hover:bg-[#334155] transition-colors"
-              >
-                View Projects <FiArrowRight />
-              </a>
-            </div>
-            {/* Contact shortcuts — feature #7 */}
-            <div className="flex items-center gap-4">
-              <a
-                href="mailto:laybabaka@gmail.com"
-                className="inline-flex items-center gap-1.5 text-[11.5px] text-[#6b7280] dark:text-[#94a3b8] hover:text-[#1a56db] dark:hover:text-[#3b82f6] transition-colors"
-              >
-                <FiMail size={13} /> laybabaka@gmail.com
-              </a>
-              <a
-                href="https://www.linkedin.com/in/laykanokporn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[11.5px] text-[#6b7280] dark:text-[#94a3b8] hover:text-[#1a56db] dark:hover:text-[#3b82f6] transition-colors"
-              >
-                <FiLinkedin size={13} /> LinkedIn
-              </a>
-              <a
-                href="https://github.com/LayKanokporn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[11.5px] text-[#6b7280] dark:text-[#94a3b8] hover:text-[#1a56db] dark:hover:text-[#3b82f6] transition-colors"
-              >
-                <FiGithub size={13} /> GitHub
-              </a>
-            </div>
-          </div>
-
-          {/* Right column: graphic + photo chip */}
-          <div className="w-full max-w-md justify-self-start lg:justify-self-end space-y-3">
-            <HeroGraphic className="w-full h-auto" />
-            <div className="flex items-center gap-3.5 px-3.5 py-3 rounded-md border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a]">
-              <button
-                onClick={() => setPhotoOpen(true)}
-                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border border-[#e5e7eb] dark:border-[#334155] bg-[#e0e7ff] dark:bg-[#1e3a5f] shrink-0 flex items-center justify-center ring-2 ring-[#1a56db]/10 hover:ring-[#1a56db]/40 transition-all cursor-zoom-in"
-                aria-label="View full profile photo"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/profile.jpg"
-                  alt="Kanokporn Hudsree (Lay)"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                    const parent = e.currentTarget.parentElement;
-                    if (parent) {
-                      const initials = document.createElement("span");
-                      initials.textContent = "KL";
-                      initials.className = "text-[16px] font-medium text-[#1a56db] dark:text-[#60a5fa]";
-                      parent.appendChild(initials);
-                    }
-                  }}
-                />
-              </button>
-              <div className="min-w-0">
-                <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9] truncate">Kanokporn Hudsree (Lay)</div>
-                <div className="text-[11px] text-[#6b7280] dark:text-[#94a3b8] truncate">
-                  ERP Developer @ AIS · Founder @ Sunrise
-                </div>
-                <div className="text-[10.5px] text-[#1a56db] dark:text-[#60a5fa] mt-0.5">
-                  Open to Automation Specialist roles
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
+      {/* HERO — spotlight reveal */}
+      <HeroSpotlight />
 
       {/* METRIC TILES — bigger, clickable */}
       <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0a0f1e] overflow-hidden">
