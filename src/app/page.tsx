@@ -17,7 +17,6 @@ import {
   FiActivity,
   FiCalendar,
   FiBriefcase,
-  FiExternalLink,
   FiMenu,
   FiX,
 } from "react-icons/fi";
