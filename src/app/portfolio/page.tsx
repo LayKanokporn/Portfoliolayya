@@ -47,13 +47,13 @@ const NAV_TABS = [
 
 const POSITIONING = {
   intro:
-    "Hi, I'm Kanokporn (Lay), an ERP Developer & Automation Engineer with a Computer & Robotics Engineering degree from Bangkok University — graduated with First-Class Honors.",
+    "Hi, I'm Kanokporn (Lay), an Automation Problem Solver — I turn business processes into observable, resilient systems using RPA, AI, and ERP. Computer & Robotics Engineering · Bangkok University · First-Class Honors.",
   body:
-    "I engineer SAP, RPA, API, and AI together to improve business processes and drive Digital Transformation at enterprise scale — working on SAP S/4HANA financial workflows, SAP Build Process Automation, and end-to-end RPA delivery in production.",
+    "I engineer SAP, RPA, API, and AI together to eliminate manual toil at enterprise scale — working on SAP S/4HANA financial workflows, SAP Build Process Automation, and end-to-end RPA delivery in production. Not just building bots that run, but designing systems where humans steer, agents execute, and outcomes are always accountable.",
   toolkit:
-    "My toolkit spans SAP S/4HANA & BTP, UiPath / Blue Prism / Power Automate, Document AI & IDP, and LLM-based pipelines. I bring an enterprise mindset from ERP work and a builder's mindset from a self-built LINE Bot production system — the same architectural patterns (idempotent webhooks, defer queues, structured logging) reused directly in UiPath workflows at AIS.",
+    "Approaching automation with an AI-augmented mindset — using structured frameworks (Problem Framing, Pre-mortem, Trade-off Thinking) before every deployment. My toolkit spans SAP S/4HANA & BTP, UiPath / Blue Prism / Power Automate, Document AI & IDP, and LLM-based pipelines. The same architectural patterns (idempotent webhooks, defer queues, structured logging) reused directly across enterprise RPA and self-built production systems.",
   quote:
-    "I'm not here to write bots. I'm here to engineer SAP, RPA, API, and AI into business processes that actually move the numbers — with production-grade logging, error handling, and measurable outcomes.",
+    "I don't just write workflows. I design systems where humans steer, agents execute, and outcomes are always accountable — with production-grade logging, error handling, and measurable numbers.",
 };
 
 const TECH_EXPERTISE = [
@@ -98,6 +98,12 @@ const SKILL_GROUPS = [
     priority: true,
     tags: ["Power Automate AI Builder (OCR)", "Azure Document Intelligence", "AWS Textract", "Google Document AI", "SAP Document AI", "Intelligent Document Processing (IDP)", "Tesseract OCR", "UiPath Document Understanding", "ocrmypdf", "pdfplumber", "PyMuPDF", "Table Extraction", "Layout Detection", "Image Preprocessing"],
     highlights: ["Power Automate AI Builder (OCR)", "SAP Document AI", "Intelligent Document Processing (IDP)"],
+  },
+  {
+    name: "AI-Augmented Engineering",
+    priority: true,
+    tags: ["Problem Framing", "Pre-mortem Analysis", "Assumption Check", "Trade-off Thinking", "Harness Pattern", "Spec-first Workflow (Research → Plan → Implement)", "Human-in-the-Loop Design", "AI Agent Orchestration", "Structured Prompting", "Multi-agent Design", "Bill Gates Lazy Principle"],
+    highlights: ["Problem Framing", "Harness Pattern", "Spec-first Workflow (Research → Plan → Implement)"],
   },
   {
     name: "Process Consulting",

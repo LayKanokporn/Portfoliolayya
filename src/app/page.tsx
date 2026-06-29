@@ -76,13 +76,13 @@ type Detail = {
 
 const FOCUS_DETAILS: Record<string, Detail> = {
   "Automation Specialist": {
-    title: "Automation Specialist",
-    desc: "I engineer automation systems with explicit SLOs and structured logging — across SAP, RPA, API, and AI. Reliability over features, measurement over assertion, ownership over hand-off.",
+    title: "Automation Problem Solver",
+    desc: "I turn business processes into observable, resilient systems — using RPA, AI, and ERP together. Not just writing bots that run, but engineering systems where humans steer, agents execute, and outcomes are always accountable.",
     bullets: [
       "5 enterprise SAP S/4HANA automations live at AIS (BG Alert · Payment Advice · OB83 · GR · Mass SO)",
-      "16 weeks solo production · 0 silent failures · p95 reply < 1.5s",
+      "16 weeks solo production · 0 silent failures · p95 reply < 1.5s · 83% ops cut",
+      "AI-augmented workflow: Problem Framing → Pre-mortem → Spec-first Implement",
       "Logging mandatory in every function · email-alerted error path · MTTR < 5m",
-      "First-Class Honors (GPA 3.53) — Computer & Robotics Engineering",
     ],
     link: { label: "Reliability metrics →", href: "#reliability" },
   },
@@ -155,6 +155,17 @@ const CORE_SKILL_DETAILS: Record<string, Detail> = {
     ],
     link: { label: "View SAP projects →", href: "#projects" },
   },
+  "AI-Augmented Engineering": {
+    title: "AI-Augmented Engineering",
+    desc: "Applying AI as a thinking partner across the full automation lifecycle — from requirement analysis to post-mortem — not just using AI tools, but designing systems with AI embedded.",
+    bullets: [
+      "Harness Pattern: human steers direction, agent executes, human verifies output",
+      "Spec-first workflow: Research → Plan → Implement (never implement without a validated plan)",
+      "Structured frameworks: Problem Framing, Pre-mortem, Assumption Check before every deployment",
+      "Bill Gates Lazy Principle: automate before doing manually",
+    ],
+    link: { label: "See engineering principles →", href: "/portfolio#skills" },
+  },
 };
 
 const CERT_DETAILS: Record<string, Detail> = {
@@ -184,6 +195,7 @@ const SIDE_SKILLS = [
   { icon: <FiZap />, label: "Power Platform & AI Builder" },
   { icon: <FiFileText />, label: "Document AI / OCR / IDP" },
   { icon: <FiActivity />, label: "Financial Process Automation" },
+  { icon: <FiZap />, label: "AI-Augmented Engineering", tag: "Mindset" },
 ];
 
 const SIDE_CERTS = ["UiPath RPA Developer", "Blue Prism Developer", "Python for Automation"];
@@ -835,10 +847,17 @@ export default function DashboardPortfolio() {
           <div className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-5 mb-8">
             <SecTitle title="About" />
             <p className="text-[13px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2">
-              ERP Developer &amp; Automation Engineer building production-grade SAP, RPA, and
-              AI-powered automation at AIS. Currently shipping 5 SAP S/4HANA automations
-              (financial &amp; procurement) and operating a self-built LINE Bot production system
-              that cut daily bookkeeping by ~83% over 16 weeks with zero silent failures.
+              Automation Problem Solver — turning business processes into observable, resilient systems
+              using RPA, AI, and ERP. Currently shipping 5 SAP S/4HANA automations (financial &amp;
+              procurement) and operating a self-built LINE Bot production system that cut daily
+              bookkeeping by ~83% over 16 weeks with zero silent failures.
+            </p>
+            <p className="text-[13px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2">
+              Approaching automation with an AI-augmented mindset — using structured frameworks
+              (Problem Framing, Pre-mortem, Trade-off Thinking) to design observable, resilient
+              systems rather than just building bots that run. I believe the best automation engineers
+              don&apos;t just write workflows; they design systems where humans steer, agents execute,
+              and outcomes are always accountable.
             </p>
             <p className="text-[13px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed">
               Computer &amp; Robotics Engineering · First-Class Honors (GPA 3.53) · Bangkok
