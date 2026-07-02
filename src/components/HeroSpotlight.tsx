@@ -40,14 +40,22 @@ export function HeroSpotlight() {
 
     const onMove = (e: MouseEvent) => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
     const onLeave = () => { mouseRef.current = { x: -999, y: -999 }; };
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) mouseRef.current = { x: t.clientX, y: t.clientY };
+    };
 
     section.addEventListener("mousemove", onMove);
     section.addEventListener("mouseleave", onLeave);
+    section.addEventListener("touchstart", onTouch, { passive: true });
+    section.addEventListener("touchmove", onTouch, { passive: true });
 
     return () => {
       cancelAnimationFrame(rafRef.current);
       section.removeEventListener("mousemove", onMove);
       section.removeEventListener("mouseleave", onLeave);
+      section.removeEventListener("touchstart", onTouch);
+      section.removeEventListener("touchmove", onTouch);
     };
   }, []);
 
@@ -138,7 +146,7 @@ export function HeroSpotlight() {
           whiteSpace: "nowrap",
         }}
       >
-        ✦ Move cursor to reveal
+        ✦ Move cursor or touch to reveal
       </div>
     </section>
   );
