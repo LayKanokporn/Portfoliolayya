@@ -230,7 +230,7 @@ const PROJECTS: {
     accent: "bg-blue-500",
     badges: ["Featured", "SAP S/4HANA"],
     name: "BG Alert Automation",
-    desc: "Automated Bank Guarantee expiration monitoring in SAP — extracts from Web GUI, classifies by 30d / 7d / expired, distributes targeted email alerts. Replaces manual compliance review.",
+    desc: "Problem: manual BG expiry review in SAP was slow, error-prone, and had no audit trail. Approach: pre-mortem on failure modes first, then UiPath bot extracting from Web GUI, classifying 30d / 7d / expired. Impact: manual compliance review eliminated, every alert email-traceable.",
     image: "/project-bg-alert.jpg",
     art: "sap-monitor",
     stats: [
@@ -244,7 +244,7 @@ const PROJECTS: {
     accent: "bg-amber-500",
     badges: ["Document AI", "Power Platform"],
     name: "Payment Advice Automation",
-    desc: "Power Automate Cloud Flow with AI Builder OCR — extracts payment data, validates against SAP, auto-generates and distributes payment advice. Intelligent document processing in a finance workflow.",
+    desc: "Problem: payment advice manually keyed and emailed — error-prone, no trail. Approach: AI Builder OCR with ≥85% confidence gate, SAP master data validation, finance-owned review queue for failures. Impact: zero manual keying errors since deploy, SOX-grade audit trail per advice.",
     image: "/project-payment-advice.jpg",
     art: "document-ocr",
     stats: [
@@ -272,7 +272,7 @@ const PROJECTS: {
     accent: "bg-emerald-500",
     badges: ["SAP OB83", "Financial ERP"],
     name: "Market Rate Maintenance (THOR & SOFR)",
-    desc: "Enhanced SAP S/4HANA transaction OB83 to support THOR + SOFR reference rates — redesigned classification to use Reference fields instead of date-based logic. Cleaner, extensible rate management.",
+    desc: "Problem: OB83 date-based rate classification couldn't support IBOR-replacement rates (THOR/SOFR). Approach: reframed the root cause — classification model, not data entry — and redesigned around Reference fields. Impact: extensible rate management, compliant with IBOR transition.",
     image: "/project-thor-sofr.jpg",
     art: "finance-rate",
     stats: [

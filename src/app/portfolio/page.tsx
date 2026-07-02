@@ -68,6 +68,7 @@ const TECH_EXPERTISE = [
 ];
 
 const CAPABILITIES = [
+  { capability: "AI Tool Enablement", impact: "+75% QA productivity (PTT showcase)", href: "#projects" },
   { capability: "Process Discovery", impact: "PDD/SDD authored", href: "#skills" },
   { capability: "RPA Development", impact: "8+ bots in production", href: "#experience" },
   { capability: "SAP Automation", impact: "OB83, THOR/SOFR, BG Alert", href: "#projects" },
@@ -159,10 +160,11 @@ const EXPERIENCE = [
     type: "work" as const,
     stack: ["UiPath", "SAP S/4HANA", "SAP Web GUI", "SAP Build Process Automation", "Power Automate", "Power Automate AI Builder (OCR)", "Excel Automation", "Outlook Automation", "SQL"],
     responsibilities: [
-      "Delivered enterprise SAP automation across Finance, Procurement, and Sales domains",
-      "Built end-to-end RPA workflows with exception handling, structured logging, and stakeholder reporting",
+      "Ship and operate 5 production SAP S/4HANA automations across Finance, Procurement, and Sales — zero post-deploy silent failures",
+      "Apply pre-mortem analysis before every go-live to identify failure points before they reach production",
+      "Build end-to-end RPA workflows with mandatory structured logging (INFO/WARN/ERROR) and finance-owned error paths — every failure actionable, never silent",
+      "Apply Problem Framing (root cause / symptom / constraint separation) during requirement gathering — cleaner scope, fewer UAT surprises",
       "Enhanced SAP S/4HANA financial processes via configuration and integration (THOR / SOFR reference rates)",
-      "Collaborated with business users on requirement gathering, UAT, and production rollout",
     ],
     projects: [
       { name: "BG Alert Automation", detail: "Automated Bank Guarantee expiration monitoring in SAP — classifies 30d / 7d / expired, distributes email alerts. UiPath + SAP Web GUI + Excel + Outlook." },
@@ -203,13 +205,15 @@ const EXPERIENCE = [
     location: "Bangkok, Thailand",
     active: false,
     type: "work" as const,
-    stack: ["Python", "YOLOv5", "OpenCV", "EasyOCR", "GPS", "REST API", "PostgreSQL"],
+    stack: ["Python", "YOLOv5", "OpenCV", "EasyOCR", "GPS", "REST API", "PostgreSQL", "LLM Tools", "AI Code Review"],
     responsibilities: [
+      "Built and presented AI Code Assistant for QA at company-wide YOU&AI Forward Together showcase — +75% QA productivity, 5-20% release-cycle cost reduction",
       "Developed AI-integrated automation for industrial traffic detection",
       "Built YOLOv5-based traffic light detection system with GPS coordination",
       "Led API integrations and data pipeline automation across backend services",
     ],
     projects: [
+      { name: "AI Code Assistant for QA", detail: "LLM-powered code review offloading routine QA checks (lint, vulnerability scan, convention review) from senior reviewers. +75% QA productivity — presented live at PTT Digital AI showcase." },
       { name: "Real-time Computer Vision Pipeline", detail: "YOLOv5 + OCR + GPS for traffic light detection on Thai traffic scenarios." },
       { name: "API Integration & Data Pipeline", detail: "Automated backend data flows between internal services." },
     ],
