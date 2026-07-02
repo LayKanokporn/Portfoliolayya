@@ -65,10 +65,10 @@ const DEMOS = [
   },
   {
     icon: <FiZap className="text-2xl" />,
-    title: "Self-built production system",
-    short: "Sunrise LINE Bots — 16+ weeks live",
+    title: "Personal LINE bot project",
+    short: "Sunrise LINE Bots — 16+ weeks daily use",
     detail:
-      "Solo-architected 2-bot LINE OA suite. Reply-200-First webhook, idempotent processing, defer queue for slip OCR. Patterns reused in enterprise UiPath at AIS. Reduced daily ops by ~83%.",
+      "2-bot LINE OA suite built for a family cafe. Idempotent webhook, defer queue for slip OCR, structured logging. Patterns reused in enterprise UiPath at AIS. Reduced daily ops by ~83%.",
     href: "/portfolio#projects",
   },
   {

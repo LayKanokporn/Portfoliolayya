@@ -18,7 +18,7 @@ import { DarkModeToggle } from "@/components/DarkModeToggle";
 // ─── DATA ─────────────────────────────────────────────────────────────
 
 const SUMMARY =
-  "Automation Problem Solver — turning business processes into observable, resilient systems with RPA, AI, and ERP. Delivering enterprise SAP S/4HANA automation at AIS (Payment Advice with AI Builder OCR, BG Alert, THOR/SOFR) while operating a self-built LINE Bot production system: 83% ops cut, 0 silent failures, p95 < 1.5s. Spec-first workflow with pre-mortem analysis before every go-live. First-Class Honors in Computer & Robotics Engineering.";
+  "Automation Problem Solver — turning business processes into observable, resilient systems with RPA, AI, and ERP. Delivering enterprise SAP S/4HANA automation at AIS (Payment Advice with AI Builder OCR, BG Alert, THOR/SOFR) plus a personal LINE bot project applying the same production discipline: 83% ops cut, 0 silent failures, p95 < 1.5s. Spec-first workflow with pre-mortem analysis before every go-live. First-Class Honors in Computer & Robotics Engineering.";
 
 const EXPERIENCE = [
   {
@@ -34,17 +34,15 @@ const EXPERIENCE = [
     stack: "UiPath · SAP S/4HANA · SAP Web GUI · SAP Build Process Automation · Power Automate · AI Builder OCR · Excel · Outlook · SQL",
   },
   {
-    role: "Founder & Solo Builder",
-    co: "Sunrise LINE Bots Suite — Self-built Production System",
+    role: "Personal Project",
+    co: "Sunrise LINE Bots — cafe operations automation (built for own use)",
     period: "2025 – Present",
     bullets: [
-      "Designed, built, deployed and solo-operated a 2-bot LINE OA suite automating end-to-end cafe operations.",
-      "Engineered Reply-200-First webhook (P95 < 1.5s on serverless) with idempotent dedup and defer queue for tasks > 60s.",
-      "Established TRACE/INFO/WARN/ERROR structured logging with persistent error sheet — zero silent failures over 16+ weeks of production.",
-      "Reduced daily bookkeeping + stock entry from ~30 min/day to ~5 min/day (~83% reduction).",
-      "Pattern library (Reply-200-First, idempotent webhook, defer queue) reused directly in enterprise UiPath workflows at AIS.",
+      "Built a 2-bot LINE OA suite automating daily bookkeeping and stock entry for a family cafe — cut from ~30 to ~5 min/day (~83%).",
+      "Applied production patterns end-to-end: idempotent webhook, defer queue, structured logging — zero silent failures over 16+ weeks of daily use.",
+      "Same patterns later reused in enterprise UiPath workflows at AIS.",
     ],
-    stack: "Google Apps Script · LINE Messaging API v2 · Flex Messages · Rich Menu API · Google Sheets · CacheService",
+    stack: "Google Apps Script · LINE Messaging API v2 · Flex Messages · Google Sheets · CacheService",
   },
   {
     role: "Software Engineer",

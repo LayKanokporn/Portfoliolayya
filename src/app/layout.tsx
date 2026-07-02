@@ -21,7 +21,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Lay · Automation Problem Solver",
   description:
-    "Automation Problem Solver — turning business processes into observable, resilient systems with RPA, AI, and ERP. Enterprise SAP automation (S/4HANA, AI Builder OCR), UiPath/Blue Prism/Power Automate in production, and a self-built LINE Bot suite: 83% ops cut, 0 silent failures, p95 < 1.5s.",
+    "Automation Problem Solver — turning business processes into observable, resilient systems with RPA, AI, and ERP. Enterprise SAP automation (S/4HANA, AI Builder OCR), UiPath/Blue Prism/Power Automate in production, plus a personal LINE bot project: 83% ops cut, 0 silent failures, p95 < 1.5s.",
   keywords: [
     "Automation Problem Solver",
     "AI-Augmented Engineering",

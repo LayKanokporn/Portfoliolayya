@@ -80,7 +80,7 @@ const FOCUS_DETAILS: Record<string, Detail> = {
     desc: "I turn business processes into observable, resilient systems — using RPA, AI, and ERP together. Not just writing bots that run, but engineering systems where humans steer, agents execute, and outcomes are always accountable.",
     bullets: [
       "5 enterprise SAP S/4HANA automations live at AIS (BG Alert · Payment Advice · OB83 · GR · Mass SO)",
-      "16 weeks solo production · 0 silent failures · p95 reply < 1.5s · 83% ops cut",
+      "Personal LINE bot project: 16+ weeks daily use · 0 silent failures · 83% ops cut",
       "AI-augmented workflow: Problem Framing → Pre-mortem → Spec-first Implement",
       "Logging mandatory in every function · email-alerted error path · MTTR < 5m",
     ],
@@ -214,9 +214,9 @@ const PROJECTS: {
 }[] = [
   {
     accent: "bg-blue-600",
-    badges: ["Featured", "Self-built · Production"],
-    name: "Sunrise LINE Bots Suite",
-    desc: "Hypothesis: cafe ops can run on a single async webhook if reply latency stays sub-2s and dedup is reliable. Measured over 16 weeks production: ↓83% manual effort, p95 <1.5s, zero silent failures. Reply-200-First + idempotent cache + async defer queue. Patterns reused in enterprise UiPath at AIS.",
+    badges: ["Personal project"],
+    name: "Sunrise LINE Bots",
+    desc: "Personal LINE bot suite built for a family cafe — async webhook, idempotent dedup, defer queue. 16 weeks of daily use: ↓83% manual effort, p95 <1.5s, zero silent failures. Patterns later reused in enterprise UiPath at AIS.",
     image: "/project-sunrise.jpg",
     art: "bot",
     stats: [
@@ -435,8 +435,8 @@ const TIMELINE = [
   },
   {
     period: "2025 – Present",
-    role: "Founder & Solo Builder",
-    company: "Sunrise LINE Bots Suite",
+    role: "Personal Project",
+    company: "Sunrise LINE Bots — built for own use",
     active: true,
     color: "#06c755",
     highlights: ["↓83% manual effort", "0 silent failures over 16+ wks", "Reply-200-First webhook"],
@@ -902,8 +902,8 @@ export default function DashboardPortfolio() {
             <p className="text-[13px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2">
               Automation Problem Solver — turning business processes into observable, resilient systems
               using RPA, AI, and ERP. Currently shipping 5 SAP S/4HANA automations (financial &amp;
-              procurement) and operating a self-built LINE Bot production system that cut daily
-              bookkeeping by ~83% over 16 weeks with zero silent failures.
+              procurement). A personal LINE bot project I built for a family cafe applies the same
+              production discipline — ~83% less daily bookkeeping, zero silent failures over 16+ weeks.
             </p>
             <p className="text-[13px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2">
               Approaching automation with an AI-augmented mindset — using structured frameworks
