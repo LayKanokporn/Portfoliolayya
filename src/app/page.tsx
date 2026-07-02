@@ -795,6 +795,59 @@ export default function DashboardPortfolio() {
         </div>
       </section>
 
+      {/* HOW I WORK — mindset made visible */}
+      <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-[#f8faff] dark:bg-[#060c18] overflow-hidden">
+        <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-7 py-9 sm:py-12">
+          <div className="text-[11px] uppercase tracking-wider text-[#6b7280] dark:text-[#94a3b8] mb-1.5">
+            How I work
+          </div>
+          <h2 className="text-[20px] sm:text-[22px] tracking-tight text-[#111827] dark:text-[#f1f5f9] mb-6">
+            Systems where humans steer, agents execute,{" "}
+            <span className="serif-accent text-[#1a56db] dark:text-[#60a5fa]">outcomes are accountable</span>
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {[
+              {
+                n: "01",
+                title: "Frame the problem",
+                desc: "Separate root cause from symptom before writing a single line. Cleaner scope, fewer UAT surprises.",
+              },
+              {
+                n: "02",
+                title: "Pre-mortem first",
+                desc: "Find failure points before go-live — not after the incident. Zero post-deploy silent failures so far.",
+              },
+              {
+                n: "03",
+                title: "Spec-first",
+                desc: "Research → Plan → Implement. Never build without a validated plan — AI as thinking partner at every step.",
+              },
+              {
+                n: "04",
+                title: "Ship observable",
+                desc: "Logging mandatory in every function. Every failure actionable, owned, and alerted — never silent.",
+              },
+            ].map((p) => (
+              <div
+                key={p.n}
+                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-4 hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 transition-colors"
+              >
+                <div className="serif-accent text-[22px] text-[#1a56db]/35 dark:text-[#60a5fa]/35 leading-none mb-2.5">
+                  {p.n}
+                </div>
+                <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9] mb-1">
+                  {p.title}
+                </div>
+                <div className="text-[11.5px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed">
+                  {p.desc}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <SectionDivider variant="wave" className="-mt-px" />
 
       {/* MAIN: SIDEBAR + CONTENT */}
@@ -1194,26 +1247,34 @@ export default function DashboardPortfolio() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-5 sm:px-7 py-5">
           <div>
             <div className="text-[15px] font-medium text-white">
-              Ready to automate your next challenge?
+              Hiring for Automation · AI Tools · RPA roles?
             </div>
             <div className="text-[12px] text-white/70 mt-1">
-              SAP · RPA · AI-powered workflows · Immediate availability · Bangkok, Thailand
+              I reply within 24 hours · Bangkok, Thailand · Open to hybrid / on-site / relocation
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
+            <a
+              href="mailto:laybabaka@gmail.com"
+              className="text-[12px] font-medium bg-white text-[#0c2463] px-4 py-2 rounded-md hover:bg-[#f8faff] transition-colors"
+            >
+              Email me
+            </a>
+            <a
+              href="https://www.linkedin.com/in/laykanokporn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[12px] bg-transparent border border-white/40 text-white px-4 py-2 rounded-md hover:bg-white/10 transition-colors"
+            >
+              LinkedIn
+            </a>
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[12px] font-medium bg-white text-[#0c2463] px-4 py-2 rounded-md hover:bg-[#f8faff] transition-colors"
-            >
-              Resume
-            </a>
-            <a
-              href="mailto:laybabaka@gmail.com"
               className="text-[12px] bg-transparent border border-white/40 text-white px-4 py-2 rounded-md hover:bg-white/10 transition-colors"
             >
-              Get in touch
+              Resume
             </a>
           </div>
         </div>
