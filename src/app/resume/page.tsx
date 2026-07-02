@@ -18,7 +18,7 @@ import { DarkModeToggle } from "@/components/DarkModeToggle";
 // ─── DATA ─────────────────────────────────────────────────────────────
 
 const SUMMARY =
-  "ERP Developer & Automation Engineer with First-Class Honors in Computer & Robotics Engineering. Specializing in SAP S/4HANA, Power Automate, UiPath, Blue Prism, and AI-powered document processing. Currently delivering enterprise SAP automation at AIS while operating a self-built LINE Bot production system in parallel.";
+  "Automation Problem Solver — turning business processes into observable, resilient systems with RPA, AI, and ERP. Delivering enterprise SAP S/4HANA automation at AIS (Payment Advice with AI Builder OCR, BG Alert, THOR/SOFR) while operating a self-built LINE Bot production system: 83% ops cut, 0 silent failures, p95 < 1.5s. Spec-first workflow with pre-mortem analysis before every go-live. First-Class Honors in Computer & Robotics Engineering.";
 
 const EXPERIENCE = [
   {

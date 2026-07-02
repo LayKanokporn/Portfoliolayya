@@ -19,10 +19,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Lay · Automation Engineer",
+  title: "Lay · Automation Problem Solver",
   description:
-    "ERP Developer & Automation Engineer at AIS. Enterprise SAP automation (S/4HANA, Build Process Automation, BTP), RPA (UiPath, Blue Prism, Power Automate), Document AI, and self-built LINE Bot production system. First-Class Honors graduate in Computer & Robotics Engineering.",
+    "Automation Problem Solver — turning business processes into observable, resilient systems with RPA, AI, and ERP. Enterprise SAP automation (S/4HANA, AI Builder OCR), UiPath/Blue Prism/Power Automate in production, and a self-built LINE Bot suite: 83% ops cut, 0 silent failures, p95 < 1.5s.",
   keywords: [
+    "Automation Problem Solver",
+    "AI-Augmented Engineering",
+    "AI Tools",
     "ERP Developer",
     "Automation Engineer",
     "Process Automation Specialist",
@@ -49,9 +52,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Kanokporn Hudsree" }],
   openGraph: {
-    title: "Kanokporn Hudsree — ERP Developer & Automation Engineer",
+    title: "Kanokporn Hudsree — Automation Problem Solver",
     description:
-      "Enterprise Automation across SAP, RPA, and AI-powered Workflows — built with production-grade logging, error handling, and measurable outcomes.",
+      "RPA · AI · ERP — systems that are observable, resilient, accountable. 83% ops cut · 0 silent failures · p95 < 1.5s in production.",
     url: "https://laykanokporn.com",
     siteName: "Kanokporn Hudsree — Portfolio",
     images: [
@@ -67,8 +70,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kanokporn Hudsree — ERP Developer & Automation Engineer",
-    description: "SAP · UiPath · Power Automate · SAP Build · Production-Grade Automation.",
+    title: "Kanokporn Hudsree — Automation Problem Solver",
+    description: "RPA · AI · ERP — observable, resilient, accountable. 83% ops cut · 0 silent failures.",
     images: ["/profile.jpg"]
   },
   icons: {
