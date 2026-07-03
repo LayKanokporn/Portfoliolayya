@@ -81,6 +81,44 @@ export const metadata: Metadata = {
   }
 };
 
+const profileJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  dateModified: "2026-07-03",
+  mainEntity: {
+    "@type": "Person",
+    name: "Kanokporn Hudsree",
+    alternateName: "Lay",
+    jobTitle: "Automation Problem Solver — RPA · AI · ERP",
+    description:
+      "Turning business processes into observable, resilient systems with RPA, AI, and ERP. Enterprise SAP S/4HANA automation in production at AIS.",
+    email: "mailto:laybabaka@gmail.com",
+    url: "https://portfolio-kanokporn.vercel.app",
+    address: { "@type": "PostalAddress", addressLocality: "Bangkok", addressCountry: "TH" },
+    alumniOf: { "@type": "CollegeOrUniversity", name: "Bangkok University" },
+    worksFor: { "@type": "Organization", name: "AIS (Advanced Info Service)" },
+    knowsAbout: [
+      "SAP S/4HANA",
+      "SAP Build Process Automation",
+      "UiPath",
+      "Blue Prism",
+      "Power Automate",
+      "AI Builder OCR",
+      "Robotic Process Automation",
+      "Intelligent Document Processing",
+      "AI-Augmented Engineering",
+      "Python",
+      "Google Apps Script",
+      "LINE Messaging API",
+      "Computer Vision",
+    ],
+    sameAs: [
+      "https://www.linkedin.com/in/laykanokporn",
+      "https://github.com/LayKanokporn",
+    ],
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -91,6 +129,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
+        />
         <Providers>{children}</Providers>
       </body>
     </html>

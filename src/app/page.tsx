@@ -19,6 +19,8 @@ import {
   FiBriefcase,
   FiMenu,
   FiX,
+  FiCopy,
+  FiCheck,
 } from "react-icons/fi";
 import { Logo } from "@/components/Logo";
 import AutomationSimulator from "@/components/AutomationSimulator";
@@ -35,6 +37,12 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { TiltCard } from "@/components/TiltCard";
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
+import { PipelineWalkthrough } from "@/components/PipelineWalkthrough";
+import { BeforeAfterDiff } from "@/components/BeforeAfterDiff";
+import { DecisionLog } from "@/components/DecisionLog";
+import { ROICalculator } from "@/components/ROICalculator";
+import { BackToTop } from "@/components/BackToTop";
+import { FloatingTOC } from "@/components/FloatingTOC";
 import { FiShield, FiClock, FiAlertTriangle, FiDatabase } from "react-icons/fi";
 import {
   SiSap,
@@ -202,6 +210,14 @@ const SIDE_CERTS = ["UiPath RPA Developer", "Blue Prism Developer", "Python for 
 
 type ProjectLink = { kind: "github" | "demo" | "case"; href: string; label: string };
 
+type HiringRole = "rpa" | "ai" | "sap";
+
+const ROLE_OPTIONS: { id: HiringRole; label: string }[] = [
+  { id: "rpa", label: "RPA Developer" },
+  { id: "ai", label: "AI Automation" },
+  { id: "sap", label: "SAP · ERP" },
+];
+
 const PROJECTS: {
   accent: string;
   badges: string[];
@@ -211,10 +227,12 @@ const PROJECTS: {
   art: ArtTheme;
   stats: { v: string; l: string }[];
   links?: ProjectLink[];
+  roles: HiringRole[];
 }[] = [
   {
     accent: "bg-blue-600",
     badges: ["Personal project"],
+    roles: ["rpa"],
     name: "Sunrise LINE Bots",
     desc: "Personal LINE bot suite built for a family cafe — async webhook, idempotent dedup, defer queue. 16 weeks of daily use: ↓83% manual effort, p95 <1.5s, zero silent failures. Patterns later reused in enterprise UiPath at AIS.",
     image: "/project-sunrise.jpg",
@@ -229,6 +247,7 @@ const PROJECTS: {
   {
     accent: "bg-blue-500",
     badges: ["Featured", "SAP S/4HANA"],
+    roles: ["rpa", "sap"],
     name: "BG Alert Automation",
     desc: "Problem: manual BG expiry review in SAP was slow, error-prone, and had no audit trail. Approach: pre-mortem on failure modes first, then UiPath bot extracting from Web GUI, classifying 30d / 7d / expired. Impact: manual compliance review eliminated, every alert email-traceable.",
     image: "/project-bg-alert.jpg",
@@ -243,6 +262,7 @@ const PROJECTS: {
   {
     accent: "bg-amber-500",
     badges: ["Document AI", "Power Platform"],
+    roles: ["rpa", "ai", "sap"],
     name: "Payment Advice Automation",
     desc: "Problem: payment advice manually keyed and emailed — error-prone, no trail. Approach: AI Builder OCR with ≥85% confidence gate, SAP master data validation, finance-owned review queue for failures. Impact: zero manual keying errors since deploy, SOX-grade audit trail per advice.",
     image: "/project-payment-advice.jpg",
@@ -257,6 +277,7 @@ const PROJECTS: {
   {
     accent: "bg-purple-600",
     badges: ["PTT Digital", "AI · Code Quality"],
+    roles: ["ai"],
     name: "AI Code Assistant for QA (PTT Digital)",
     desc: "Hypothesis: an AI code review assistant can offload routine QA checks (lint, vulnerability scan, convention review) from senior reviewers and cut review cycle time. Measured at PTT Digital: +75% QA productivity, 5-20% release-cycle cost reduction. Presented live at PTT Digital YOU&AI Forward Together AI showcase.",
     image: "/project-ai-code-qa.jpg",
@@ -271,6 +292,7 @@ const PROJECTS: {
   {
     accent: "bg-emerald-500",
     badges: ["SAP OB83", "Financial ERP"],
+    roles: ["sap"],
     name: "Market Rate Maintenance (THOR & SOFR)",
     desc: "Problem: OB83 date-based rate classification couldn't support IBOR-replacement rates (THOR/SOFR). Approach: reframed the root cause — classification model, not data entry — and redesigned around Reference fields. Impact: extensible rate management, compliant with IBOR transition.",
     image: "/project-thor-sofr.jpg",
@@ -279,6 +301,21 @@ const PROJECTS: {
       { v: "THOR+SOFR", l: "Rate types" },
       { v: "Reference", l: "Classification" },
       { v: "Improved", l: "Maintainability" },
+    ],
+    links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
+  },
+  {
+    accent: "bg-cyan-600",
+    badges: ["PTT Digital", "Computer Vision"],
+    roles: ["ai"],
+    name: "Traffic Detection — YOLOv5 + OCR + GPS",
+    desc: "Problem: manual monitoring of industrial traffic couldn't scale across sites. Approach: computer vision pipeline — YOLOv5 vehicle detection, OCR plate reading, GPS coordinate matching for site-level events. Impact: 92.5% detection accuracy in field conditions, monitoring shifted from human eyes to an automated pipeline.",
+    image: "/project-traffic-cv.jpg",
+    art: "vision-grid",
+    stats: [
+      { v: "92.5%", l: "Detection accuracy" },
+      { v: "YOLOv5", l: "+ OCR + GPS" },
+      { v: "Field", l: "Deployed conditions" },
     ],
     links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
   },
@@ -342,6 +379,18 @@ const AUTOMATIONS: {
     href: "/portfolio#projects",
   },
   {
+    title: "Traffic Detection CV Pipeline",
+    tag: "YOLOv5 · OCR · GPS · PTT Digital",
+    challenge: "Manual monitoring of industrial traffic couldn't scale across sites — events missed, no coordinates.",
+    solution: "Vision pipeline: YOLOv5 detects vehicles, OCR reads plates, GPS matching pins each event to a site.",
+    flow: ["Camera Feed", "YOLOv5 Detection", "OCR Plate Read", "GPS Site Match"],
+    results: [
+      { v: "92.5%", l: "Detection accuracy" },
+      { v: "Automated", l: "Site monitoring" },
+    ],
+    href: "/portfolio#projects",
+  },
+  {
     title: "Multi-Source Inventory Sync",
     tag: "Blue Prism · Python · REST API",
     challenge: "Manual stock updates and oversell incidents across E-Commerce channels.",
@@ -356,11 +405,16 @@ const AUTOMATIONS: {
 ];
 
 
-const SKILL_GROUPS = [
+const SKILL_GROUPS: {
+  name: string;
+  roles: HiringRole[];
+  tags: { t: string; hi?: boolean; proof?: string }[];
+}[] = [
   {
     name: "Enterprise & SAP",
+    roles: ["sap"],
     tags: [
-      { t: "SAP S/4HANA", hi: true },
+      { t: "SAP S/4HANA", hi: true, proof: "#projects" },
       { t: "SAP Build Process Automation", hi: true },
       { t: "SAP BTP" },
       { t: "SAP Document AI" },
@@ -369,10 +423,11 @@ const SKILL_GROUPS = [
   },
   {
     name: "Automation & Scheduling",
+    roles: ["rpa"],
     tags: [
-      { t: "UiPath", hi: true },
-      { t: "Blue Prism", hi: true },
-      { t: "Power Automate", hi: true },
+      { t: "UiPath", hi: true, proof: "#projects" },
+      { t: "Blue Prism", hi: true, proof: "#automation" },
+      { t: "Power Automate", hi: true, proof: "#reliability" },
       { t: "Power Apps", hi: true },
       { t: "CronJob" },
       { t: "Python Scheduling" },
@@ -381,8 +436,9 @@ const SKILL_GROUPS = [
   },
   {
     name: "Reliability & Observability",
+    roles: ["rpa", "ai", "sap"],
     tags: [
-      { t: "Structured logging", hi: true },
+      { t: "Structured logging", hi: true, proof: "#reliability" },
       { t: "Error path / DLQ" },
       { t: "Idempotency" },
       { t: "Retry + backoff" },
@@ -393,16 +449,18 @@ const SKILL_GROUPS = [
   },
   {
     name: "AI & Document Intelligence",
+    roles: ["ai"],
     tags: [
-      { t: "AI Builder OCR", hi: true },
+      { t: "AI Builder OCR", hi: true, proof: "#reliability" },
       { t: "Tesseract OCR" },
       { t: "EasyOCR" },
       { t: "Intelligent Document Processing" },
-      { t: "Computer Vision (YOLOv5)" },
+      { t: "Computer Vision (YOLOv5)", proof: "#projects" },
     ],
   },
   {
     name: "Programming & Data",
+    roles: ["ai", "rpa"],
     tags: [
       { t: "Python", hi: true },
       { t: "SQL" },
@@ -480,9 +538,11 @@ const TIMELINE = [
 const NAV_TABS = [
   { label: "About", href: "#about" },
   { label: "Reliability", href: "#reliability" },
+  { label: "Decisions", href: "#decisions" },
   { label: "Projects", href: "#projects" },
   { label: "Automation", href: "#automation" },
   { label: "Try It", href: "#simulator" },
+  { label: "ROI", href: "#roi" },
   { label: "Experience", href: "#experience" },
 ];
 
@@ -490,6 +550,18 @@ const NAV_TABS = [
 export default function DashboardPortfolio() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [photoOpen, setPhotoOpen] = useState(false);
+  const [hiringRole, setHiringRole] = useState<HiringRole | null>(null);
+
+  const sortedProjects = React.useMemo(
+    () =>
+      hiringRole
+        ? [...PROJECTS].sort(
+            (a, b) =>
+              Number(b.roles.includes(hiringRole)) - Number(a.roles.includes(hiringRole))
+          )
+        : PROJECTS,
+    [hiringRole]
+  );
 
   useEffect(() => {
     if (!photoOpen) return;
@@ -507,6 +579,8 @@ export default function DashboardPortfolio() {
     <div className="min-h-screen bg-white dark:bg-[#0a0f1e] text-[#111827] dark:text-[#f1f5f9]">
       <ScrollProgressBar />
       <FloatingHireButton />
+      <BackToTop />
+      <FloatingTOC items={NAV_TABS.map((t) => ({ id: t.href.replace("#", ""), label: t.label }))} />
       {/* NAV */}
       <nav className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-7 h-[52px] border-b border-[#e5e7eb] dark:border-[#1e293b] bg-white/95 dark:bg-[#0a0f1e]/95 backdrop-blur-md">
         <div className="flex items-center gap-3 sm:gap-6 min-w-0">
@@ -537,9 +611,10 @@ export default function DashboardPortfolio() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
+            download
             className="hidden sm:inline-block text-[12px] px-3.5 py-1.5 rounded-md border border-[#e5e7eb] dark:border-[#334155] text-[#111827] dark:text-[#e2e8f0] hover:bg-[#f8faff] dark:hover:bg-[#1e293b] transition-colors"
           >
-            Resume
+            Resume (PDF)
           </a>
           <DarkModeToggle />
           <MagneticButton
@@ -599,9 +674,10 @@ export default function DashboardPortfolio() {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
+                download
                 className="block text-center text-[12px] px-3 py-2 rounded-md border border-[#e5e7eb] dark:border-[#334155] text-[#111827] dark:text-[#e2e8f0] hover:bg-[#f8faff] dark:hover:bg-[#1e293b]"
               >
-                Download Resume
+                Download Resume (PDF)
               </a>
               <a
                 href="https://www.linkedin.com/in/laykanokporn"
@@ -617,7 +693,45 @@ export default function DashboardPortfolio() {
       )}
 
       {/* HERO — spotlight reveal */}
-      <HeroSpotlight />
+      <div id="about">
+        <HeroSpotlight />
+      </div>
+
+      {/* ROLE SWITCHER — the page adapts to your JD */}
+      <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-[#f8faff] dark:bg-[#060c18]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-7 py-3 flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] uppercase tracking-wider text-[#6b7280] dark:text-[#64748b]">
+            I&apos;m hiring for:
+          </span>
+          {ROLE_OPTIONS.map((r) => (
+            <button
+              key={r.id}
+              onClick={() => setHiringRole(hiringRole === r.id ? null : r.id)}
+              aria-pressed={hiringRole === r.id}
+              className={`text-[11.5px] px-3 py-1.5 rounded-full border transition-all ${
+                hiringRole === r.id
+                  ? "bg-[#1a56db] border-[#1a56db] text-white shadow-sm"
+                  : "bg-white dark:bg-[#0f172a] border-[#e5e7eb] dark:border-[#334155] text-[#374151] dark:text-[#cbd5e1] hover:border-[#1a56db]/50"
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
+          {hiringRole && (
+            <button
+              onClick={() => setHiringRole(null)}
+              className="text-[11px] text-[#6b7280] dark:text-[#94a3b8] hover:text-[#1a56db] underline underline-offset-2"
+            >
+              Show all
+            </button>
+          )}
+          <span className="text-[10.5px] text-[#9ca3af] dark:text-[#64748b] ml-auto hidden sm:inline">
+            {hiringRole
+              ? "Matching projects & skills highlighted below"
+              : "Pick a role — the page reorders itself to your JD"}
+          </span>
+        </div>
+      </section>
 
       {/* METRIC TILES — bigger, clickable */}
       <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0a0f1e] overflow-hidden">
@@ -763,6 +877,9 @@ export default function DashboardPortfolio() {
             </div>
           </div>
 
+          {/* Interactive walkthrough — design decisions per node */}
+          <PipelineWalkthrough />
+
           {/* Engineering principles */}
           <div className="mt-6 flex flex-wrap gap-2">
             {[
@@ -847,6 +964,12 @@ export default function DashboardPortfolio() {
           </div>
         </div>
       </section>
+
+      {/* BEFORE / AFTER — see yourself in the left column */}
+      <BeforeAfterDiff />
+
+      {/* DECISION LOG — why X over Y */}
+      <DecisionLog />
 
       <SectionDivider variant="wave" className="-mt-px" />
 
@@ -956,14 +1079,20 @@ export default function DashboardPortfolio() {
             </Link>
           </SecTitle>
           <div className="grid sm:grid-cols-2 gap-3 mb-8">
-            {PROJECTS.map((p, i) => (
+            {sortedProjects.map((p, i) => (
               <motion.div
                 key={p.name}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] overflow-hidden hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40 hover:shadow-md transition-all group relative"
+                className={`rounded-lg border bg-white dark:bg-[#0f172a] overflow-hidden hover:shadow-md transition-all group relative ${
+                  hiringRole && p.roles.includes(hiringRole)
+                    ? "border-[#1a56db]/60 ring-1 ring-[#1a56db]/30"
+                    : hiringRole
+                      ? "border-[#e5e7eb] dark:border-[#1e293b] opacity-45 saturate-50 hover:opacity-100 hover:saturate-100"
+                      : "border-[#e5e7eb] dark:border-[#1e293b] hover:border-[#1a56db]/40 dark:hover:border-[#3b82f6]/40"
+                }`}
               >
                 {/* Whole-card click target — goes to portfolio detail */}
                 <Link
@@ -1113,6 +1242,14 @@ export default function DashboardPortfolio() {
             <AutomationSimulator />
           </div>
 
+          {/* ROI CALCULATOR */}
+          <SecTitle id="roi" title="What's your manual work costing?">
+            <span className="text-[10px] text-[#6b7280]">Same math I use in real ROI sizing</span>
+          </SecTitle>
+          <div className="mb-8">
+            <ROICalculator />
+          </div>
+
           {/* CAREER TIMELINE — feature #4 */}
           <SecTitle id="experience" title="Career timeline" />
           <div className="relative mb-8 pl-6">
@@ -1198,23 +1335,40 @@ export default function DashboardPortfolio() {
           <SecTitle title="Technical skills" />
           <div className="rounded-lg border border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0f172a] p-5 mb-2">
             {SKILL_GROUPS.map((g) => (
-              <div key={g.name} className="mb-4 last:mb-0">
-                <div className="text-[10px] font-medium uppercase tracking-wider text-[#6b7280] dark:text-[#64748b] mb-2">
+              <div
+                key={g.name}
+                className={`mb-4 last:mb-0 transition-opacity ${
+                  hiringRole && !g.roles.includes(hiringRole) ? "opacity-40" : ""
+                }`}
+              >
+                <div className="text-[10px] font-medium uppercase tracking-wider text-[#6b7280] dark:text-[#64748b] mb-2 flex items-center gap-1.5">
                   {g.name}
+                  {hiringRole && g.roles.includes(hiringRole) && (
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#1a56db]" title="Relevant to selected role" />
+                  )}
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  {g.tags.map((tag) => (
-                    <span
-                      key={tag.t}
-                      className={`text-[11px] px-2.5 py-1 rounded border ${
-                        tag.hi
-                          ? "bg-[#e0e7ff] dark:bg-[#1e3a5f] text-[#1a56db] dark:text-[#60a5fa] border-[#c7d2fe] dark:border-[#1e40af]"
-                          : "bg-[#f8faff] dark:bg-[#1e293b] text-[#374151] dark:text-[#94a3b8] border-[#e5e7eb] dark:border-[#334155]"
-                      }`}
-                    >
-                      {tag.t}
-                    </span>
-                  ))}
+                  {g.tags.map((tag) => {
+                    const cls = `text-[11px] px-2.5 py-1 rounded border ${
+                      tag.hi
+                        ? "bg-[#e0e7ff] dark:bg-[#1e3a5f] text-[#1a56db] dark:text-[#60a5fa] border-[#c7d2fe] dark:border-[#1e40af]"
+                        : "bg-[#f8faff] dark:bg-[#1e293b] text-[#374151] dark:text-[#94a3b8] border-[#e5e7eb] dark:border-[#334155]"
+                    }`;
+                    return "proof" in tag && tag.proof ? (
+                      <a
+                        key={tag.t}
+                        href={tag.proof}
+                        title="See it in a shipped project"
+                        className={`${cls} hover:border-[#1a56db] hover:shadow-sm transition-all`}
+                      >
+                        {tag.t} <span className="text-[9px] opacity-70">↗ proof</span>
+                      </a>
+                    ) : (
+                      <span key={tag.t} className={cls}>
+                        {tag.t}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             ))}
@@ -1260,6 +1414,7 @@ export default function DashboardPortfolio() {
             >
               Email me
             </a>
+            <CopyEmailButton />
             <a
               href="https://www.linkedin.com/in/laykanokporn"
               target="_blank"
@@ -1272,11 +1427,23 @@ export default function DashboardPortfolio() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              download
               className="text-[12px] bg-transparent border border-white/40 text-white px-4 py-2 rounded-md hover:bg-white/10 transition-colors"
             >
-              Resume
+              Resume (PDF)
             </a>
           </div>
+        </div>
+        <div className="max-w-6xl mx-auto px-5 sm:px-7 pb-4 -mt-1">
+          <a
+            href="/api/resume"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-[10.5px] text-white/50 hover:text-white/90 transition-colors"
+          >
+            $ curl portfolio-kanokporn.vercel.app/api/resume
+          </a>
+          <span className="text-[10.5px] text-white/40 ml-2">— yes, the resume has an API</span>
         </div>
       </section>
 
@@ -1350,6 +1517,37 @@ export default function DashboardPortfolio() {
 }
 
 // ── SUB-COMPONENTS ────────────────────────────────────────────────────
+function CopyEmailButton() {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText("laybabaka@gmail.com");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard blocked — fall back to mailto
+      window.location.href = "mailto:laybabaka@gmail.com";
+    }
+  };
+  return (
+    <button
+      onClick={copy}
+      className="text-[12px] bg-transparent border border-white/40 text-white px-4 py-2 rounded-md hover:bg-white/10 transition-colors inline-flex items-center gap-1.5"
+      aria-live="polite"
+    >
+      {copied ? (
+        <>
+          <FiCheck /> Copied ✓
+        </>
+      ) : (
+        <>
+          <FiCopy /> Copy email
+        </>
+      )}
+    </button>
+  );
+}
+
 function SidePopover({
   detail,
   children,

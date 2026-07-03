@@ -18,8 +18,8 @@ export function HeroSpotlight() {
     function loop() {
       const s = smoothRef.current;
       const m = mouseRef.current;
-      s.x += (m.x - s.x) * 0.1;
-      s.y += (m.y - s.y) * 0.1;
+      s.x += (m.x - s.x) * 0.18;
+      s.y += (m.y - s.y) * 0.18;
 
       const rect = section!.getBoundingClientRect();
       const cx = s.x - rect.left;
