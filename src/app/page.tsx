@@ -635,6 +635,30 @@ export default function DashboardPortfolio() {
         </div>
       </nav>
 
+      {/* Mobile section tabs — always-visible horizontal scroll strip */}
+      <div
+        className="sticky top-[52px] z-20 lg:hidden border-b border-[#e5e7eb] dark:border-[#1e293b] bg-white/95 dark:bg-[#0a0f1e]/95 backdrop-blur-md"
+      >
+        <div className="flex overflow-x-auto px-2" style={{ scrollbarWidth: "none" }}>
+          {NAV_TABS.map((t) => {
+            const isActive = activeSection === t.href.replace("#", "");
+            return (
+              <a
+                key={t.label}
+                href={t.href}
+                className={`px-3 py-2.5 text-[12px] whitespace-nowrap border-b-2 transition-colors shrink-0 ${
+                  isActive
+                    ? "text-[#1a56db] dark:text-[#60a5fa] border-[#1a56db] dark:border-[#60a5fa]"
+                    : "text-[#6b7280] dark:text-[#94a3b8] border-transparent"
+                }`}
+              >
+                {t.label}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Mobile drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
@@ -956,7 +980,7 @@ export default function DashboardPortfolio() {
                 <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9] mb-1">
                   {p.title}
                 </div>
-                <div className="text-[11.5px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed">
+                <div className="text-[12.5px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed">
                   {p.desc}
                 </div>
               </div>
@@ -1134,7 +1158,7 @@ export default function DashboardPortfolio() {
                     {p.name}
                   </h3>
 
-                  <p className="text-[12px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed mb-3">{p.desc}</p>
+                  <p className="text-[13px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed mb-3 line-clamp-2">{p.desc}</p>
                   <div className="flex gap-4 border-t border-[#e5e7eb] dark:border-[#1e293b] pt-2.5 items-end justify-between">
                     <div className="flex gap-4">
                       {p.stats.map((s) => (
@@ -1191,7 +1215,7 @@ export default function DashboardPortfolio() {
                   </div>
                   <FiBriefcase className="text-[#1a56db] shrink-0 mt-0.5" />
                 </div>
-                <div className="space-y-1.5 text-[12px] mb-3">
+                <div className="space-y-1.5 text-[13px] mb-3">
                   <div>
                     <span className="text-[10px] uppercase tracking-wide text-[#6b7280] dark:text-[#64748b] mr-2">
                       Challenge
@@ -1564,10 +1588,10 @@ function SidePopover({
       content={
         <div>
           <div className="text-[12px] font-medium text-[#111827] dark:text-[#f1f5f9] mb-1.5">{detail.title}</div>
-          <p className="text-[11.5px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2.5">{detail.desc}</p>
+          <p className="text-[12.5px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-2.5">{detail.desc}</p>
           <ul className="space-y-1 mb-3">
             {detail.bullets.map((b) => (
-              <li key={b} className="flex items-start gap-1.5 text-[11.5px] text-[#374151] dark:text-[#cbd5e1]">
+              <li key={b} className="flex items-start gap-1.5 text-[12.5px] text-[#374151] dark:text-[#cbd5e1]">
                 <span className="text-[#1a56db] mt-0.5 leading-none">·</span>
                 <span className="leading-snug">{b}</span>
               </li>
@@ -1651,12 +1675,14 @@ function SecTitle({
   children?: React.ReactNode;
 }) {
   return (
-    <div
-      id={id}
-      className="flex items-center justify-between text-[11px] font-medium uppercase tracking-wider text-[#6b7280] mb-3 scroll-mt-20"
-    >
-      <span>{title}</span>
-      {children}
+    <div id={id} className="mb-4 scroll-mt-20">
+      <div className="flex items-end justify-between gap-3 flex-wrap">
+        <h2 className="text-[19px] sm:text-[21px] font-medium tracking-tight text-[#111827] dark:text-[#f1f5f9] leading-tight">
+          {title}
+        </h2>
+        {children}
+      </div>
+      <div className="mt-2 h-[3px] w-10 rounded-full bg-[#1a56db]" />
     </div>
   );
 }

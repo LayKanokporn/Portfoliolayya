@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { FiX, FiCheck, FiAlertTriangle } from "react-icons/fi";
+import { FiX, FiCheck, FiAlertTriangle, FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const MANUAL_STEPS = [
   "Open shared inbox, scan for payment advice emails",
@@ -26,7 +27,13 @@ const AUTO_STEPS = [
   { t: "Auto-distribute per beneficiary + Excel audit log per advice", s: "SOX-grade trail" },
 ];
 
+const VISIBLE_COUNT = 5;
+
 export function BeforeAfterDiff() {
+  const [expanded, setExpanded] = useState(false);
+  const visibleSteps = expanded ? MANUAL_STEPS : MANUAL_STEPS.slice(0, VISIBLE_COUNT);
+  const hiddenCount = MANUAL_STEPS.length - VISIBLE_COUNT;
+
   return (
     <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0a0f1e] overflow-hidden">
       <div className="relative max-w-6xl mx-auto px-4 sm:px-7 py-9 sm:py-12">
@@ -57,8 +64,8 @@ export function BeforeAfterDiff() {
               <div className="text-[10.5px] text-[#b91c1c]/70 dark:text-[#f87171]/70">{MANUAL_STEPS.length} steps</div>
             </div>
             <ol className="space-y-1.5 mb-4">
-              {MANUAL_STEPS.map((s, i) => (
-                <li key={s} className="flex items-start gap-2 text-[11.5px] text-[#7f1d1d] dark:text-[#fca5a5] leading-snug">
+              {visibleSteps.map((s, i) => (
+                <li key={s} className="flex items-start gap-2 text-[12.5px] text-[#7f1d1d] dark:text-[#fca5a5] leading-snug">
                   <FiX className="mt-0.5 shrink-0 text-[#dc2626]" />
                   <span>
                     <span className="tabular-nums text-[#dc2626]/60 mr-1">{String(i + 1).padStart(2, "0")}</span>
@@ -67,6 +74,14 @@ export function BeforeAfterDiff() {
                 </li>
               ))}
             </ol>
+            {hiddenCount > 0 && (
+              <button
+                onClick={() => setExpanded((v) => !v)}
+                className="flex items-center gap-1 text-[11px] text-[#b91c1c] dark:text-[#f87171] hover:underline mb-3"
+              >
+                {expanded ? <><FiChevronUp /> Show less</> : <><FiChevronDown /> +{hiddenCount} more steps</>}
+              </button>
+            )}
             <div className="flex flex-wrap gap-1.5">
               {MANUAL_RISKS.map((r) => (
                 <span key={r} className="text-[10px] px-2 py-0.5 rounded bg-[#dc2626]/10 text-[#b91c1c] dark:text-[#f87171] border border-[#dc2626]/20">
@@ -92,7 +107,7 @@ export function BeforeAfterDiff() {
             </div>
             <ol className="space-y-3 mb-4">
               {AUTO_STEPS.map((s, i) => (
-                <li key={s.t} className="flex items-start gap-2 text-[12px] text-[#064e3b] dark:text-[#6ee7b7] leading-snug">
+                <li key={s.t} className="flex items-start gap-2 text-[12.5px] text-[#064e3b] dark:text-[#6ee7b7] leading-snug">
                   <FiCheck className="mt-0.5 shrink-0 text-[#059669]" />
                   <span>
                     <span className="tabular-nums text-[#059669]/60 mr-1">{String(i + 1).padStart(2, "0")}</span>

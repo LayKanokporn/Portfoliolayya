@@ -71,7 +71,7 @@ export function DecisionLog() {
                 <span className="text-[#6b7280] dark:text-[#94a3b8]"> over </span>
                 <span className="text-[#6b7280] dark:text-[#94a3b8] line-through decoration-[#dc2626]/40">{d.over}</span>
               </div>
-              <p className="text-[11.5px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-3">{d.because}</p>
+              <p className="text-[12.5px] text-[#374151] dark:text-[#cbd5e1] leading-relaxed mb-3 line-clamp-3">{d.because}</p>
               <div className="text-[10.5px] text-[#6b7280] dark:text-[#94a3b8] border-t border-[#e5e7eb] dark:border-[#1e293b] pt-2">
                 <span className="uppercase tracking-wider text-[9px]">Trade-off accepted:</span> {d.tradeoff}
               </div>
