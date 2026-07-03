@@ -21,6 +21,7 @@ import {
   FiX,
   FiCopy,
   FiCheck,
+  FiChevronDown,
 } from "react-icons/fi";
 import { Logo } from "@/components/Logo";
 import AutomationSimulator from "@/components/AutomationSimulator";
@@ -28,7 +29,7 @@ import { HoverCard } from "@/components/HoverCard";
 import { MagneticButton } from "@/components/MagneticButton";
 import { ProjectArt, type ArtTheme } from "@/components/ProjectArt";
 import { HeroSpotlight } from "@/components/HeroSpotlight";
-import { PullQuote } from "@/components/PullQuote";
+// PullQuote removed — redundant with hero message
 import { SectionDivider } from "@/components/SectionDivider";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { FloatingHireButton } from "@/components/FloatingHireButton";
@@ -37,7 +38,7 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { TiltCard } from "@/components/TiltCard";
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
-import { PipelineWalkthrough } from "@/components/PipelineWalkthrough";
+// PipelineWalkthrough removed — merged with Architecture diagram
 import { BeforeAfterDiff } from "@/components/BeforeAfterDiff";
 import { DecisionLog } from "@/components/DecisionLog";
 import { ROICalculator } from "@/components/ROICalculator";
@@ -551,6 +552,7 @@ export default function DashboardPortfolio() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [photoOpen, setPhotoOpen] = useState(false);
   const [hiringRole, setHiringRole] = useState<HiringRole | null>(null);
+  const [roiOpen, setRoiOpen] = useState(false);
 
   const sortedProjects = React.useMemo(
     () =>
@@ -824,9 +826,6 @@ export default function DashboardPortfolio() {
               <h2 className="text-[20px] sm:text-[22px] font-medium tracking-tight text-[#111827] dark:text-[#f1f5f9]">
                 Measured, not asserted.
               </h2>
-              <p className="text-[12.5px] text-[#6b7280] dark:text-[#94a3b8] mt-1 max-w-2xl">
-                Every system I ship gets explicit SLOs, structured logging, and an error path the finance team can act on. Numbers below come from production AP automation at AIS — not demos.
-              </p>
             </div>
           </div>
 
@@ -881,28 +880,7 @@ export default function DashboardPortfolio() {
                 onError={(e) => { e.currentTarget.style.display = "none"; }}
               />
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-[10.5px]">
-              <div>
-                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Hypothesis</div>
-                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">AI OCR can replace manual keying for AP advices if a confidence gate + SAP master-data check stop bad data before send.</div>
-              </div>
-              <div>
-                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Metric</div>
-                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">OCR confidence ≥85% · SAP vendor match rate · advices auto-distributed vs queued.</div>
-              </div>
-              <div>
-                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Result</div>
-                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Manual entry eliminated · per-beneficiary auto-distribution · SOX-grade Excel + email audit.</div>
-              </div>
-              <div>
-                <div className="text-[#6b7280] dark:text-[#64748b] uppercase tracking-wider text-[9px] mb-0.5">Iteration</div>
-                <div className="text-[#374151] dark:text-[#cbd5e1] leading-snug">Added SAP tolerance check after OCR caught vendor name but missed cents — false positives went to finance review.</div>
-              </div>
-            </div>
           </div>
-
-          {/* Interactive walkthrough — design decisions per node */}
-          <PipelineWalkthrough />
 
           {/* Engineering principles */}
           <div className="mt-6 flex flex-wrap gap-2">
@@ -920,19 +898,6 @@ export default function DashboardPortfolio() {
               </span>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* PULL QUOTE — editorial pause */}
-      <section className="relative bg-white dark:bg-[#0a0f1e] py-12 sm:py-16 border-b border-[#e5e7eb] dark:border-[#1e293b] overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
-        <div className="relative max-w-6xl mx-auto px-5 sm:px-7">
-          <PullQuote attribution="Personal engineering principle">
-            I&apos;m not here to write bots. I&apos;m here to engineer SAP, RPA, API, and AI
-            into business processes that actually{" "}
-            <span className="serif-accent text-[#1a56db]">move&nbsp;the&nbsp;numbers</span>
-            &nbsp;— with production-grade logging, error handling, and measurable outcomes.
-          </PullQuote>
         </div>
       </section>
 
@@ -977,11 +942,8 @@ export default function DashboardPortfolio() {
                 <div className="serif-accent text-[22px] text-[#1a56db]/35 dark:text-[#60a5fa]/35 leading-none mb-2.5">
                   {p.n}
                 </div>
-                <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9] mb-1">
+                <div className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9]">
                   {p.title}
-                </div>
-                <div className="text-[12.5px] text-[#6b7280] dark:text-[#94a3b8] leading-relaxed">
-                  {p.desc}
                 </div>
               </div>
             ))}
@@ -1266,12 +1228,22 @@ export default function DashboardPortfolio() {
             <AutomationSimulator />
           </div>
 
-          {/* ROI CALCULATOR */}
-          <SecTitle id="roi" title="What's your manual work costing?">
-            <span className="text-[10px] text-[#6b7280]">Same math I use in real ROI sizing</span>
-          </SecTitle>
-          <div className="mb-8">
-            <ROICalculator />
+          {/* ROI CALCULATOR — collapsed by default */}
+          <div id="roi" className="mb-8 scroll-mt-20">
+            <button
+              onClick={() => setRoiOpen(v => !v)}
+              className="w-full flex items-center justify-between gap-3 mb-3"
+            >
+              <h2 className="text-[19px] sm:text-[21px] font-medium tracking-tight text-[#111827] dark:text-[#f1f5f9] leading-tight">
+                What&apos;s your manual work costing?
+              </h2>
+              <span className="flex items-center gap-1.5 text-[11px] text-[#1a56db] shrink-0">
+                {roiOpen ? "Hide" : "Try calculator"}
+                <FiChevronDown className={`transition-transform ${roiOpen ? "rotate-180" : ""}`} />
+              </span>
+            </button>
+            <div className="h-[3px] w-10 rounded-full bg-[#1a56db] mb-4" />
+            {roiOpen && <ROICalculator />}
           </div>
 
           {/* CAREER TIMELINE — feature #4 */}
