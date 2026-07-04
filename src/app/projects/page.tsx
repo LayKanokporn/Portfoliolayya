@@ -9,27 +9,48 @@ import { PROJECTS, AUTOMATIONS, ROLE_OPTIONS, type HiringRole } from "@/data/por
 // ── Keyword highlight ─────────────────────────────────────────────────
 const ROLE_KEYWORDS: Record<HiringRole, string[]> = {
   rpa: ["UiPath", "Blue Prism", "Power Automate", "RPA", "bot", "webhook", "idempotent", "automation", "Automation", "flow", "dedup", "defer queue"],
-  ai: ["AI Builder", "OCR", "YOLOv5", "computer vision", "LLM", "document", "confidence gate", "machine learning", "intelligence", "AI"],
+  ai: ["AI Builder", "OCR", "YOLOv5", "computer vision", "LLM", "document", "confidence gate", "machine learning", "intelligence"],
   sap: ["SAP S/4HANA", "SAP", "OB83", "BTP", "ERP", "IBOR", "THOR", "SOFR", "audit trail", "finance", "compliance"],
 };
 
+const ROLE_MARK_CLASS: Record<HiringRole, { on: string; dim: string }> = {
+  rpa: {
+    on:  "bg-[#fef3c7] dark:bg-[#78350f]/50 text-[#92400e] dark:text-[#fbbf24] rounded px-0.5 font-medium not-italic",
+    dim: "bg-[#fef9ec] dark:bg-[#78350f]/20 text-[#b45309] dark:text-[#d97706]/60 rounded px-0.5 not-italic opacity-50",
+  },
+  ai: {
+    on:  "bg-[#ede9fe] dark:bg-[#4c1d95]/50 text-[#6d28d9] dark:text-[#a78bfa] rounded px-0.5 font-medium not-italic",
+    dim: "bg-[#f5f3ff] dark:bg-[#4c1d95]/20 text-[#7c3aed] dark:text-[#a78bfa]/60 rounded px-0.5 not-italic opacity-50",
+  },
+  sap: {
+    on:  "bg-[#dcfce7] dark:bg-[#14532d]/50 text-[#15803d] dark:text-[#4ade80] rounded px-0.5 font-medium not-italic",
+    dim: "bg-[#f0fdf4] dark:bg-[#14532d]/20 text-[#16a34a] dark:text-[#4ade80]/60 rounded px-0.5 not-italic opacity-50",
+  },
+};
+
+// Build a flat list of { keyword, role } sorted longest-first to avoid partial matches
+const ALL_KEYWORDS: { kw: string; role: HiringRole }[] = (
+  Object.entries(ROLE_KEYWORDS) as [HiringRole, string[]][]
+).flatMap(([role, kws]) => kws.map((kw) => ({ kw, role })))
+ .sort((a, b) => b.kw.length - a.kw.length);
+
 function HighlightText({ text, role }: { text: string; role: HiringRole | null }) {
-  if (!role) return <>{text}</>;
-  const keywords = ROLE_KEYWORDS[role];
-  const escaped = keywords.map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const escaped = ALL_KEYWORDS.map(({ kw }) => kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
   const pattern = new RegExp(`(${escaped.join("|")})`, "gi");
   const parts = text.split(pattern);
+
   return (
     <>
       {parts.map((part, i) => {
-        const isMatch = keywords.some((k) => k.toLowerCase() === part.toLowerCase());
-        return isMatch ? (
-          <mark key={i} className="bg-[#fef3c7] dark:bg-[#78350f]/50 text-[#92400e] dark:text-[#fbbf24] rounded px-0.5 not-italic font-medium">
-            {part}
-          </mark>
-        ) : (
-          <React.Fragment key={i}>{part}</React.Fragment>
-        );
+        const match = ALL_KEYWORDS.find(({ kw }) => kw.toLowerCase() === part.toLowerCase());
+        if (!match) return <React.Fragment key={i}>{part}</React.Fragment>;
+
+        const isActive = !role || role === match.role;
+        const cls = isActive
+          ? ROLE_MARK_CLASS[match.role].on
+          : ROLE_MARK_CLASS[match.role].dim;
+
+        return <mark key={i} className={cls}>{part}</mark>;
       })}
     </>
   );
