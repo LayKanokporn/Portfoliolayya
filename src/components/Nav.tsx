@@ -36,7 +36,7 @@ export function Nav() {
                       : "text-[#6b7280] dark:text-[#94a3b8] border-transparent hover:text-[#111827] dark:hover:text-[#f1f5f9] hover:border-[#1a56db]/60"
                   }`}
                 >
-                  <span className="text-[10px] tabular-nums opacity-50">{p.num}</span>
+                  <span className="text-[10px] tabular-nums opacity-40 mr-1">{p.num}</span>
                   {p.label}
                 </Link>
               );
