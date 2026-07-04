@@ -61,11 +61,11 @@ export function HeroSpotlight() {
 
   return (
     <section className="relative border-b border-[#e5e7eb] dark:border-[#1e293b] bg-white dark:bg-[#0a0f1e] overflow-hidden">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] min-h-[420px] lg:min-h-[480px]">
-        {/* LEFT — photo with spotlight */}
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] min-h-[420px] lg:min-h-[480px]">
+        {/* LEFT — photo bleeds to edge, rounded on right */}
         <div
           ref={photoRef}
-          className="relative cursor-crosshair bg-black overflow-hidden min-h-[320px] lg:min-h-0"
+          className="relative cursor-crosshair bg-black overflow-hidden min-h-[320px] lg:min-h-0 lg:rounded-r-[40px]"
         >
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
