@@ -6,6 +6,7 @@ import {
   FiMail,
   FiLinkedin,
   FiGithub,
+  FiGlobe,
   FiPrinter,
   FiArrowLeft,
   FiCheck,
@@ -18,7 +19,30 @@ import { DarkModeToggle } from "@/components/DarkModeToggle";
 // ─── DATA ─────────────────────────────────────────────────────────────
 
 const SUMMARY =
-  "ERP Developer & Automation Engineer with First-Class Honors in Computer & Robotics Engineering. Specializing in SAP S/4HANA, Power Automate, UiPath, Blue Prism, and AI-powered document processing. Currently delivering enterprise SAP automation at AIS while operating a self-built LINE Bot production system in parallel.";
+  "ERP Developer & Automation Engineer with First-Class Honors in Computer & Robotics Engineering. Specializing in SAP S/4HANA, Power Automate, UiPath, Blue Prism, and AI-powered document processing. Self-driven end-to-end delivery — take a requirement, analyze it, plan the approach, build it, flag issues early, propose a solution, and ship — while acting as the communication bridge between business stakeholders and technical implementation. Currently delivering enterprise SAP automation at AIS while operating a self-built LINE Bot production system in parallel, and actively tracking new developments in AI, automation, and data platforms to bring back into both.";
+
+const CORE_COMPETENCIES = [
+  {
+    group: "Project Prioritization & Planning",
+    items: "Assess incoming requests, size effort against business impact, and sequence delivery across concurrent automation projects.",
+  },
+  {
+    group: "Development & Execution",
+    items: "Build and ship production systems end-to-end — SAP automation, RPA bots, and self-built AI-tooling — not just prototypes.",
+  },
+  {
+    group: "Stakeholder Communication & User Immersion",
+    items: "Sit with business users to observe real workflows, translate pain points into technical requirements, and report back in language each side understands.",
+  },
+  {
+    group: "Continuous Learning & Innovation",
+    items: "Track new tools in AI, automation, and engineering best practices; proactively propose automation ideas sourced from problems seen in the business; share findings with the team.",
+  },
+  {
+    group: "Self-Driven / Independent",
+    items: "Work without step-by-step direction — receive a problem, analyze it, plan, execute, surface blockers, propose a fix, and deliver, end to end.",
+  },
+];
 
 const EXPERIENCE = [
   {
@@ -29,7 +53,8 @@ const EXPERIENCE = [
       "Delivered 5 enterprise SAP automations across Finance, Procurement, and Sales (BG Alert, GR Process, Mass Sales Order, THOR/SOFR, Payment Advice with AI Builder OCR).",
       "Enhanced SAP S/4HANA OB83 to support THOR + SOFR reference rates — redesigned classification using Reference fields instead of date-based logic.",
       "Built end-to-end RPA workflows with exception handling, structured logging, and stakeholder reporting.",
-      "Collaborated with business users on requirements, UAT, and production rollout.",
+      "Acted as the bridge between business users and technical delivery — gathered requirements directly from users, ran UAT, and owned production rollout.",
+      "Took each request from requirement through analysis, planning, and execution to delivery independently — flagging blockers and proposing fixes without waiting on step-by-step direction.",
     ],
     stack: "UiPath · SAP S/4HANA · SAP Web GUI · SAP Build Process Automation · Power Automate · AI Builder OCR · Excel · Outlook · SQL",
   },
@@ -188,6 +213,17 @@ export default function ResumePage() {
               <FiMapPin className="text-[#1a56db]" /> Bangkok, Thailand
             </div>
             <div className="flex items-center gap-1.5">
+              <FiGlobe className="text-[#1a56db]" />
+              <a
+                href="https://portfolio-kanokporn.vercel.app/about-me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#1a56db]"
+              >
+                portfolio-kanokporn.vercel.app
+              </a>
+            </div>
+            <div className="flex items-center gap-1.5">
               <FiMail className="text-[#1a56db]" />
               <a href="mailto:laybabaka@gmail.com" className="text-[#1a56db]">
                 laybabaka@gmail.com
@@ -221,6 +257,19 @@ export default function ResumePage() {
         {/* Summary */}
         <Section title="Summary">
           <p className="text-[#374151]">{SUMMARY}</p>
+        </Section>
+
+        {/* Core Competencies */}
+        <Section title="Core Competencies">
+          <div className="space-y-1.5">
+            {CORE_COMPETENCIES.map((c) => (
+              <p key={c.group} className="text-[#374151]">
+                <span className="font-medium text-[#111827]">{c.group}</span>
+                {" — "}
+                {c.items}
+              </p>
+            ))}
+          </div>
         </Section>
 
         {/* Experience */}
