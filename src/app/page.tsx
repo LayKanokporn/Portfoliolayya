@@ -19,7 +19,6 @@ import {
   FiActivity,
   FiCalendar,
   FiBriefcase,
-  FiExternalLink,
   FiMenu,
   FiX,
 } from "react-icons/fi";
@@ -283,6 +282,48 @@ const PROJECTS: {
     ],
     links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
   },
+  {
+    accent: "bg-indigo-600",
+    badges: ["AI Orchestration", "Self-built"],
+    name: "Multi-Agent Quality-Gate System",
+    desc: "Orchestrator / specialist / critic topology on the Claude Agent SDK. One orchestrator delegates to specialists (documentation, RPA design, test authoring, log analysis); every deliverable then passes an independent critic agent that returns PASS/FAIL with reasons before it reaches me. The critic has no write access, so review stays independent of authorship — the same separation-of-duties principle I apply to RPA approval flows.",
+    image: "",
+    art: "pipeline",
+    stats: [
+      { v: "PASS/FAIL", l: "Gate per deliverable" },
+      { v: "Read-only", l: "Critic isolation" },
+      { v: "Worklog", l: "Duplicate guard" },
+    ],
+    links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
+  },
+  {
+    accent: "bg-rose-500",
+    badges: ["In delivery", "SAP · Compliance"],
+    name: "WHT Certificate Distribution",
+    desc: "Withholding Tax certificates pulled from SAP, rendered per vendor, and emailed out. External vendors were blocked by DLP because the default Purview sensitivity label is Internal and setting the label via API is reverted by policy — so the bot downgrades it to General through the real UI before sending. Row-level checkpoint CSV keeps remarks durable if the run dies mid-batch.",
+    image: "",
+    art: "document-ocr",
+    stats: [
+      { v: "DLP-safe", l: "External send" },
+      { v: "Row-level", l: "Durable checkpoint" },
+      { v: "Split path", l: "Internal / external" },
+    ],
+    links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
+  },
+  {
+    accent: "bg-cyan-600",
+    badges: ["In delivery", "SAP Web GUI"],
+    name: "BG Field Replacement Bot",
+    desc: "Mass field maintenance on Bank Guarantee records. A read-before-write decision gate per field (WRITE_FILLIN / WRITE_MATCH / SKIP_ALREADY / SKIP_MISMATCH / SKIP_DRYRUN) makes re-runs idempotent, and per-row filtering replaced an all-or-nothing guard that discarded an entire batch when one field was unsupported. Plaintext credentials moved out of the config workbook into environment variables.",
+    image: "",
+    art: "sap-monitor",
+    stats: [
+      { v: "Idempotent", l: "Safe re-run" },
+      { v: "Per-row", l: "Failure isolation" },
+      { v: "Env vars", l: "Secrets removed" },
+    ],
+    links: [{ kind: "case", href: "/portfolio#projects", label: "Case study" }],
+  },
 ];
 
 const AUTOMATIONS: {
@@ -351,6 +392,30 @@ const AUTOMATIONS: {
     results: [
       { v: "Real-time", l: "Sync window" },
       { v: "Zero", l: "Oversell incidents" },
+    ],
+    href: "/portfolio#projects",
+  },
+  {
+    title: "WHT Certificate Distribution",
+    tag: "UiPath · SAP · Outlook COM · Purview",
+    challenge: "Vendor certificates could not be emailed externally — the default Internal sensitivity label made DLP block every external recipient, and setting the label programmatically was reverted by policy.",
+    solution: "Split the send path by recipient domain: internal goes through standard Outlook automation, external drives the real Outlook UI to downgrade the label to General, then sends via COM with retry. A per-row checkpoint CSV keeps remarks durable if the run is killed mid-batch.",
+    flow: ["SAP Extract", "Render PDF per vendor", "Domain Split + Label Downgrade", "Send + Checkpoint CSV"],
+    results: [
+      { v: "Unblocked", l: "External delivery" },
+      { v: "Row-level", l: "Crash recovery" },
+    ],
+    href: "/portfolio#projects",
+  },
+  {
+    title: "BG Field Replacement Bot",
+    tag: "UiPath · SAP Web GUI · Excel",
+    challenge: "Bulk field maintenance on Bank Guarantee records was unsafe to re-run, and a single unsupported field aborted the whole batch.",
+    solution: "Read-before-write decision gate per field returning an explicit verdict, per-row filtering so one bad row cannot take down the batch, and a dry-run mode plus a PowerShell preflight check before any write.",
+    flow: ["Preflight + Config Validate", "Read Current Value", "Decision Gate per Field", "Write / Skip + Archive"],
+    results: [
+      { v: "Idempotent", l: "Safe re-run" },
+      { v: "Isolated", l: "Per-row failure" },
     ],
     href: "/portfolio#projects",
   },

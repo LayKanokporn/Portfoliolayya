@@ -164,6 +164,27 @@ const EXPERIENCE = [
       { name: "Mass Sales Order Automation", detail: "High-volume SO creation/updates with optimized business rules. UiPath + SAP SD + SQL." },
       { name: "Market Rate Maintenance (THOR & SOFR)", detail: "Enhanced SAP S/4HANA OB83 — redesigned classification using Reference fields instead of date-based. SAP S/4HANA + API." },
       { name: "Payment Advice Automation (OCR)", detail: "End-to-end Power Automate flow with AI Builder OCR — extract payment data, validate against SAP, auto-distribute. Power Automate + AI Builder + SAP + Outlook." },
+      { name: "WHT Certificate Distribution (in delivery)", detail: "Bot pulls Withholding Tax certificates from SAP, renders PDF per vendor, and emails them. Internal recipients go through Outlook automation; external vendors require the bot to downgrade the Microsoft Purview sensitivity label from Internal to General through the real UI, because DLP blocks external send otherwise and API-set labels are reverted by policy. Row-level checkpoint CSV keeps remarks durable if the run is killed mid-way. UiPath + SAP + Outlook COM + Purview/MIP." },
+      { name: "BG Field Replacement Bot (in delivery)", detail: "Mass field maintenance on Bank Guarantee records in SAP Web GUI. Read-before-write decision gate per field (WRITE_FILLIN / WRITE_MATCH / SKIP_ALREADY / SKIP_MISMATCH / SKIP_DRYRUN) makes re-runs idempotent, and row-level filtering replaced an all-or-nothing guard that used to discard a whole batch on one unsupported field. Credentials moved out of the config workbook into environment variables. UiPath + SAP Web GUI + Excel + PowerShell preflight." },
+    ],
+  },
+  {
+    role: "Solo Builder — Internal Tooling",
+    company: "Self-built Engineering Systems",
+    period: "2025 – Present",
+    duration: "Ongoing",
+    location: "Bangkok, Thailand",
+    active: true,
+    type: "work" as const,
+    stack: ["PowerShell 5.1", "Python", "Pandas", "Claude Agent SDK", "Markdown-driven config", "Windows automation"],
+    responsibilities: [
+      "Built the tooling layer around my own delivery work — context recovery, quality gates, and recurring data pipelines",
+      "Treated internal tools as production software: structured logging, encoding contracts, and validated failure paths",
+    ],
+    projects: [
+      { name: "Multi-Agent Quality-Gate System", detail: "Orchestrator/specialist/critic agent topology on the Claude Agent SDK. A single orchestrator delegates to specialists (documentation, RPA design, test authoring, log analysis) and every deliverable passes a separate critic agent that returns PASS/FAIL with reasons before it reaches me — the critic cannot edit, so review stays independent of authorship. Delegations are appended to a worklog so duplicate work is caught before it starts." },
+      { name: "RPA Launcher & WIP Context System", detail: "PowerShell launcher plus a session-start hook that solves context loss between projects: each project carries a WIP file (goal / where it stopped / next step / traps) keyed to its session id, so resuming a bot after two weeks starts from state instead of from scratch. Hard-won constraint baked in — UTF-8 BOM is mandatory, because broken encoding silently breaks Thai hashtable key lookups rather than just garbling text." },
+      { name: "STM / SA2555 Statement Pipeline", detail: "Python pipeline that normalizes multi-account bank statements into a monthly income/expense view, with recurring-transaction rules kept in external JSON so classification changes need no code edit. Log rotation built in. Runs against real financial data — kept deliberately off any public repository." },
     ],
   },
   {
